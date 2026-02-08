@@ -1313,6 +1313,22 @@
             .no-print {
                 display: none !important;
             }
+            
+            /* Watermark for print */
+            .print-watermark {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                opacity: 0.03;
+                z-index: -1;
+                pointer-events: none;
+                width: 300px;
+                height: 300px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
         }
         
         /* Compact spacing */
@@ -2191,12 +2207,62 @@
                 const statusText = status.toUpperCase();
                 const statusClass = 'status-' + status;
                 
+                // Get logo image source
+                const logoImg = document.querySelector('.logo-img');
+                const logoFallback = document.querySelector('.logo-fallback');
+                let logoHTML = '';
+                
+                if (logoImg && logoImg.src && !logoImg.src.includes('data:image')) {
+                    logoHTML = `
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 50px; height: 50px; margin-right: 15px; border-radius: 6px; overflow: hidden; flex-shrink: 0;">
+                                <img src="${logoImg.src}" alt="Urban Kutir Logo" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div style="width: 100%; height: 100%; display: none; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 600; background: linear-gradient(135deg, #8B4513, #d4a574);">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h1 style="color: #5a3921; font-size: 24px; margin-bottom: 2px; font-weight: 700; letter-spacing: -0.2px;">Urban Kutir</h1>
+                                <p style="color: #8B4513; font-size: 13px; font-weight: 500;">Premium Home Solutions & Interior Design</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    logoHTML = `
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 50px; height: 50px; margin-right: 15px; border-radius: 6px; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 600; background: linear-gradient(135deg, #8B4513, #d4a574);">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div>
+                                <h1 style="color: #5a3921; font-size: 24px; margin-bottom: 2px; font-weight: 700; letter-spacing: -0.2px;">Urban Kutir</h1>
+                                <p style="color: #8B4513; font-size: 13px; font-weight: 500;">Premium Home Solutions & Interior Design</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
                 return `
                     <style>
                         .print-content {
                             font-family: 'Inter', sans-serif;
                             color: #2c1810;
                             line-height: 1.5;
+                            position: relative;
+                        }
+                        
+                        .print-watermark {
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate(-45deg);
+                            opacity: 0.03;
+                            z-index: -1;
+                            pointer-events: none;
+                            width: 300px;
+                            height: 300px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
                         }
                         
                         .print-header {
@@ -2206,6 +2272,10 @@
                             margin-bottom: 30px;
                             padding-bottom: 20px;
                             border-bottom: 2px solid #d4a574;
+                        }
+                        
+                        .print-company-info {
+                            flex: 1;
                         }
                         
                         .print-company-info h1 {
@@ -2325,10 +2395,13 @@
                     </style>
                     
                     <div class="print-content">
-                        <div class="print-header">
+                        <!-- Watermark for print and PDF -->
+                        <div class="print-watermark"></div>
+                        
+                        ${logoHTML}
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #d4a574;">
                             <div class="print-company-info">
-                                <h1>Urban Kutir</h1>
-                                <p style="color: #8B4513; font-size: 13px; margin-bottom: 8px;">Premium Home Solutions & Interior Design</p>
                                 <p style="font-size: 12px;">
                                     59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308, Kolkata 700050<br>
                                     <strong>GSTIN:</strong> 19AAHFU6863E1ZR<br>
@@ -2460,6 +2533,16 @@
             function showPrintPreview() {
                 const html = generatePrintPreviewHTML();
                 printPreviewContent.innerHTML = html;
+                
+                // Set watermark for print preview
+                const printWatermark = printPreviewContent.querySelector('.print-watermark');
+                const logoImg = document.querySelector('.logo-img');
+                if (logoImg && logoImg.src && printWatermark) {
+                    printWatermark.style.backgroundImage = `url('${logoImg.src}')`;
+                } else if (printWatermark) {
+                    printWatermark.style.backgroundColor = 'rgba(139, 69, 19, 0.015)';
+                }
+                
                 printPreviewModal.classList.add('active');
             }
             
@@ -2471,6 +2554,7 @@
                 confirmExport.disabled = true;
                 
                 try {
+                    // First, generate the HTML for the PDF
                     const html = generatePrintPreviewHTML();
                     
                     // Create a temporary container
@@ -2484,8 +2568,41 @@
                     tempContainer.innerHTML = html;
                     document.body.appendChild(tempContainer);
                     
-                    // Wait for content to load
-                    await new Promise(resolve => setTimeout(resolve, 500));
+                    // Set watermark for PDF
+                    const printWatermark = tempContainer.querySelector('.print-watermark');
+                    const logoImg = document.querySelector('.logo-img');
+                    if (logoImg && logoImg.src && printWatermark) {
+                        printWatermark.style.backgroundImage = `url('${logoImg.src}')`;
+                    } else if (printWatermark) {
+                        printWatermark.style.backgroundColor = 'rgba(139, 69, 19, 0.015)';
+                    }
+                    
+                    // Wait for images to load
+                    await new Promise(resolve => {
+                        const images = tempContainer.querySelectorAll('img');
+                        let loadedImages = 0;
+                        
+                        if (images.length === 0) {
+                            setTimeout(resolve, 500);
+                            return;
+                        }
+                        
+                        images.forEach(img => {
+                            if (img.complete) {
+                                loadedImages++;
+                                if (loadedImages === images.length) resolve();
+                            } else {
+                                img.onload = () => {
+                                    loadedImages++;
+                                    if (loadedImages === images.length) resolve();
+                                };
+                                img.onerror = () => {
+                                    loadedImages++;
+                                    if (loadedImages === images.length) resolve();
+                                };
+                            }
+                        });
+                    });
                     
                     // Convert to canvas
                     const canvas = await html2canvas(tempContainer, {
@@ -2561,6 +2678,20 @@
                                     -webkit-print-color-adjust: exact;
                                     print-color-adjust: exact;
                                 }
+                                .print-watermark {
+                                    position: fixed;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%) rotate(-45deg);
+                                    opacity: 0.03;
+                                    z-index: -1;
+                                    pointer-events: none;
+                                    width: 300px;
+                                    height: 300px;
+                                    background-size: contain;
+                                    background-repeat: no-repeat;
+                                    background-position: center;
+                                }
                             }
                             body {
                                 margin: 0;
@@ -2573,8 +2704,17 @@
                         ${html}
                         <script>
                             window.onload = function() {
-                                window.print();
-                                setTimeout(() => window.close(), 500);
+                                // Set watermark for print
+                                const printWatermark = document.querySelector('.print-watermark');
+                                const logoImg = document.querySelector('img[alt="Urban Kutir Logo"]');
+                                if (logoImg && logoImg.src && printWatermark) {
+                                    printWatermark.style.backgroundImage = 'url(' + logoImg.src + ')';
+                                }
+                                
+                                setTimeout(function() {
+                                    window.print();
+                                    setTimeout(() => window.close(), 500);
+                                }, 500);
                             };
                         <\/script>
                     </body>
@@ -2641,6 +2781,20 @@
                                 body {
                                     -webkit-print-color-adjust: exact;
                                     print-color-adjust: exact;
+                                }
+                                .print-watermark {
+                                    position: fixed;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%) rotate(-45deg);
+                                    opacity: 0.03;
+                                    z-index: -1;
+                                    pointer-events: none;
+                                    width: 300px;
+                                    height: 300px;
+                                    background-size: contain;
+                                    background-repeat: no-repeat;
+                                    background-position: center;
                                 }
                             }
                             body {

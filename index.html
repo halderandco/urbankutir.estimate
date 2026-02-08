@@ -1313,6 +1313,22 @@
             .no-print {
                 display: none !important;
             }
+            
+            /* Watermark for print */
+            .print-watermark {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+                opacity: 0.03;
+                z-index: -1;
+                pointer-events: none;
+                width: 300px;
+                height: 300px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
         }
         
         /* Compact spacing */
@@ -2191,12 +2207,37 @@
                 const statusText = status.toUpperCase();
                 const statusClass = 'status-' + status;
                 
+                // Get logo image for watermark
+                const logoImg = document.querySelector('.logo-img');
+                let watermarkStyle = '';
+                if (logoImg && logoImg.src && !logoImg.src.includes('data:image')) {
+                    watermarkStyle = `background-image: url('${logoImg.src}');`;
+                } else {
+                    watermarkStyle = 'background-color: rgba(139, 69, 19, 0.015);';
+                }
+                
                 return `
                     <style>
                         .print-content {
                             font-family: 'Inter', sans-serif;
                             color: #2c1810;
                             line-height: 1.5;
+                            position: relative;
+                        }
+                        
+                        .print-watermark {
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) rotate(-45deg);
+                            opacity: 0.03;
+                            z-index: -1;
+                            pointer-events: none;
+                            width: 300px;
+                            height: 300px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
                         }
                         
                         .print-header {
@@ -2325,6 +2366,9 @@
                     </style>
                     
                     <div class="print-content">
+                        <!-- Watermark for export output -->
+                        <div class="print-watermark" style="${watermarkStyle}"></div>
+                        
                         <div class="print-header">
                             <div class="print-company-info">
                                 <h1>Urban Kutir</h1>
@@ -2471,6 +2515,7 @@
                 confirmExport.disabled = true;
                 
                 try {
+                    // First, generate the HTML for the PDF
                     const html = generatePrintPreviewHTML();
                     
                     // Create a temporary container
@@ -2484,8 +2529,32 @@
                     tempContainer.innerHTML = html;
                     document.body.appendChild(tempContainer);
                     
-                    // Wait for content to load
-                    await new Promise(resolve => setTimeout(resolve, 500));
+                    // Wait for images to load
+                    await new Promise(resolve => {
+                        const images = tempContainer.querySelectorAll('img');
+                        let loadedImages = 0;
+                        
+                        if (images.length === 0) {
+                            setTimeout(resolve, 500);
+                            return;
+                        }
+                        
+                        images.forEach(img => {
+                            if (img.complete) {
+                                loadedImages++;
+                                if (loadedImages === images.length) resolve();
+                            } else {
+                                img.onload = () => {
+                                    loadedImages++;
+                                    if (loadedImages === images.length) resolve();
+                                };
+                                img.onerror = () => {
+                                    loadedImages++;
+                                    if (loadedImages === images.length) resolve();
+                                };
+                            }
+                        });
+                    });
                     
                     // Convert to canvas
                     const canvas = await html2canvas(tempContainer, {

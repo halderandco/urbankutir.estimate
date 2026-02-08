@@ -909,279 +909,138 @@
             color: #6b7280;
         }
         
-        /* PRINT SPECIFIC STYLES - Fixed for better printing */
-        .no-print {
-            display: block !important;
+        /* Print and PDF Output Styles */
+        .print-logo {
+            display: none;
         }
         
         @media print {
-            body {
-                margin: 0 !important;
-                padding: 0 !important;
-                background: white !important;
-                font-size: 11pt !important;
-                width: 100% !important;
-                height: auto !important;
-                overflow: visible !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            body * {
+                visibility: hidden;
+                margin: 0;
+                padding: 0;
             }
             
-            .container {
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                display: block !important;
-                gap: 0 !important;
+            .print-version,
+            .print-version * {
+                visibility: visible;
+            }
+            
+            .print-version {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                min-height: 100vh;
+                background: white;
+                padding: 25px;
+                box-shadow: none;
+                border: none;
+            }
+            
+            .print-version header.print-header {
+                display: flex !important;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 15px;
+                border-bottom: 2px solid var(--primary-color);
+                margin-bottom: 25px;
+            }
+            
+            .print-version .logo-container {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .print-version .logo {
+                width: 70px;
+                height: 70px;
+                border: 1px solid var(--border-color);
+            }
+            
+            .print-version .company-info h1 {
+                font-size: 22px;
+                margin-bottom: 5px;
+                color: var(--primary-dark);
+            }
+            
+            .print-version .company-info p {
+                font-size: 13px;
+                color: var(--text-medium);
+            }
+            
+            .print-version .watermark {
+                opacity: 0.08;
+                width: 400px;
+                height: 400px;
+            }
+            
+            .print-version .estimate-title {
+                font-size: 28px;
+                text-align: center;
+                margin: 25px 0;
+                color: var(--primary-dark);
+                border-bottom: 2px solid var(--accent-color);
+                padding-bottom: 10px;
+            }
+            
+            .print-version .estimate-table {
+                font-size: 11pt;
+                margin: 25px 0;
+            }
+            
+            .print-version .estimate-table th {
+                background-color: var(--light-accent);
+                padding: 10px 12px;
+                font-size: 11pt;
+            }
+            
+            .print-version .estimate-table td {
+                padding: 9px 12px;
+                font-size: 10.5pt;
+            }
+            
+            .print-version .terms-section {
+                background-color: #fcfaf7;
+                border: 1px solid var(--border-color);
+                padding: 18px;
+                margin-top: 30px;
+            }
+            
+            .print-version .authorization-section {
+                margin-top: 40px;
+                padding-top: 25px;
+                border-top: 2px solid var(--accent-color);
+            }
+            
+            .print-version .estimate-footer {
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border-color);
+                font-size: 10pt;
+            }
+            
+            .print-version .legal-disclaimer {
+                font-size: 9pt;
+                color: #666;
+                text-align: center;
+                margin-top: 15px;
+                font-style: italic;
             }
             
             .no-print {
                 display: none !important;
             }
             
-            .estimate-container {
-                display: block !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            
-            .form-panel {
-                display: none !important;
-            }
-            
-            .preview-panel {
-                display: block !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 15px 20px !important;
-                box-shadow: none !important;
-                border: none !important;
-                border-top: none !important;
-                border-radius: 0 !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                overflow: visible !important;
-                position: static !important;
-                min-height: auto !important;
-            }
-            
-            .watermark {
-                opacity: 0.08 !important;
-                width: 300px !important;
-                height: 300px !important;
-                z-index: 9999 !important;
-            }
-            
-            /* Header fixes for print */
-            .estimate-header {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: flex-start !important;
-                margin-bottom: 20px !important;
-                padding-bottom: 15px !important;
-                border-bottom: 2px solid var(--primary-color) !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
-            }
-            
-            .estimate-title {
-                font-size: 24pt !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                text-align: center !important;
-                width: 100% !important;
-                order: 1 !important;
-                border-bottom: 2px solid var(--accent-color) !important;
-                padding-bottom: 10px !important;
-                margin-bottom: 20px !important;
-            }
-            
-            .company-gst-box {
-                background-color: transparent !important;
-                border: 1px solid var(--border-color) !important;
-                padding: 3px 6px !important;
-                font-size: 9pt !important;
-            }
-            
-            .estimate-meta {
-                text-align: right !important;
-                order: 2 !important;
-                margin-bottom: 15px !important;
-            }
-            
-            .estimate-meta p {
-                margin-bottom: 4px !important;
-                font-size: 10pt !important;
-                line-height: 1.3 !important;
-            }
-            
-            /* Address boxes fix */
-            .estimate-addresses {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                margin-bottom: 20px !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
-                gap: 20px !important;
-            }
-            
-            .address-box {
-                flex: 1 !important;
-                padding: 12px !important;
-                background-color: #fcfaf7 !important;
-                border: 1px solid var(--border-color) !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            .address-title {
-                font-size: 11pt !important;
-                margin-bottom: 8px !important;
-            }
-            
-            .address-content {
-                font-size: 10pt !important;
-                line-height: 1.4 !important;
-            }
-            
-            /* Table fixes for print */
-            .estimate-table {
-                width: 100% !important;
-                margin: 20px 0 !important;
-                font-size: 10pt !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            .estimate-table th {
-                padding: 8px 6px !important;
-                font-size: 9pt !important;
-                background-color: #f0e6d6 !important;
-                border: 1px solid #d4a574 !important;
-            }
-            
-            .estimate-table td {
-                padding: 6px !important;
-                font-size: 9pt !important;
-                border: 1px solid #e0d6c8 !important;
-            }
-            
-            .estimate-table tr:last-child td {
-                border-bottom: 1px solid #d4a574 !important;
-            }
-            
-            /* Summary fixes */
-            .estimate-summary {
-                max-width: 250px !important;
-                margin-left: auto !important;
-                margin-top: 25px !important;
-                margin-bottom: 25px !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            .summary-row {
-                font-size: 10pt !important;
-                padding: 5px 0 !important;
-            }
-            
-            .summary-row.total {
-                font-size: 11pt !important;
-                padding-top: 8px !important;
-                margin-top: 5px !important;
-            }
-            
-            /* Terms and authorization fixes */
-            .terms-section {
-                margin-top: 25px !important;
-                padding: 15px !important;
-                background-color: #fcfaf7 !important;
-                border: 1px solid var(--border-color) !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            .terms-title {
-                font-size: 11pt !important;
-                margin-bottom: 10px !important;
-            }
-            
-            .terms-content {
-                font-size: 9.5pt !important;
-                line-height: 1.4 !important;
-            }
-            
-            .authorization-section {
-                margin-top: 30px !important;
-                padding-top: 20px !important;
-                border-top: 2px solid var(--accent-color) !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            .signature-line {
-                width: 200px !important;
-            }
-            
-            .signature-name {
-                font-size: 11pt !important;
-            }
-            
-            .signature-title {
-                font-size: 9pt !important;
-            }
-            
-            /* Footer fixes */
-            .estimate-footer {
-                margin-top: 20px !important;
-                padding-top: 15px !important;
-                border-top: 1px solid var(--border-color) !important;
-                font-size: 9pt !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            /* Validity box */
-            .validity-box {
-                background-color: #fff8f0 !important;
-                border: 1px solid #f0d6b8 !important;
-                padding: 10px !important;
-                margin-top: 15px !important;
-                margin-bottom: 15px !important;
-                font-size: 9.5pt !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            /* Page breaks and margins */
             @page {
-                margin: 15mm 10mm 15mm 10mm !important;
-                size: auto !important;
+                margin: 20mm;
+                size: A4;
             }
             
-            /* Hide print template */
-            #printTemplate {
-                display: none !important;
-            }
-            
-            /* Ensure no unwanted page breaks */
-            h1, h2, h3, h4, .panel-title, .address-title, .terms-title {
-                page-break-after: avoid !important;
-                break-after: avoid !important;
-            }
-            
-            tr, img {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            /* Font size adjustments */
-            body, p, span, div {
-                font-size: 10pt !important;
-                line-height: 1.4 !important;
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
         }
         
@@ -1249,24 +1108,6 @@
         
         .address-title, .signature-name {
             letter-spacing: 0.2px;
-        }
-        
-        /* Hidden print overlay */
-        .print-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 99999;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        
-        .print-overlay.active {
-            display: block;
         }
     </style>
 </head>
@@ -1585,8 +1426,158 @@
         </footer>
     </div>
     
-    <!-- Print Overlay (hidden by default) -->
-    <div id="printOverlay" class="print-overlay"></div>
+    <!-- Print/PDF Output Template (hidden) -->
+    <div id="printTemplate" style="display: none;">
+        <div class="print-version">
+            <div class="watermark"></div>
+            
+            <header class="print-header" style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 15px; border-bottom: 2px solid var(--primary-color); margin-bottom: 25px;">
+                <div class="logo-container">
+                    <div class="logo">
+                        <img src="urbankutir.png" alt="Urban Kutir Logo" class="logo-img" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="logo-fallback" style="display: none;">
+                            <i class="fas fa-home"></i>
+                        </div>
+                    </div>
+                    <div class="company-info">
+                        <h1>Urban Kutir</h1>
+                        <p>Premium Home Solutions & Interior Design</p>
+                        <p style="font-size: 11px; color: var(--text-light); margin-top: 3px;">
+                            <i class="fas fa-phone"></i> 9831859858 | <i class="fas fa-envelope"></i> urbankutir@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div class="estimate-meta">
+                    <p><strong>ESTIMATE NO:</strong> <span id="printEstimateNo">[Estimate Number]</span></p>
+                    <p><strong>DATE:</strong> <span id="printEstimateDate">[Date]</span></p>
+                    <p><strong>VALID UNTIL:</strong> <span id="printValidUntil">[Valid Until]</span></p>
+                    <p><strong>STATUS:</strong> <span id="printStatus" class="status-badge status-draft">DRAFT</span></p>
+                </div>
+            </header>
+            
+            <div class="estimate-title" style="font-size: 28px; text-align: center; margin: 25px 0; color: var(--primary-dark); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px;">
+                ESTIMATE
+            </div>
+            
+            <div class="estimate-addresses">
+                <div class="address-box">
+                    <div class="address-title">CLIENT DETAILS:</div>
+                    <div class="address-content" id="printClient">
+                        [Client Information]
+                    </div>
+                </div>
+                <div class="address-box">
+                    <div class="address-title">PROJECT LOCATION:</div>
+                    <div class="address-content" id="printProjectLocation">
+                        [Project/Site Location]
+                    </div>
+                </div>
+            </div>
+            
+            <div class="validity-box">
+                <strong>Note:</strong> This estimate is valid until <span id="printValidUntilText">[Valid Until Date]</span>. 
+                Prices are subject to change based on market rates of materials at the time of order confirmation.
+            </div>
+            
+            <table class="estimate-table">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="45">SL No</th>
+                        <th>Description of Work/Materials</th>
+                        <th class="text-center" width="85">HSN/SAC</th>
+                        <th class="text-center" width="65">Qty</th>
+                        <th class="text-right" width="85">Rate (₹)</th>
+                        <th class="text-center" width="65">Unit</th>
+                        <th class="text-right" width="95">Amount (₹)</th>
+                    </tr>
+                </thead>
+                <tbody id="printItems">
+                    <tr>
+                        <td colspan="7" class="text-center">[No items added]</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="estimate-summary">
+                <div class="summary-row">
+                    <span>Total Estimate Value</span>
+                    <span id="printTaxable">0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>CGST <span id="printTaxRate">9</span>%</span>
+                    <span id="printCgst">0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>SGST <span id="printSgstRate">9</span>%</span>
+                    <span id="printSgst">0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>IGST <span id="printIgstRate">0</span>%</span>
+                    <span id="printIgst">0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Round Off</span>
+                    <span id="printRoundOff">0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>TOTAL ESTIMATE</span>
+                    <span id="printTotal">₹0.00</span>
+                </div>
+                <div class="summary-row" style="border-bottom: none; padding-top: 8px;">
+                    <span>Advance Required (<span id="printAdvancePercentage">50</span>%)</span>
+                    <span id="printAdvanceAmount">₹0.00</span>
+                </div>
+            </div>
+            
+            <div id="printWorkDuration" style="margin-top: 10px; font-size: 11.5px; color: var(--text-medium); padding: 7px; background-color: var(--lighter-accent); border-radius: 4px;">
+                <strong>Estimated Work Duration:</strong> <span id="printWorkDurationText"></span>
+            </div>
+            
+            <div class="terms-section">
+                <div class="terms-title"><i class="fas fa-file-contract"></i> Terms & Conditions</div>
+                <div class="terms-content">
+                    <ul>
+                        <li>This estimate is valid for 30 days from the date of issue unless otherwise specified.</li>
+                        <li>Advance payment of <span id="printAdvanceText">50%</span> is required to confirm the order and commence work.</li>
+                        <li>Balance payment to be made upon completion of work and before delivery/installation.</li>
+                        <li>All prices are exclusive of GST unless otherwise specified.</li>
+                        <li>Any changes in design/specifications after confirmation may result in price adjustments.</li>
+                        <li>Urban Kutir reserves the right to revise prices if material costs change before order confirmation.</li>
+                        <li>Work commencement is subject to receipt of advance payment and availability of materials.</li>
+                        <li>Installation/delivery timelines are estimates and subject to weather conditions and other factors.</li>
+                    </ul>
+                    <div id="printSpecialNotes">
+                        <strong>Special Notes:</strong> <span id="printSpecialNotesContent"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="authorization-section">
+                <div style="flex: 1;">
+                    <p><strong>Payment Terms:</strong> <span id="printAdvanceSummary">50% advance, 50% on completion</span></p>
+                    <p><strong>Delivery/Installation:</strong> Subject to advance payment and material availability</p>
+                    <p><strong>Bank Details:</strong> State Bank of India | A/C: 123456789012 | IFSC: SBIN0001234</p>
+                    <p><strong>PAN:</strong> AAHFU6863E | <strong>GSTIN:</strong> 19AAHFU6863E1ZR</p>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-line"></div>
+                    <div class="signature-name">Doel Pathak</div>
+                    <div class="signature-title">Authorized Signatory</div>
+                    <div class="signature-title">Urban Kutir</div>
+                </div>
+            </div>
+            
+            <div class="estimate-footer">
+                <p>This is a quotation/estimate and not a tax invoice. Tax invoice will be issued upon order confirmation and payment.</p>
+                <p style="margin-top: 10px; font-size: 11px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
+                <p class="legal-disclaimer" style="margin-top: 15px; font-size: 9pt; color: #666; font-style: italic;">
+                    This document complies with Indian tax regulations and legal requirements for business quotations. 
+                    Urban Kutir is registered under GST with GSTIN 19AAHFU6863E1ZR.
+                </p>
+            </div>
+        </div>
+    </div>
     
     <!-- Include jsPDF and html2canvas libraries for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1626,7 +1617,6 @@
             const printEstimateBtn = document.getElementById('printEstimate');
             const generatePdfBtn = document.getElementById('generatePdf');
             const resetFormBtn = document.getElementById('resetForm');
-            const printOverlay = document.getElementById('printOverlay');
             
             // Mobile buttons
             const printEstimateBtnMobile = document.getElementById('printEstimateMobile');
@@ -1919,9 +1909,12 @@
             // Update estimate preview
             updatePreviewBtn.addEventListener('click', updateEstimatePreview);
             
-            // Create print content HTML
-            function createPrintContent() {
-                // Get form values
+            // Prepare print/PDF content
+            function preparePrintContent() {
+                const printTemplate = document.getElementById('printTemplate').cloneNode(true);
+                printTemplate.style.display = 'block';
+                
+                // Transfer data from preview to print template
                 const estimateNo = document.getElementById('estimateNo').value;
                 const estimateDate = document.getElementById('estimateDate').value;
                 const validUntil = document.getElementById('validUntil').value;
@@ -1943,209 +1936,123 @@
                 const totalAmount = taxableValue + (taxAmount * 2) + roundOff;
                 const advanceAmount = (totalAmount * advancePercentage) / 100;
                 
-                // Build client HTML
+                // Update print template
+                printTemplate.querySelector('#printEstimateNo').textContent = estimateNo || 'EST-XXXX';
+                printTemplate.querySelector('#printEstimateDate').textContent = estimateDate ? formatDate(estimateDate) : formatDate(formattedToday);
+                printTemplate.querySelector('#printValidUntil').textContent = validUntil ? formatDate(validUntil) : formatDate(formattedValidUntil);
+                printTemplate.querySelector('#printValidUntilText').textContent = validUntil ? formatDate(validUntil) : formatDate(formattedValidUntil);
+                
+                const printStatusBadge = printTemplate.querySelector('#printStatus');
+                printStatusBadge.textContent = status.toUpperCase();
+                printStatusBadge.className = 'status-badge status-' + status;
+                
+                // Client info
                 let clientHTML = '';
                 if (clientName.trim()) clientHTML += clientName + '<br>';
                 if (clientAddress.trim()) clientHTML += clientAddress.replace(/\n/g, '<br>');
                 if (clientPhone.trim()) clientHTML += '<br>PHONE: ' + clientPhone;
                 if (clientGst.trim()) clientHTML += '<br><strong>GSTIN:</strong> ' + clientGst;
+                printTemplate.querySelector('#printClient').innerHTML = clientHTML || '[Client Information]';
                 
-                // Build items HTML
-                let itemsHTML = '';
-                const hasItems = items.some(item => item.name.trim() !== '' || item.total > 0);
+                // Project location
+                printTemplate.querySelector('#printProjectLocation').innerHTML = 
+                    projectLocation.trim() ? projectLocation.replace(/\n/g, '<br>') : '[Project/Site Location]';
                 
-                if (hasItems) {
+                // Items
+                const printItemsContainer = printTemplate.querySelector('#printItems');
+                printItemsContainer.innerHTML = '';
+                
+                if (items.some(item => item.name.trim() !== '' || item.total > 0)) {
                     items.forEach(item => {
                         if (item.name.trim() === '' && item.total === 0) return;
                         
-                        itemsHTML += `
-                            <tr>
-                                <td class="text-center">${item.slNo}</td>
-                                <td>${item.name || '-'}</td>
-                                <td class="text-center">${item.hsnCode || '-'}</td>
-                                <td class="text-center">${item.qty}</td>
-                                <td class="text-right">${formatCurrency(item.price, true)}</td>
-                                <td class="text-center">${item.unit || 'Pcs'}</td>
-                                <td class="text-right">${formatCurrency(item.total, true)}</td>
-                            </tr>
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td class="text-center">${item.slNo}</td>
+                            <td>${item.name || '-'}</td>
+                            <td class="text-center">${item.hsnCode || '-'}</td>
+                            <td class="text-center">${item.qty}</td>
+                            <td class="text-right">${formatCurrency(item.price, true)}</td>
+                            <td class="text-center">${item.unit || 'Pcs'}</td>
+                            <td class="text-right">${formatCurrency(item.total, true)}</td>
                         `;
+                        printItemsContainer.appendChild(row);
                     });
                 } else {
-                    itemsHTML = '<tr><td colspan="7" class="text-center">[No items added]</td></tr>';
+                    printItemsContainer.innerHTML = '<tr><td colspan="7" class="text-center">[No items added]</td></tr>';
                 }
                 
-                // Build the complete print HTML
-                const printHTML = `
-                    <div class="preview-panel" style="border-top: none; box-shadow: none; padding: 0;">
-                        <div class="watermark"></div>
-                        
-                        <div class="estimate-header">
-                            <div>
-                                <div class="estimate-title">ESTIMATE</div>
-                                <div class="address-content">
-                                    <strong>Urban Kutir</strong><br>
-                                    59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308, Kolkata 700050<br>
-                                    <div class="company-gst-box">
-                                        <strong>GSTIN:</strong> 19AAHFU6863E1ZR
-                                    </div>
-                                    <br>
-                                    <i class="fas fa-envelope"></i> urbankutir@gmail.com | 
-                                    <i class="fas fa-phone"></i> 9831859858
-                                </div>
-                            </div>
-                            <div class="estimate-meta">
-                                <p><strong>ESTIMATE NO:</strong> ${estimateNo || '[Estimate Number]'}</p>
-                                <p><strong>DATE:</strong> ${estimateDate ? formatDate(estimateDate) : '[Date]'}</p>
-                                <p><strong>VALID UNTIL:</strong> ${validUntil ? formatDate(validUntil) : '[Valid Until]'}</p>
-                                <p><strong>STATUS:</strong> <span class="status-badge status-${status}">${status.toUpperCase()}</span></p>
-                            </div>
-                        </div>
-                        
-                        <div class="estimate-addresses">
-                            <div class="address-box">
-                                <div class="address-title">CLIENT DETAILS:</div>
-                                <div class="address-content">
-                                    ${clientHTML || '[Client Information]'}
-                                </div>
-                            </div>
-                            <div class="address-box">
-                                <div class="address-title">PROJECT LOCATION:</div>
-                                <div class="address-content">
-                                    ${projectLocation.trim() ? projectLocation.replace(/\n/g, '<br>') : '[Project/Site Location]'}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="validity-box">
-                            <strong>Note:</strong> This estimate is valid until ${validUntil ? formatDate(validUntil) : '[Valid Until Date]'}. 
-                            Prices are subject to change based on market rates of materials at the time of order confirmation.
-                        </div>
-                        
-                        <table class="estimate-table">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" width="45">SL No</th>
-                                    <th>Description of Work/Materials</th>
-                                    <th class="text-center" width="85">HSN/SAC</th>
-                                    <th class="text-center" width="65">Qty</th>
-                                    <th class="text-right" width="85">Rate (₹)</th>
-                                    <th class="text-center" width="65">Unit</th>
-                                    <th class="text-right" width="95">Amount (₹)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${itemsHTML}
-                            </tbody>
-                        </table>
-                        
-                        <div class="estimate-summary">
-                            <div class="summary-row">
-                                <span>Total Estimate Value</span>
-                                <span>${formatCurrency(taxableValue, true)}</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>CGST ${taxRate}%</span>
-                                <span>${formatCurrency(taxAmount, true)}</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>SGST ${taxRate}%</span>
-                                <span>${formatCurrency(taxAmount, true)}</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>IGST 0%</span>
-                                <span>0.00</span>
-                            </div>
-                            <div class="summary-row">
-                                <span>Round Off</span>
-                                <span>${formatCurrency(roundOff, true)}</span>
-                            </div>
-                            <div class="summary-row total">
-                                <span>TOTAL ESTIMATE</span>
-                                <span>₹${formatCurrency(totalAmount, true)}</span>
-                            </div>
-                            <div class="summary-row" style="border-bottom: none; padding-top: 8px;">
-                                <span>Advance Required (${advancePercentage}%)</span>
-                                <span>₹${formatCurrency(advanceAmount, true)}</span>
-                            </div>
-                        </div>
-                        
-                        ${workDuration.trim() ? `
-                        <div style="margin-top: 10px; font-size: 11.5px; color: var(--text-medium); padding: 7px; background-color: var(--lighter-accent); border-radius: 4px;">
-                            <strong>Estimated Work Duration:</strong> ${workDuration}
-                        </div>` : ''}
-                        
-                        <div class="terms-section">
-                            <div class="terms-title"><i class="fas fa-file-contract"></i> Terms & Conditions</div>
-                            <div class="terms-content">
-                                <ul>
-                                    <li>This estimate is valid for 30 days from the date of issue unless otherwise specified.</li>
-                                    <li>Advance payment of ${advancePercentage}% is required to confirm the order and commence work.</li>
-                                    <li>Balance payment to be made upon completion of work and before delivery/installation.</li>
-                                    <li>All prices are exclusive of GST unless otherwise specified.</li>
-                                    <li>Any changes in design/specifications after confirmation may result in price adjustments.</li>
-                                    <li>Urban Kutir reserves the right to revise prices if material costs change before order confirmation.</li>
-                                    <li>Work commencement is subject to receipt of advance payment and availability of materials.</li>
-                                    <li>Installation/delivery timelines are estimates and subject to weather conditions and other factors.</li>
-                                </ul>
-                                ${specialNotes.trim() ? `
-                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
-                                    <strong>Special Notes:</strong> ${specialNotes}
-                                </div>` : ''}
-                            </div>
-                        </div>
-                        
-                        <div class="authorization-section">
-                            <div style="flex: 1;">
-                                <p><strong>Payment Terms:</strong> ${advancePercentage}% advance, ${100 - advancePercentage}% on completion</p>
-                                <p><strong>Delivery/Installation:</strong> Subject to advance payment and material availability</p>
-                                <p><strong>Bank Details:</strong> State Bank of India | A/C: 123456789012 | IFSC: SBIN0001234</p>
-                                <p><strong>PAN:</strong> AAHFU6863E</p>
-                            </div>
-                            <div class="signature-box">
-                                <div class="signature-line"></div>
-                                <div class="signature-name">Doel Pathak</div>
-                                <div class="signature-title">Authorized Signatory</div>
-                                <div class="signature-title">Urban Kutir</div>
-                            </div>
-                        </div>
-                        
-                        <div class="estimate-footer">
-                            <p>This is a quotation/estimate and not a tax invoice. Tax invoice will be issued upon order confirmation and payment.</p>
-                            <p style="margin-top: 10px; font-size: 11px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
-                        </div>
-                    </div>
-                `;
+                // Summary
+                printTemplate.querySelector('#printTaxable').textContent = formatCurrency(taxableValue, true);
+                printTemplate.querySelector('#printTaxRate').textContent = taxRate;
+                printTemplate.querySelector('#printSgstRate').textContent = taxRate;
+                printTemplate.querySelector('#printCgst').textContent = formatCurrency(taxAmount, true);
+                printTemplate.querySelector('#printSgst').textContent = formatCurrency(taxAmount, true);
+                printTemplate.querySelector('#printRoundOff').textContent = formatCurrency(roundOff, true);
+                printTemplate.querySelector('#printTotal').textContent = '₹' + formatCurrency(totalAmount, true);
+                printTemplate.querySelector('#printAdvancePercentage').textContent = advancePercentage;
+                printTemplate.querySelector('#printAdvanceAmount').textContent = '₹' + formatCurrency(advanceAmount, true);
+                printTemplate.querySelector('#printAdvanceText').textContent = advancePercentage + '%';
+                printTemplate.querySelector('#printAdvanceSummary').textContent = advancePercentage + '% advance, ' + (100 - advancePercentage) + '% on completion';
                 
-                return printHTML;
+                // Work duration
+                const workDurationElement = printTemplate.querySelector('#printWorkDuration');
+                const workDurationTextElement = printTemplate.querySelector('#printWorkDurationText');
+                if (workDuration.trim()) {
+                    workDurationTextElement.textContent = workDuration;
+                    workDurationElement.style.display = 'block';
+                } else {
+                    workDurationElement.style.display = 'none';
+                }
+                
+                // Special notes
+                const specialNotesElement = printTemplate.querySelector('#printSpecialNotes');
+                const specialNotesContentElement = printTemplate.querySelector('#printSpecialNotesContent');
+                if (specialNotes.trim()) {
+                    specialNotesContentElement.textContent = specialNotes;
+                    specialNotesElement.style.display = 'block';
+                } else {
+                    specialNotesElement.style.display = 'none';
+                }
+                
+                return printTemplate.innerHTML;
             }
             
-            // Simple and reliable print function
+            // Print estimate function
             function printEstimate() {
-                // Create print content
-                const printContent = createPrintContent();
+                const printContent = preparePrintContent();
+                const printWindow = window.open('', '_blank', 'width=800,height=600');
                 
-                // Set print overlay content
-                printOverlay.innerHTML = printContent;
-                
-                // Show print overlay
-                printOverlay.classList.add('active');
-                
-                // Add a small delay to ensure DOM is updated
-                setTimeout(() => {
-                    // Trigger print dialog
-                    window.print();
-                    
-                    // Hide print overlay after printing
-                    setTimeout(() => {
-                        printOverlay.classList.remove('active');
-                        printOverlay.innerHTML = '';
-                    }, 100);
-                }, 100);
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Urban Kutir - Estimate ${document.getElementById('estimateNo').value || 'Draft'}</title>
+                        <style>
+                            ${document.querySelector('style').innerHTML}
+                        </style>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+                    </head>
+                    <body>
+                        ${printContent}
+                        <script>
+                            window.onload = function() {
+                                window.print();
+                                setTimeout(function() {
+                                    window.close();
+                                }, 500);
+                            };
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
             }
             
-            // Generate PDF function (unchanged from original)
+            // Generate PDF function
             async function generatePdf() {
-                const printContent = createPrintContent();
+                const printContent = preparePrintContent();
                 const { jsPDF } = window.jspdf;
                 
                 // Show loading state
@@ -2307,4 +2214,4 @@
         });
     </script>
 </body>
-</html>
+    </html>

@@ -152,18 +152,19 @@
             }
         }
         
-        /* Mobile Controls */
-        .mobile-controls {
+        /* Controls */
+        .controls {
             display: flex;
             gap: 8px;
-            margin-top: 12px;
-            width: 100%;
+            flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
         }
         
         @media (min-width: 768px) {
-            .mobile-controls {
-                display: none;
+            .controls {
+                justify-content: flex-end;
+                width: auto;
             }
         }
         
@@ -188,14 +189,6 @@
                 font-size: 12px;
                 min-width: 130px;
             }
-        }
-        
-        .mobile-btn {
-            padding: 7px 12px;
-            font-size: 11px;
-            min-width: auto;
-            flex: 1;
-            max-width: 110px;
         }
         
         .btn-primary {
@@ -1051,6 +1044,35 @@
             }
         }
         
+        /* Mobile-specific optimizations */
+        @media (max-width: 767px) {
+            .controls {
+                display: none;
+            }
+            
+            .mobile-controls {
+                display: flex;
+                gap: 8px;
+                margin-top: 12px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-controls {
+                display: none;
+            }
+        }
+        
+        .mobile-btn {
+            padding: 7px 12px;
+            font-size: 11px;
+            min-width: auto;
+            flex: 1;
+            max-width: 110px;
+        }
+        
         /* Compact spacing */
         .form-group.compact {
             margin-bottom: 14px;
@@ -1087,56 +1109,6 @@
         .address-title, .signature-name {
             letter-spacing: 0.2px;
         }
-        
-        /* PDF Generation Loading */
-        .pdf-loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
-            backdrop-filter: blur(2px);
-        }
-        
-        .pdf-loading-content {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--accent-color);
-            max-width: 400px;
-            width: 90%;
-        }
-        
-        .pdf-progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--light-accent);
-            border-radius: 3px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .pdf-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 3px;
-        }
-        
-        .pdf-page-indicator {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
@@ -1158,17 +1130,29 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="controls">
+                <button class="btn btn-secondary" id="generatePdf">
+                    <i class="fas fa-file-pdf"></i> Download PDF
+                </button>
+                <button class="btn btn-primary" id="printEstimate">
+                    <i class="fas fa-print"></i> Print Estimate
+                </button>
+                <button class="btn btn-outline" id="resetForm">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
         </header>
         
         <!-- Mobile controls -->
         <div class="mobile-controls no-print">
-            <button class="btn btn-secondary mobile-btn" id="generatePdf">
+            <button class="btn btn-secondary mobile-btn" id="generatePdfMobile">
                 <i class="fas fa-file-pdf"></i> PDF
             </button>
-            <button class="btn btn-primary mobile-btn" id="printEstimate">
+            <button class="btn btn-primary mobile-btn" id="printEstimateMobile">
                 <i class="fas fa-print"></i> Print
             </button>
-            <button class="btn btn-outline mobile-btn" id="resetForm">
+            <button class="btn btn-outline mobile-btn" id="resetFormMobile">
                 <i class="fas fa-redo"></i> Reset
             </button>
         </div>
@@ -1442,19 +1426,6 @@
         </footer>
     </div>
     
-    <!-- PDF Loading Overlay -->
-    <div class="pdf-loading-overlay" id="pdfLoadingOverlay">
-        <div class="pdf-loading-content">
-            <i class="fas fa-file-pdf" style="font-size: 40px; color: var(--primary-color); margin-bottom: 15px;"></i>
-            <h3 style="color: var(--primary-dark); margin-bottom: 10px;">Generating PDF</h3>
-            <p style="color: var(--text-medium); font-size: 13px;">Please wait while we prepare your estimate document...</p>
-            <div class="pdf-progress-bar">
-                <div class="pdf-progress-fill" id="pdfProgressFill"></div>
-            </div>
-            <div class="pdf-page-indicator" id="pdfPageIndicator">Processing page 1 of 1</div>
-        </div>
-    </div>
-    
     <!-- Print/PDF Output Template (hidden) -->
     <div id="printTemplate" style="display: none;">
         <div class="print-version">
@@ -1646,9 +1617,11 @@
             const printEstimateBtn = document.getElementById('printEstimate');
             const generatePdfBtn = document.getElementById('generatePdf');
             const resetFormBtn = document.getElementById('resetForm');
-            const pdfLoadingOverlay = document.getElementById('pdfLoadingOverlay');
-            const pdfProgressFill = document.getElementById('pdfProgressFill');
-            const pdfPageIndicator = document.getElementById('pdfPageIndicator');
+            
+            // Mobile buttons
+            const printEstimateBtnMobile = document.getElementById('printEstimateMobile');
+            const generatePdfBtnMobile = document.getElementById('generatePdfMobile');
+            const resetFormBtnMobile = document.getElementById('resetFormMobile');
             
             // Preload watermark image
             function preloadWatermark() {
@@ -2077,15 +2050,18 @@
                 printWindow.document.close();
             }
             
-            // Generate PDF function with smooth page transitions
+            // Generate PDF function
             async function generatePdf() {
                 const printContent = preparePrintContent();
                 const { jsPDF } = window.jspdf;
                 
-                // Show loading overlay with progress
-                pdfLoadingOverlay.style.display = 'flex';
-                pdfProgressFill.style.width = '10%';
-                pdfPageIndicator.textContent = 'Preparing document...';
+                // Show loading state
+                const originalText = generatePdfBtn.innerHTML;
+                const originalTextMobile = generatePdfBtnMobile.innerHTML;
+                generatePdfBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+                generatePdfBtnMobile.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PDF';
+                generatePdfBtn.disabled = true;
+                generatePdfBtnMobile.disabled = true;
                 
                 // Create a temporary iframe to render the print content
                 const iframe = document.createElement('iframe');
@@ -2094,7 +2070,6 @@
                 iframe.style.height = '1120px'; // A4 height at 96 DPI
                 iframe.style.left = '-9999px';
                 iframe.style.top = '0';
-                iframe.style.border = 'none';
                 document.body.appendChild(iframe);
                 
                 iframe.contentDocument.open();
@@ -2108,7 +2083,7 @@
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
                     </head>
-                    <body style="margin: 0; padding: 20px; width: 800px; background: white;">
+                    <body style="margin: 0; padding: 20px; width: 800px;">
                         ${printContent}
                     </body>
                     </html>
@@ -2116,95 +2091,58 @@
                 iframe.contentDocument.close();
                 
                 // Wait for content to load
-                await new Promise(resolve => setTimeout(resolve, 300));
-                pdfProgressFill.style.width = '30%';
-                pdfPageIndicator.textContent = 'Rendering content...';
+                await new Promise(resolve => setTimeout(resolve, 500));
                 
-                try {
-                    // Get the content height
-                    const contentHeight = iframe.contentDocument.body.scrollHeight;
-                    const a4Height = 1120; // A4 height at 96 DPI
-                    const totalPages = Math.ceil(contentHeight / a4Height);
-                    
-                    // Initialize PDF
+                // Capture the iframe content
+                html2canvas(iframe.contentDocument.body, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    width: 800,
+                    height: iframe.contentDocument.body.scrollHeight
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
                     const pdf = new jsPDF('p', 'mm', 'a4');
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
                     
-                    // Calculate scale for better quality
-                    const scale = 2;
+                    // A4 dimensions in mm
+                    const imgWidth = 210;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
                     
-                    for (let page = 0; page < totalPages; page++) {
-                        // Update progress
-                        const progress = 30 + (page / totalPages * 60);
-                        pdfProgressFill.style.width = `${progress}%`;
-                        pdfPageIndicator.textContent = `Processing page ${page + 1} of ${totalPages}`;
-                        
-                        // Calculate vertical position for this page
-                        const verticalPosition = -page * a4Height;
-                        
-                        // Create a canvas for this page
-                        const canvas = await html2canvas(iframe.contentDocument.body, {
-                            scale: scale,
-                            useCORS: true,
-                            logging: false,
-                            backgroundColor: '#ffffff',
-                            width: 800,
-                            height: Math.min(a4Height, contentHeight - (page * a4Height)),
-                            windowWidth: 800,
-                            windowHeight: Math.min(a4Height, contentHeight - (page * a4Height)),
-                            y: verticalPosition,
-                            onclone: function(clonedDoc) {
-                                // Ensure all elements are visible
-                                clonedDoc.body.style.overflow = 'visible';
-                                clonedDoc.body.style.height = 'auto';
-                            }
-                        });
-                        
-                        // Convert canvas to image
-                        const imgData = canvas.toDataURL('image/jpeg', 0.9);
-                        
-                        // Calculate image dimensions for PDF
-                        const imgWidth = pdfWidth;
-                        const imgHeight = (canvas.height * pdfWidth) / (canvas.width / scale);
-                        
-                        // Add page if not first page
-                        if (page > 0) {
-                            pdf.addPage();
-                        }
-                        
-                        // Add image to PDF with smooth positioning
-                        pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
-                        
-                        // Small delay for smoother transition
-                        await new Promise(resolve => setTimeout(resolve, 100));
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= 297; // A4 height in mm
+                    
+                    // Add new page if content is longer than one page
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= 297;
                     }
                     
-                    // Update progress to complete
-                    pdfProgressFill.style.width = '100%';
-                    pdfPageIndicator.textContent = 'Finalizing PDF...';
-                    
-                    // Save PDF
                     const estimateNo = document.getElementById('estimateNo').value || 'Draft';
-                    setTimeout(() => {
-                        pdf.save(`UrbanKutir_Estimate_${estimateNo}.pdf`);
-                        
-                        // Hide loading overlay with animation
-                        setTimeout(() => {
-                            pdfLoadingOverlay.style.display = 'none';
-                            pdfProgressFill.style.width = '0%';
-                        }, 300);
-                    }, 500);
+                    pdf.save(`UrbanKutir_Estimate_${estimateNo}.pdf`);
                     
-                } catch (error) {
-                    console.error('Error generating PDF:', error);
-                    alert('Error generating PDF. Please try again.');
-                    pdfLoadingOverlay.style.display = 'none';
-                    pdfProgressFill.style.width = '0%';
-                } finally {
                     // Clean up
                     document.body.removeChild(iframe);
-                }
+                    
+                    // Reset button state
+                    generatePdfBtn.innerHTML = originalText;
+                    generatePdfBtnMobile.innerHTML = originalTextMobile;
+                    generatePdfBtn.disabled = false;
+                    generatePdfBtnMobile.disabled = false;
+                }).catch(error => {
+                    console.error('Error generating PDF:', error);
+                    generatePdfBtn.innerHTML = originalText;
+                    generatePdfBtnMobile.innerHTML = originalTextMobile;
+                    generatePdfBtn.disabled = false;
+                    generatePdfBtnMobile.disabled = false;
+                    alert('Error generating PDF. Please try again.');
+                    document.body.removeChild(iframe);
+                });
             }
             
             // Reset form function
@@ -2246,8 +2184,13 @@
             
             // Add event listeners to buttons
             printEstimateBtn.addEventListener('click', printEstimate);
+            printEstimateBtnMobile.addEventListener('click', printEstimate);
+            
             generatePdfBtn.addEventListener('click', generatePdf);
+            generatePdfBtnMobile.addEventListener('click', generatePdf);
+            
             resetFormBtn.addEventListener('click', resetForm);
+            resetFormBtnMobile.addEventListener('click', resetForm);
             
             // Auto-update on input changes
             document.getElementById('estimateNo').addEventListener('input', updateEstimatePreview);

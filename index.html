@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Kutir - Estimate Details Form</title>
+    <title>Urban Kutir - Tax Invoice System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -46,7 +46,6 @@
             gap: 20px;
         }
         
-        /* Header Styles */
         header {
             display: flex;
             flex-direction: column;
@@ -152,7 +151,6 @@
             }
         }
         
-        /* Controls */
         .controls {
             display: flex;
             gap: 8px;
@@ -225,20 +223,19 @@
             border-color: var(--primary-color);
         }
         
-        /* Main Content Layout */
-        .estimate-container {
+        .invoice-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
         
         @media (min-width: 992px) {
-            .estimate-container {
+            .invoice-container {
                 flex-direction: row;
             }
         }
         
-        .form-panel {
+        .editor-panel {
             flex: 1;
             background-color: white;
             border-radius: var(--radius);
@@ -249,13 +246,13 @@
         }
         
         @media (min-width: 768px) {
-            .form-panel {
+            .editor-panel {
                 padding: 20px;
             }
         }
         
         @media (min-width: 992px) {
-            .form-panel {
+            .editor-panel {
                 order: 1;
             }
         }
@@ -284,36 +281,6 @@
             }
         }
         
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            opacity: 0.025;
-            z-index: 0;
-            pointer-events: none;
-            width: 200px;
-            height: 200px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-        
-        @media (min-width: 768px) {
-            .watermark {
-                width: 300px;
-                height: 300px;
-            }
-        }
-        
-        @media (min-width: 992px) {
-            .watermark {
-                width: 350px;
-                height: 350px;
-            }
-        }
-        
-        /* Form Styles */
         .panel-title {
             color: var(--primary-dark);
             font-size: 15px;
@@ -388,7 +355,302 @@
             flex: 1;
         }
         
-        /* Items Table Editor */
+        .invoice-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-accent);
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-header {
+                flex-direction: row;
+                gap: 25px;
+            }
+        }
+        
+        .invoice-title {
+            font-size: 20px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-title {
+                font-size: 24px;
+            }
+        }
+        
+        .invoice-meta {
+            text-align: left;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-meta {
+                text-align: right;
+            }
+        }
+        
+        .invoice-meta p {
+            margin-bottom: 3px;
+            color: var(--text-light);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-meta p {
+                font-size: 12.5px;
+            }
+        }
+        
+        .invoice-addresses {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-addresses {
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+        
+        .address-box {
+            flex: 1;
+            background-color: var(--lighter-accent);
+            padding: 12px;
+            border-radius: var(--radius);
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        @media (min-width: 768px) {
+            .address-box {
+                padding: 14px;
+            }
+        }
+        
+        .address-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+        
+        @media (min-width: 768px) {
+            .address-title {
+                font-size: 14px;
+            }
+        }
+        
+        .address-content {
+            color: var(--text-medium);
+            line-height: 1.5;
+            font-size: 12.5px;
+        }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            font-size: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-table {
+                font-size: 12.5px;
+            }
+        }
+        
+        .invoice-table th {
+            background-color: var(--light-accent);
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--accent-color);
+            border-top: 1px solid var(--accent-color);
+            font-size: 11.5px;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-table th {
+                padding: 9px 11px;
+                font-size: 12px;
+            }
+        }
+        
+        .invoice-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--light-accent);
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-table td {
+                padding: 9px 11px;
+            }
+        }
+        
+        .invoice-table tr:last-child td {
+            border-bottom: 1px solid var(--accent-color);
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .invoice-summary {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-summary {
+                max-width: 280px;
+                margin-left: auto;
+            }
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 12.5px;
+        }
+        
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: 1px solid var(--primary-dark);
+            padding-top: 10px;
+            color: var(--primary-dark);
+        }
+        
+        @media (min-width: 768px) {
+            .summary-row.total {
+                font-size: 14.5px;
+            }
+        }
+        
+        .authorization-section {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--accent-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .authorization-section {
+                flex-direction: row;
+                align-items: center;
+                gap: 25px;
+            }
+        }
+        
+        .signature-box {
+            text-align: center;
+            order: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .signature-box {
+                order: 1;
+            }
+        }
+        
+        .signature-line {
+            width: 160px;
+            border-bottom: 1px solid var(--primary-dark);
+            margin: 0 auto 4px;
+            padding-top: 30px;
+        }
+        
+        .signature-name {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+        
+        .signature-title {
+            color: var(--text-light);
+            font-size: 12px;
+        }
+        
+        .invoice-footer {
+            margin-top: 15px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 12px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-accent);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-footer {
+                font-size: 12.5px;
+            }
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            opacity: 0.025;
+            z-index: 0;
+            pointer-events: none;
+            width: 200px;
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        @media (min-width: 768px) {
+            .watermark {
+                width: 300px;
+                height: 300px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .watermark {
+                width: 350px;
+                height: 350px;
+            }
+        }
+        
         .items-section {
             margin-top: 20px;
         }
@@ -513,64 +775,6 @@
             border-color: var(--primary-color);
         }
         
-        /* Preview Panel Styles */
-        .estimate-header {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--light-accent);
-            gap: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-header {
-                flex-direction: row;
-                gap: 25px;
-            }
-        }
-        
-        .estimate-title {
-            font-size: 20px;
-            color: var(--primary-dark);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.2;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-title {
-                font-size: 24px;
-            }
-        }
-        
-        .estimate-meta {
-            text-align: left;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-meta {
-                text-align: right;
-            }
-        }
-        
-        .estimate-meta p {
-            margin-bottom: 3px;
-            color: var(--text-light);
-            font-size: 12px;
-            line-height: 1.4;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-meta p {
-                font-size: 12.5px;
-            }
-        }
-        
         .company-gst-box {
             background-color: var(--lighter-accent);
             padding: 4px 8px;
@@ -591,322 +795,12 @@
             color: var(--primary-dark);
         }
         
-        .estimate-addresses {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-addresses {
-                flex-direction: row;
-                gap: 20px;
-            }
-        }
-        
-        .address-box {
-            flex: 1;
-            background-color: var(--lighter-accent);
-            padding: 12px;
-            border-radius: var(--radius);
-            border-left: 3px solid var(--accent-color);
-        }
-        
-        @media (min-width: 768px) {
-            .address-box {
-                padding: 14px;
-            }
-        }
-        
-        .address-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 7px;
-            font-size: 13px;
-        }
-        
-        @media (min-width: 768px) {
-            .address-title {
-                font-size: 14px;
-            }
-        }
-        
-        .address-content {
-            color: var(--text-medium);
-            line-height: 1.5;
-            font-size: 12.5px;
-        }
-        
-        .estimate-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 18px 0;
-            font-size: 12px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-table {
-                font-size: 12.5px;
-            }
-        }
-        
-        .estimate-table th {
-            background-color: var(--light-accent);
-            padding: 8px 10px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--primary-dark);
-            border-bottom: 1px solid var(--accent-color);
-            border-top: 1px solid var(--accent-color);
-            font-size: 11.5px;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-table th {
-                padding: 9px 11px;
-                font-size: 12px;
-            }
-        }
-        
-        .estimate-table td {
-            padding: 8px 10px;
-            border-bottom: 1px solid var(--light-accent);
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-table td {
-                padding: 9px 11px;
-            }
-        }
-        
-        .estimate-table tr:last-child td {
-            border-bottom: 1px solid var(--accent-color);
-        }
-        
-        .text-right {
-            text-align: right;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .estimate-summary {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 100%;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-summary {
-                max-width: 280px;
-                margin-left: auto;
-            }
-        }
-        
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px dashed var(--border-color);
-            font-size: 12.5px;
-        }
-        
-        .summary-row.total {
-            font-weight: 700;
-            font-size: 14px;
-            border-bottom: 1px solid var(--primary-dark);
-            padding-top: 10px;
-            color: var(--primary-dark);
-        }
-        
-        @media (min-width: 768px) {
-            .summary-row.total {
-                font-size: 14.5px;
-            }
-        }
-        
-        .terms-section {
-            margin-top: 20px;
-            padding: 14px;
-            background-color: var(--lighter-accent);
-            border-radius: var(--radius);
-            border-left: 3px solid var(--accent-color);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .terms-section {
-                padding: 16px;
-            }
-        }
-        
-        .terms-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-        
-        .terms-content {
-            color: var(--text-medium);
-            line-height: 1.5;
-            font-size: 12px;
-        }
-        
-        @media (min-width: 768px) {
-            .terms-content {
-                font-size: 12.5px;
-            }
-        }
-        
-        .terms-content ul {
-            padding-left: 18px;
-            margin-bottom: 10px;
-        }
-        
-        .terms-content li {
-            margin-bottom: 5px;
-        }
-        
-        .authorization-section {
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--accent-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .authorization-section {
-                flex-direction: row;
-                align-items: center;
-                gap: 25px;
-            }
-        }
-        
-        .signature-box {
-            text-align: center;
-            order: 2;
-        }
-        
-        @media (min-width: 768px) {
-            .signature-box {
-                order: 1;
-            }
-        }
-        
-        .signature-line {
-            width: 160px;
-            border-bottom: 1px solid var(--primary-dark);
-            margin: 0 auto 4px;
-            padding-top: 30px;
-        }
-        
-        .signature-name {
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 14px;
-            letter-spacing: 0.3px;
-        }
-        
-        .signature-title {
-            color: var(--text-light);
-            font-size: 12px;
-        }
-        
-        .estimate-footer {
-            margin-top: 15px;
-            text-align: center;
-            color: var(--text-light);
-            font-size: 12px;
-            padding-top: 15px;
-            border-top: 1px solid var(--light-accent);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-footer {
-                font-size: 12.5px;
-            }
-        }
-        
-        /* Additional Styles */
-        .validity-box {
-            background-color: #fff8f0;
-            border: 1px solid #f0d6b8;
-            border-radius: var(--radius);
-            padding: 10px 12px;
-            margin-top: 15px;
-            font-size: 12px;
-            color: var(--text-medium);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .validity-box {
-                padding: 12px 15px;
-                font-size: 12.5px;
-            }
-        }
-        
-        .validity-box strong {
-            color: var(--primary-dark);
-        }
-        
         .empty-state {
             color: #95a5a6;
             font-style: italic;
             text-align: center;
             padding: 7px;
             font-size: 12.5px;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-        
-        .status-draft {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-        
-        .status-sent {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
-        
-        .status-accepted {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-        
-        .status-expired {
-            background-color: #f3f4f6;
-            color: #6b7280;
         }
         
         /* Modal Styles for Export Options */
@@ -1109,9 +1003,9 @@
             background: white;
             min-height: 100%;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 210mm; /* A4 width */
+            max-width: 210mm;
             margin: 0 auto;
-            padding: 25mm; /* A4 margins */
+            padding: 25mm;
         }
         
         /* Progress Indicator */
@@ -1313,22 +1207,6 @@
             .no-print {
                 display: none !important;
             }
-            
-            /* Watermark for print */
-            .print-watermark {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) rotate(-45deg);
-                opacity: 0.03;
-                z-index: -1;
-                pointer-events: none;
-                width: 300px;
-                height: 300px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-            }
         }
         
         /* Compact spacing */
@@ -1360,7 +1238,7 @@
         }
         
         /* Elegant font refinements */
-        h1, h2, h3, h4, .estimate-title, .panel-title {
+        h1, h2, h3, h4, .invoice-title, .panel-title {
             letter-spacing: -0.1px;
         }
         
@@ -1390,10 +1268,10 @@
             </div>
             
             <div class="controls">
-                <button class="btn btn-secondary" id="exportEstimate">
-                    <i class="fas fa-download"></i> Export Estimate
+                <button class="btn btn-secondary" id="exportInvoice">
+                    <i class="fas fa-download"></i> Export Invoice
                 </button>
-                <button class="btn btn-primary" id="updatePreview">
+                <button class="btn btn-primary" id="updateInvoice">
                     <i class="fas fa-sync-alt"></i> Update Preview
                 </button>
                 <button class="btn btn-outline" id="resetForm">
@@ -1404,10 +1282,10 @@
         
         <!-- Mobile controls -->
         <div class="mobile-controls no-print">
-            <button class="btn btn-secondary mobile-btn" id="exportEstimateMobile">
+            <button class="btn btn-secondary mobile-btn" id="exportInvoiceMobile">
                 <i class="fas fa-download"></i> Export
             </button>
-            <button class="btn btn-primary mobile-btn" id="updatePreviewMobile">
+            <button class="btn btn-primary mobile-btn" id="updateInvoiceMobile">
                 <i class="fas fa-sync-alt"></i> Update
             </button>
             <button class="btn btn-outline mobile-btn" id="resetFormMobile">
@@ -1415,39 +1293,34 @@
             </button>
         </div>
         
-        <div class="estimate-container">
-            <div class="form-panel no-print">
-                <h2 class="panel-title"><i class="fas fa-edit"></i> Estimate Details</h2>
+        <div class="invoice-container">
+            <div class="editor-panel no-print">
+                <h2 class="panel-title"><i class="fas fa-edit"></i> Invoice Details</h2>
                 
                 <div class="row">
                     <div class="form-group compact">
-                        <label for="estimateNo">Estimate Number *</label>
-                        <input type="text" id="estimateNo" placeholder="e.g., EST-001" required>
+                        <label for="invoiceNo">Invoice Number *</label>
+                        <input type="text" id="invoiceNo" placeholder="e.g., INV-001" required>
                     </div>
                     <div class="form-group compact">
-                        <label for="estimateDate">Estimate Date *</label>
-                        <input type="date" id="estimateDate" required>
+                        <label for="invoiceDate">Invoice Date *</label>
+                        <input type="date" id="invoiceDate" required>
                     </div>
                 </div>
                 
                 <div class="row">
                     <div class="form-group compact">
-                        <label for="validUntil">Valid Until *</label>
-                        <input type="date" id="validUntil" required>
+                        <label for="dueDate">Due Date</label>
+                        <input type="date" id="dueDate">
                     </div>
                     <div class="form-group compact">
-                        <label for="estimateStatus">Estimate Status</label>
-                        <select id="estimateStatus">
-                            <option value="draft">Draft</option>
-                            <option value="sent">Sent</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="expired">Expired</option>
-                        </select>
+                        <label for="poNumber">PO Number</label>
+                        <input type="text" id="poNumber" placeholder="Optional">
                     </div>
                 </div>
                 
                 <h3 class="panel-title" style="font-size: 15px; margin-top: 22px;">
-                    <i class="fas fa-building"></i> Client Details
+                    <i class="fas fa-building"></i> Billed To
                 </h3>
                 
                 <div class="form-group compact">
@@ -1455,15 +1328,9 @@
                     <input type="text" id="clientName" placeholder="Enter client name" required>
                 </div>
                 
-                <div class="row">
-                    <div class="form-group compact">
-                        <label for="clientGst">Client GST Number</label>
-                        <input type="text" id="clientGst" placeholder="Enter Client GST Number">
-                    </div>
-                    <div class="form-group compact">
-                        <label for="clientPhone">Client Phone</label>
-                        <input type="text" id="clientPhone" placeholder="Enter phone number">
-                    </div>
+                <div class="form-group compact">
+                    <label for="clientGst">Client GST Number</label>
+                    <input type="text" id="clientGst" placeholder="Enter Client GST Number">
                 </div>
                 
                 <div class="form-group compact">
@@ -1471,38 +1338,50 @@
                     <textarea id="clientAddress" rows="2" placeholder="Enter client address" required></textarea>
                 </div>
                 
-                <div class="form-group compact">
-                    <label for="projectLocation">Project Location</label>
-                    <textarea id="projectLocation" rows="2" placeholder="Enter project/site location"></textarea>
-                </div>
-                
                 <h3 class="panel-title" style="font-size: 15px; margin-top: 22px;">
-                    <i class="fas fa-boxes"></i> Estimate Items
+                    <i class="fas fa-truck"></i> Delivery Address
                 </h3>
                 
-                <div class="items-table-container">
-                    <table class="items-editor-table">
-                        <thead>
-                            <tr>
-                                <th width="45">SL No</th>
-                                <th>Description of Work/Materials</th>
-                                <th width="85">HSN/SAC</th>
-                                <th width="65">Qty</th>
-                                <th width="85">Rate (₹)</th>
-                                <th width="65">Unit</th>
-                                <th width="95">Amount (₹)</th>
-                                <th width="45">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="itemsContainer">
-                            <!-- Items will be added dynamically here -->
-                        </tbody>
-                    </table>
+                <div class="form-group compact">
+                    <label for="deliveryAddress">Delivery Address</label>
+                    <textarea id="deliveryAddress" rows="2" placeholder="Enter delivery address (if different)"></textarea>
                 </div>
                 
-                <button class="add-item-btn" id="addItemBtn">
-                    <i class="fas fa-plus-circle"></i> Add New Line Item
-                </button>
+                <div class="form-group compact">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" id="phoneNumber" placeholder="Enter phone number">
+                </div>
+                
+                <div class="items-section">
+                    <h3 class="items-section-title"><i class="fas fa-boxes"></i> Items & Products</h3>
+                    
+                    <div class="items-table-container">
+                        <table class="items-editor-table">
+                            <thead>
+                                <tr>
+                                    <th width="45">SL No</th>
+                                    <th>Description of Goods/Services</th>
+                                    <th width="85">HSN/SAC</th>
+                                    <th width="65">Qty</th>
+                                    <th width="85">Rate (₹)</th>
+                                    <th width="65">Unit</th>
+                                    <th width="95">Amount (₹)</th>
+                                    <th width="45">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsContainer">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <button class="add-item-btn" id="addItemBtn">
+                        <i class="fas fa-plus-circle"></i> Add New Line Item
+                    </button>
+                    
+                    <div class="legal-note">
+                        * Required fields. HSN/SAC codes are mandatory for GST compliance.
+                    </div>
+                </div>
                 
                 <div class="row" style="margin-top: 18px;">
                     <div class="form-group compact">
@@ -1516,34 +1395,25 @@
                 </div>
                 
                 <div class="form-group compact">
-                    <label for="advancePercentage">Advance Required (%)</label>
-                    <input type="number" id="advancePercentage" value="50" min="0" max="100" step="1">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" rows="2" placeholder="Any special instructions or terms..."></textarea>
                 </div>
                 
-                <div class="form-group compact">
-                    <label for="workDuration">Estimated Work Duration</label>
-                    <input type="text" id="workDuration" placeholder="e.g., 15 working days">
-                </div>
-                
-                <div class="form-group compact">
-                    <label for="specialNotes">Special Notes</label>
-                    <textarea id="specialNotes" rows="3" placeholder="Any special instructions, terms, or conditions..."></textarea>
-                </div>
-                
-                <button class="btn btn-primary" id="updatePreviewBtn" style="width: 100%; margin-top: 16px; padding: 10px;">
-                    <i class="fas fa-sync-alt"></i> Update Estimate Preview
+                <button class="btn btn-primary" id="updateInvoiceBtn" style="width: 100%; margin-top: 16px; padding: 10px;">
+                    <i class="fas fa-sync-alt"></i> Update Invoice Preview
                 </button>
             </div>
             
             <div class="preview-panel no-print" id="previewPanel">
                 <div class="watermark"></div>
                 
-                <div class="estimate-header">
+                <div class="invoice-header">
                     <div>
-                        <div class="estimate-title">ESTIMATE</div>
+                        <div class="invoice-title">TAX INVOICE</div>
                         <div class="address-content">
                             <strong>Urban Kutir</strong><br>
-                            59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308, Kolkata 700050<br>
+                            59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308<br>
+                            Kolkata 700050, West Bengal<br>
                             <div class="company-gst-box">
                                 <strong>GSTIN:</strong> 19AAHFU6863E1ZR
                             </div>
@@ -1552,17 +1422,17 @@
                             <i class="fas fa-phone"></i> 9831859858
                         </div>
                     </div>
-                    <div class="estimate-meta">
-                        <p><strong>ESTIMATE NO:</strong> <span id="previewEstimateNo" class="empty-state">[Estimate Number]</span></p>
-                        <p><strong>DATE:</strong> <span id="previewEstimateDate" class="empty-state">[Date]</span></p>
-                        <p><strong>VALID UNTIL:</strong> <span id="previewValidUntil" class="empty-state">[Valid Until]</span></p>
-                        <p><strong>STATUS:</strong> <span id="previewStatus" class="status-badge status-draft">DRAFT</span></p>
+                    <div class="invoice-meta">
+                        <p><strong>INVOICE NO:</strong> <span id="previewInvoiceNo" class="empty-state">[Invoice Number]</span></p>
+                        <p><strong>DATE:</strong> <span id="previewDate" class="empty-state">[Date]</span></p>
+                        <p><strong>DUE DATE:</strong> <span id="previewDueDate" class="empty-state">[Due Date]</span></p>
+                        <p><strong>STATE:</strong> WEST BENGAL</p>
                     </div>
                 </div>
                 
-                <div class="estimate-addresses">
+                <div class="invoice-addresses">
                     <div class="address-box">
-                        <div class="address-title">CLIENT DETAILS:</div>
+                        <div class="address-title">BILLED TO:</div>
                         <div class="address-content" id="previewClient">
                             <div class="empty-state">[Client Information]</div>
                             <div id="previewClientGst" style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--accent-color); display: none;">
@@ -1571,23 +1441,18 @@
                         </div>
                     </div>
                     <div class="address-box">
-                        <div class="address-title">PROJECT LOCATION:</div>
-                        <div class="address-content" id="previewProjectLocation">
-                            <div class="empty-state">[Project/Site Location]</div>
+                        <div class="address-title">SHIP TO:</div>
+                        <div class="address-content" id="previewDelivery">
+                            <div class="empty-state">[Delivery Address]</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="validity-box">
-                    <strong>Note:</strong> This estimate is valid until <span id="previewValidUntilText" class="empty-state">[Valid Until Date]</span>. 
-                    Prices are subject to change based on market rates of materials at the time of order confirmation.
-                </div>
-                
-                <table class="estimate-table">
+                <table class="invoice-table">
                     <thead>
                         <tr>
                             <th class="text-center" width="45">SL No</th>
-                            <th>Description of Work/Materials</th>
+                            <th>Description of Goods/Services</th>
                             <th class="text-center" width="85">HSN/SAC</th>
                             <th class="text-center" width="65">Qty</th>
                             <th class="text-right" width="85">Rate (₹)</th>
@@ -1602,9 +1467,9 @@
                     </tbody>
                 </table>
                 
-                <div class="estimate-summary">
+                <div class="invoice-summary">
                     <div class="summary-row">
-                        <span>Total Estimate Value</span>
+                        <span>Total Taxable Value</span>
                         <span id="previewTaxable">0.00</span>
                     </div>
                     <div class="summary-row">
@@ -1624,42 +1489,19 @@
                         <span id="previewRoundOff">0.00</span>
                     </div>
                     <div class="summary-row total">
-                        <span>TOTAL ESTIMATE</span>
+                        <span>GRAND TOTAL</span>
                         <span id="previewTotal">₹0.00</span>
                     </div>
-                    <div class="summary-row" style="border-bottom: none; padding-top: 8px;">
-                        <span>Advance Required (<span id="previewAdvancePercentage">50</span>%)</span>
-                        <span id="previewAdvanceAmount">₹0.00</span>
-                    </div>
                 </div>
                 
-                <div id="previewWorkDuration" style="margin-top: 10px; font-size: 11.5px; color: var(--text-medium); padding: 7px; background-color: var(--lighter-accent); border-radius: 4px; display: none;">
-                    <strong>Estimated Work Duration:</strong> <span id="previewWorkDurationText"></span>
-                </div>
-                
-                <div class="terms-section">
-                    <div class="terms-title"><i class="fas fa-file-contract"></i> Terms & Conditions</div>
-                    <div class="terms-content">
-                        <ul>
-                            <li>This estimate is valid for 30 days from the date of issue unless otherwise specified.</li>
-                            <li>Advance payment of <span id="previewAdvanceText">50%</span> is required to confirm the order and commence work.</li>
-                            <li>Balance payment to be made upon completion of work and before delivery/installation.</li>
-                            <li>All prices are exclusive of GST unless otherwise specified.</li>
-                            <li>Any changes in design/specifications after confirmation may result in price adjustments.</li>
-                            <li>Urban Kutir reserves the right to revise prices if material costs change before order confirmation.</li>
-                            <li>Work commencement is subject to receipt of advance payment and availability of materials.</li>
-                            <li>Installation/delivery timelines are estimates and subject to weather conditions and other factors.</li>
-                        </ul>
-                        <div id="previewSpecialNotes" style="display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
-                            <strong>Special Notes:</strong> <span id="previewSpecialNotesContent"></span>
-                        </div>
-                    </div>
+                <div id="previewNotes" style="margin-top: 10px; font-size: 11.5px; color: var(--text-medium); padding: 7px; background-color: var(--lighter-accent); border-radius: 4px; display: none;">
+                    <strong>Notes:</strong> <span id="previewNotesContent"></span>
                 </div>
                 
                 <div class="authorization-section">
                     <div style="flex: 1;">
-                        <p><strong>Payment Terms:</strong> <span id="previewAdvanceSummary">50% advance, 50% on completion</span></p>
-                        <p><strong>Delivery/Installation:</strong> Subject to advance payment and material availability</p>
+                        <p><strong>Payment Terms:</strong> 50% advance, 50% on delivery</p>
+                        <p><strong>Delivery:</strong> Within 15 working days from order confirmation</p>
                         <p><strong>Bank Details:</strong> State Bank of India | A/C: 123456789012 | IFSC: SBIN0001234</p>
                         <p><strong>PAN:</strong> AAHFU6863E</p>
                     </div>
@@ -1671,16 +1513,16 @@
                     </div>
                 </div>
                 
-                <div class="estimate-footer">
-                    <p>This is a quotation/estimate and not a tax invoice. Tax invoice will be issued upon order confirmation and payment.</p>
-                    <p style="margin-top: 10px; font-size: 11px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
+                <div class="invoice-footer">
+                    <p><strong>TOTAL AMOUNT:</strong> RUPEES <span id="previewAmountWords" class="empty-state">[Amount in words]</span> ONLY.</p>
+                    <p style="margin-top: 10px; font-size: 11px;">This is a computer generated invoice and does not require a physical signature. Subject to Kolkata Jurisdiction.</p>
+                    <p style="font-size: 10px; color: #7f8c8d; margin-top: 6px;">As per GST rules, this invoice is valid without signature | E. & O.E.</p>
                 </div>
             </div>
         </div>
         
         <footer class="no-print">
-            <p>Urban Kutir Professional Estimate System &copy; 2025 | GST No: 19AAHFU6863E1ZR</p>
-            <p class="legal-note">This estimate system complies with Indian tax regulations and legal requirements for business quotations.</p>
+            <p>Urban Kutir Professional Invoice System &copy; 2025 | GST No: 19AAHFU6863E1ZR</p>
         </footer>
     </div>
     
@@ -1688,7 +1530,7 @@
     <div class="modal-overlay" id="exportModal">
         <div class="export-modal">
             <div class="modal-header">
-                <h3>Export Estimate</h3>
+                <h3>Export Invoice</h3>
                 <button class="close-modal" id="closeExportModal">
                     <i class="fas fa-times"></i>
                 </button>
@@ -1766,13 +1608,12 @@
             // Set default dates
             const today = new Date();
             const formattedToday = today.toISOString().split('T')[0];
-            document.getElementById('estimateDate').value = formattedToday;
+            document.getElementById('invoiceDate').value = formattedToday;
             
-            // Set valid until date to 30 days from today
-            const validUntil = new Date(today);
-            validUntil.setDate(today.getDate() + 30);
-            const formattedValidUntil = validUntil.toISOString().split('T')[0];
-            document.getElementById('validUntil').value = formattedValidUntil;
+            const dueDate = new Date(today);
+            dueDate.setDate(today.getDate() + 15);
+            const formattedDueDate = dueDate.toISOString().split('T')[0];
+            document.getElementById('dueDate').value = formattedDueDate;
             
             // Initialize items with one empty item
             let items = [
@@ -1791,13 +1632,13 @@
             const itemsContainer = document.getElementById('itemsContainer');
             const previewItems = document.getElementById('previewItems');
             const addItemBtn = document.getElementById('addItemBtn');
-            const updatePreviewBtn = document.getElementById('updatePreviewBtn');
-            const exportEstimateBtn = document.getElementById('exportEstimate');
+            const updateInvoiceBtn = document.getElementById('updateInvoiceBtn');
+            const exportInvoiceBtn = document.getElementById('exportInvoice');
             const resetFormBtn = document.getElementById('resetForm');
             
             // Mobile buttons
-            const exportEstimateBtnMobile = document.getElementById('exportEstimateMobile');
-            const updatePreviewBtnMobile = document.getElementById('updatePreviewMobile');
+            const exportInvoiceBtnMobile = document.getElementById('exportInvoiceMobile');
+            const updateInvoiceBtnMobile = document.getElementById('updateInvoiceMobile');
             const resetFormBtnMobile = document.getElementById('resetFormMobile');
             
             // Export modal elements
@@ -1895,6 +1736,73 @@
                 }, 300);
             }
             
+            // Number to words function
+            function numberToWords(num) {
+                if (num === 0) return 'ZERO';
+                
+                const ones = ['', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE', 'TEN', 'ELEVEN', 'TWELVE', 'THIRTEEN', 'FOURTEEN', 'FIFTEEN', 'SIXTEEN', 'SEVENTEEN', 'EIGHTEEN', 'NINETEEN'];
+                const tens = ['', '', 'TWENTY', 'THIRTY', 'FORTY', 'FIFTY', 'SIXTY', 'SEVENTY', 'EIGHTY', 'NINETY'];
+                
+                let words = '';
+                
+                if (num >= 10000000) {
+                    const crores = Math.floor(num / 10000000);
+                    words += numberToWords(crores) + ' CRORE ';
+                    num %= 10000000;
+                }
+                
+                if (num >= 100000) {
+                    const lakhs = Math.floor(num / 100000);
+                    words += numberToWords(lakhs) + ' LAKH ';
+                    num %= 100000;
+                }
+                
+                if (num >= 1000) {
+                    const thousands = Math.floor(num / 1000);
+                    words += numberToWords(thousands) + ' THOUSAND ';
+                    num %= 1000;
+                }
+                
+                if (num >= 100) {
+                    const hundreds = Math.floor(num / 100);
+                    words += ones[hundreds] + ' HUNDRED ';
+                    num %= 100;
+                }
+                
+                if (num > 0) {
+                    if (words !== '') words += 'AND ';
+                    
+                    if (num < 20) {
+                        words += ones[num];
+                    } else {
+                        words += tens[Math.floor(num / 10)];
+                        if (num % 10 > 0) {
+                            words += ' ' + ones[num % 10];
+                        }
+                    }
+                }
+                
+                return words.trim() || 'ZERO';
+            }
+            
+            // Format currency with commas and decimals
+            function formatCurrency(amount, withDecimals = false) {
+                if (withDecimals) {
+                    return amount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                }
+                return amount.toLocaleString('en-IN');
+            }
+            
+            // Format date from YYYY-MM-DD to DD/MM/YYYY
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const date = new Date(dateString);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+            
             // Render items in editor
             function renderItems() {
                 itemsContainer.innerHTML = '';
@@ -1903,7 +1811,7 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td><input type="text" class="item-sno" value="${item.slNo}" readonly></td>
-                        <td><input type="text" class="item-name" value="${item.name}" placeholder="Description of work/material"></td>
+                        <td><input type="text" class="item-name" value="${item.name}" placeholder="Description of goods/services"></td>
                         <td><input type="text" class="item-hsn" value="${item.hsnCode}" placeholder="HSN/SAC code"></td>
                         <td><input type="number" class="item-qty" value="${item.qty}" placeholder="Qty" min="0" step="0.01"></td>
                         <td><input type="number" class="item-price" value="${item.price}" placeholder="Rate" min="0" step="0.01"></td>
@@ -1926,7 +1834,7 @@
                             items.splice(index, 1);
                             items.forEach((item, idx) => item.slNo = idx + 1);
                             renderItems();
-                            updateEstimatePreview();
+                            updateInvoicePreview();
                         }
                     });
                 });
@@ -1949,7 +1857,7 @@
                         items[sno].hsnCode = row.querySelector('.item-hsn').value;
                         items[sno].unit = row.querySelector('.item-unit').value;
                         
-                        updateEstimatePreview();
+                        updateInvoicePreview();
                     });
                 });
                 
@@ -1967,7 +1875,7 @@
                             items[sno].unit = this.value;
                         }
                         
-                        updateEstimatePreview();
+                        updateInvoicePreview();
                     });
                 });
             }
@@ -2004,41 +1912,25 @@
                 });
             }
             
-            // Format currency with commas and decimals
-            function formatCurrency(amount, withDecimals = false) {
-                if (withDecimals) {
-                    return amount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                }
-                return amount.toLocaleString('en-IN');
-            }
-            
-            // Update estimate preview with form values
-            function updateEstimatePreview() {
+            // Update invoice preview with form values
+            function updateInvoicePreview() {
                 // Update basic information
-                const estimateNo = document.getElementById('estimateNo').value;
-                document.getElementById('previewEstimateNo').textContent = estimateNo || '[Estimate Number]';
-                document.getElementById('previewEstimateNo').className = estimateNo ? '' : 'empty-state';
+                const invoiceNo = document.getElementById('invoiceNo').value;
+                document.getElementById('previewInvoiceNo').textContent = invoiceNo || '[Invoice Number]';
+                document.getElementById('previewInvoiceNo').className = invoiceNo ? '' : 'empty-state';
                 
-                const estimateDate = document.getElementById('estimateDate').value;
-                document.getElementById('previewEstimateDate').textContent = estimateDate ? formatDate(estimateDate) : '[Date]';
-                document.getElementById('previewEstimateDate').className = estimateDate ? '' : 'empty-state';
+                const invoiceDate = document.getElementById('invoiceDate').value;
+                document.getElementById('previewDate').textContent = invoiceDate ? formatDate(invoiceDate) : '[Date]';
+                document.getElementById('previewDate').className = invoiceDate ? '' : 'empty-state';
                 
-                const validUntil = document.getElementById('validUntil').value;
-                document.getElementById('previewValidUntil').textContent = validUntil ? formatDate(validUntil) : '[Valid Until]';
-                document.getElementById('previewValidUntilText').textContent = validUntil ? formatDate(validUntil) : '[Valid Until Date]';
-                document.getElementById('previewValidUntil').className = validUntil ? '' : 'empty-state';
-                
-                // Update status
-                const status = document.getElementById('estimateStatus').value;
-                const statusBadge = document.getElementById('previewStatus');
-                statusBadge.textContent = status.toUpperCase();
-                statusBadge.className = 'status-badge status-' + status;
+                const dueDate = document.getElementById('dueDate').value;
+                document.getElementById('previewDueDate').textContent = dueDate ? formatDate(dueDate) : '[Due Date]';
+                document.getElementById('previewDueDate').className = dueDate ? '' : 'empty-state';
                 
                 // Update client information
                 const clientName = document.getElementById('clientName').value;
                 const clientAddress = document.getElementById('clientAddress').value;
                 const clientGst = document.getElementById('clientGst').value;
-                const clientPhone = document.getElementById('clientPhone').value;
                 
                 const clientGstContainer = document.getElementById('previewClientGst');
                 if (clientGst.trim()) {
@@ -2052,7 +1944,6 @@
                     let clientHTML = '';
                     if (clientName.trim()) clientHTML += clientName + '<br>';
                     if (clientAddress.trim()) clientHTML += clientAddress.replace(/\n/g, '<br>');
-                    if (clientPhone.trim()) clientHTML += '<br>PHONE: ' + clientPhone;
                     
                     document.getElementById('previewClient').innerHTML = clientHTML + 
                         (clientGst.trim() ? `<div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--accent-color);">
@@ -2064,13 +1955,19 @@
                     document.getElementById('previewClient').innerHTML = '<div class="empty-state">[Client Information]</div>';
                 }
                 
-                // Update project location
-                const projectLocation = document.getElementById('projectLocation').value;
-                if (projectLocation.trim()) {
-                    document.getElementById('previewProjectLocation').innerHTML = projectLocation.replace(/\n/g, '<br>');
-                    document.getElementById('previewProjectLocation').querySelectorAll('.empty-state').forEach(el => el.remove());
+                // Update delivery address
+                const deliveryAddress = document.getElementById('deliveryAddress').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                if (deliveryAddress.trim() || phoneNumber.trim()) {
+                    let deliveryHTML = '';
+                    if (deliveryAddress.trim()) deliveryHTML += deliveryAddress.replace(/\n/g, '<br>');
+                    if (phoneNumber.trim()) deliveryHTML += (deliveryAddress.trim() ? '<br>' : '') + 'PHONE: ' + phoneNumber;
+                    
+                    document.getElementById('previewDelivery').innerHTML = deliveryHTML;
+                    document.getElementById('previewDelivery').querySelectorAll('.empty-state').forEach(el => el.remove());
                 } else {
-                    document.getElementById('previewProjectLocation').innerHTML = '<div class="empty-state">[Project/Site Location]</div>';
+                    document.getElementById('previewDelivery').innerHTML = '<div class="empty-state">[Delivery Address]</div>';
                 }
                 
                 // Update items
@@ -2082,8 +1979,6 @@
                 const taxAmount = (taxableValue * taxRate) / 100;
                 const roundOff = parseFloat(document.getElementById('roundOff').value) || 0;
                 const totalAmount = taxableValue + (taxAmount * 2) + roundOff;
-                const advancePercentage = parseFloat(document.getElementById('advancePercentage').value) || 0;
-                const advanceAmount = (totalAmount * advancePercentage) / 100;
                 
                 // Update summary
                 document.getElementById('previewTaxable').textContent = formatCurrency(taxableValue, true);
@@ -2093,86 +1988,45 @@
                 document.getElementById('previewSgst').textContent = formatCurrency(taxAmount, true);
                 document.getElementById('previewRoundOff').textContent = formatCurrency(roundOff, true);
                 document.getElementById('previewTotal').textContent = '₹' + formatCurrency(totalAmount, true);
-                document.getElementById('previewAdvancePercentage').textContent = advancePercentage;
-                document.getElementById('previewAdvanceAmount').textContent = '₹' + formatCurrency(advanceAmount, true);
                 
-                // Update terms and conditions
-                document.getElementById('previewAdvanceText').textContent = advancePercentage + '%';
-                document.getElementById('previewAdvanceSummary').textContent = advancePercentage + '% advance, ' + (100 - advancePercentage) + '% on completion';
+                // Update amount in words
+                const amountWords = numberToWords(Math.round(totalAmount));
+                document.getElementById('previewAmountWords').textContent = totalAmount > 0 ? amountWords : '[Amount in words]';
+                document.getElementById('previewAmountWords').className = totalAmount > 0 ? '' : 'empty-state';
                 
-                // Update work duration
-                const workDuration = document.getElementById('workDuration').value;
-                const workDurationContainer = document.getElementById('previewWorkDuration');
-                if (workDuration.trim()) {
-                    document.getElementById('previewWorkDurationText').textContent = workDuration;
-                    workDurationContainer.style.display = 'block';
+                // Update notes
+                const notes = document.getElementById('notes').value;
+                const notesContainer = document.getElementById('previewNotes');
+                const notesContent = document.getElementById('previewNotesContent');
+                
+                if (notes.trim()) {
+                    notesContent.textContent = notes;
+                    notesContainer.style.display = 'block';
                 } else {
-                    workDurationContainer.style.display = 'none';
-                }
-                
-                // Update special notes
-                const specialNotes = document.getElementById('specialNotes').value;
-                const specialNotesContainer = document.getElementById('previewSpecialNotes');
-                if (specialNotes.trim()) {
-                    document.getElementById('previewSpecialNotesContent').textContent = specialNotes;
-                    specialNotesContainer.style.display = 'block';
-                } else {
-                    specialNotesContainer.style.display = 'none';
+                    notesContainer.style.display = 'none';
                 }
             }
-            
-            // Format date from YYYY-MM-DD to DD/MM/YYYY
-            function formatDate(dateString) {
-                if (!dateString) return '';
-                const date = new Date(dateString);
-                const day = String(date.getDate()).padStart(2, '0');
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const year = date.getFullYear();
-                return `${day}/${month}/${year}`;
-            }
-            
-            // Add new item
-            addItemBtn.addEventListener('click', function() {
-                const newSlNo = items.length + 1;
-                items.push({
-                    slNo: newSlNo,
-                    name: "",
-                    hsnCode: "",
-                    qty: 1,
-                    price: 0,
-                    unit: "Pcs",
-                    total: 0
-                });
-                renderItems();
-                updateEstimatePreview();
-            });
-            
-            // Update estimate preview
-            updatePreviewBtn.addEventListener('click', updateEstimatePreview);
-            updatePreviewBtnMobile.addEventListener('click', updateEstimatePreview);
             
             // Generate print preview HTML
             function generatePrintPreviewHTML() {
-                const estimateNo = document.getElementById('estimateNo').value;
-                const estimateDate = document.getElementById('estimateDate').value;
-                const validUntil = document.getElementById('validUntil').value;
-                const status = document.getElementById('estimateStatus').value;
+                const invoiceNo = document.getElementById('invoiceNo').value;
+                const invoiceDate = document.getElementById('invoiceDate').value;
+                const dueDate = document.getElementById('dueDate').value;
+                const poNumber = document.getElementById('poNumber').value;
                 const clientName = document.getElementById('clientName').value;
                 const clientAddress = document.getElementById('clientAddress').value;
                 const clientGst = document.getElementById('clientGst').value;
-                const clientPhone = document.getElementById('clientPhone').value;
-                const projectLocation = document.getElementById('projectLocation').value;
-                const workDuration = document.getElementById('workDuration').value;
-                const specialNotes = document.getElementById('specialNotes').value;
+                const deliveryAddress = document.getElementById('deliveryAddress').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                const notes = document.getElementById('notes').value;
                 const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
                 const roundOff = parseFloat(document.getElementById('roundOff').value) || 0;
-                const advancePercentage = parseFloat(document.getElementById('advancePercentage').value) || 0;
                 
                 // Calculate totals
                 const taxableValue = items.reduce((sum, item) => sum + item.total, 0);
                 const taxAmount = (taxableValue * taxRate) / 100;
                 const totalAmount = taxableValue + (taxAmount * 2) + roundOff;
-                const advanceAmount = (totalAmount * advancePercentage) / 100;
+                const amountWords = numberToWords(Math.round(totalAmount));
                 
                 // Generate items HTML
                 let itemsHTML = '';
@@ -2200,21 +2054,12 @@
                 let clientHTML = '';
                 if (clientName.trim()) clientHTML += clientName + '<br>';
                 if (clientAddress.trim()) clientHTML += clientAddress.replace(/\n/g, '<br>');
-                if (clientPhone.trim()) clientHTML += '<br>PHONE: ' + clientPhone;
                 if (clientGst.trim()) clientHTML += '<br><strong>GSTIN:</strong> ' + clientGst;
                 
-                // Status badge
-                const statusText = status.toUpperCase();
-                const statusClass = 'status-' + status;
-                
-                // Get logo image for watermark
-                const logoImg = document.querySelector('.logo-img');
-                let watermarkStyle = '';
-                if (logoImg && logoImg.src && !logoImg.src.includes('data:image')) {
-                    watermarkStyle = `background-image: url('${logoImg.src}');`;
-                } else {
-                    watermarkStyle = 'background-color: rgba(139, 69, 19, 0.015);';
-                }
+                // Delivery info
+                let deliveryHTML = '';
+                if (deliveryAddress.trim()) deliveryHTML += deliveryAddress.replace(/\n/g, '<br>');
+                if (phoneNumber.trim()) deliveryHTML += (deliveryAddress.trim() ? '<br>' : '') + 'PHONE: ' + phoneNumber;
                 
                 return `
                     <style>
@@ -2222,22 +2067,6 @@
                             font-family: 'Inter', sans-serif;
                             color: #2c1810;
                             line-height: 1.5;
-                            position: relative;
-                        }
-                        
-                        .print-watermark {
-                            position: fixed;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%) rotate(-45deg);
-                            opacity: 0.03;
-                            z-index: -1;
-                            pointer-events: none;
-                            width: 300px;
-                            height: 300px;
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            background-position: center;
                         }
                         
                         .print-header {
@@ -2323,14 +2152,6 @@
                             color: #5a3921;
                         }
                         
-                        .print-terms {
-                            margin-top: 30px;
-                            padding: 20px;
-                            background-color: #fcfaf7;
-                            border-radius: 6px;
-                            border-left: 3px solid #d4a574;
-                        }
-                        
                         .print-authorization {
                             margin-top: 40px;
                             padding-top: 25px;
@@ -2350,69 +2171,49 @@
                             margin: 0 auto 5px;
                             padding-top: 40px;
                         }
-                        
-                        .status-badge {
-                            display: inline-block;
-                            padding: 4px 10px;
-                            border-radius: 3px;
-                            font-size: 11px;
-                            font-weight: 600;
-                        }
-                        
-                        .status-draft { background-color: #fef3c7; color: #92400e; }
-                        .status-sent { background-color: #d1fae5; color: #065f46; }
-                        .status-accepted { background-color: #dbeafe; color: #1e40af; }
-                        .status-expired { background-color: #f3f4f6; color: #6b7280; }
                     </style>
                     
                     <div class="print-content">
-                        <!-- Watermark for export output -->
-                        <div class="print-watermark" style="${watermarkStyle}"></div>
-                        
                         <div class="print-header">
                             <div class="print-company-info">
                                 <h1>Urban Kutir</h1>
                                 <p style="color: #8B4513; font-size: 13px; margin-bottom: 8px;">Premium Home Solutions & Interior Design</p>
                                 <p style="font-size: 12px;">
-                                    59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308, Kolkata 700050<br>
+                                    59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308, Kolkata 700050, West Bengal<br>
                                     <strong>GSTIN:</strong> 19AAHFU6863E1ZR<br>
                                     <i class="fas fa-envelope"></i> urbankutir@gmail.com | 
                                     <i class="fas fa-phone"></i> 9831859858
                                 </p>
                             </div>
                             <div class="print-meta">
-                                <p><strong>ESTIMATE NO:</strong> ${estimateNo || 'EST-XXXX'}</p>
-                                <p><strong>DATE:</strong> ${estimateDate ? formatDate(estimateDate) : formatDate(formattedToday)}</p>
-                                <p><strong>VALID UNTIL:</strong> ${validUntil ? formatDate(validUntil) : formatDate(formattedValidUntil)}</p>
-                                <p><strong>STATUS:</strong> <span class="status-badge ${statusClass}">${statusText}</span></p>
+                                <p><strong>INVOICE NO:</strong> ${invoiceNo || 'INV-XXXX'}</p>
+                                <p><strong>DATE:</strong> ${invoiceDate ? formatDate(invoiceDate) : formatDate(formattedToday)}</p>
+                                <p><strong>DUE DATE:</strong> ${dueDate ? formatDate(dueDate) : formatDate(formattedDueDate)}</p>
+                                ${poNumber ? `<p><strong>PO NUMBER:</strong> ${poNumber}</p>` : ''}
+                                <p><strong>STATE:</strong> WEST BENGAL</p>
                             </div>
                         </div>
                         
                         <div style="text-align: center; margin: 30px 0;">
-                            <h1 style="color: #5a3921; font-size: 28px; border-bottom: 2px solid #d4a574; padding-bottom: 10px; display: inline-block;">ESTIMATE</h1>
+                            <h1 style="color: #5a3921; font-size: 28px; border-bottom: 2px solid #d4a574; padding-bottom: 10px; display: inline-block;">TAX INVOICE</h1>
                         </div>
                         
                         <div class="print-addresses">
                             <div class="print-address-box">
-                                <strong style="color: #5a3921; font-size: 14px;">CLIENT DETAILS:</strong><br>
+                                <strong style="color: #5a3921; font-size: 14px;">BILLED TO:</strong><br>
                                 <div style="margin-top: 8px; font-size: 12px;">${clientHTML || '[Client Information]'}</div>
                             </div>
                             <div class="print-address-box">
-                                <strong style="color: #5a3921; font-size: 14px;">PROJECT LOCATION:</strong><br>
-                                <div style="margin-top: 8px; font-size: 12px;">${projectLocation.trim() ? projectLocation.replace(/\n/g, '<br>') : '[Project/Site Location]'}</div>
+                                <strong style="color: #5a3921; font-size: 14px;">SHIP TO:</strong><br>
+                                <div style="margin-top: 8px; font-size: 12px;">${deliveryHTML || '[Delivery Address]'}</div>
                             </div>
-                        </div>
-                        
-                        <div style="background-color: #fff8f0; border: 1px solid #f0d6b8; border-radius: 6px; padding: 12px 15px; margin-bottom: 25px; font-size: 12px;">
-                            <strong>Note:</strong> This estimate is valid until ${validUntil ? formatDate(validUntil) : formatDate(formattedValidUntil)}. 
-                            Prices are subject to change based on market rates of materials at the time of order confirmation.
                         </div>
                         
                         <table class="print-table">
                             <thead>
                                 <tr>
                                     <th class="text-center" width="45">SL No</th>
-                                    <th>Description of Work/Materials</th>
+                                    <th>Description of Goods/Services</th>
                                     <th class="text-center" width="85">HSN/SAC</th>
                                     <th class="text-center" width="65">Qty</th>
                                     <th class="text-right" width="85">Rate (₹)</th>
@@ -2427,7 +2228,7 @@
                         
                         <div class="print-summary">
                             <div class="print-summary-row">
-                                <span>Total Estimate Value</span>
+                                <span>Total Taxable Value</span>
                                 <span>${formatCurrency(taxableValue, true)}</span>
                             </div>
                             <div class="print-summary-row">
@@ -2443,44 +2244,21 @@
                                 <span>${formatCurrency(roundOff, true)}</span>
                             </div>
                             <div class="print-summary-row print-total">
-                                <span>TOTAL ESTIMATE</span>
+                                <span>GRAND TOTAL</span>
                                 <span>₹${formatCurrency(totalAmount, true)}</span>
-                            </div>
-                            <div class="print-summary-row" style="border-bottom: none; padding-top: 10px;">
-                                <span>Advance Required (${advancePercentage}%)</span>
-                                <span>₹${formatCurrency(advanceAmount, true)}</span>
                             </div>
                         </div>
                         
-                        ${workDuration.trim() ? `
+                        ${notes.trim() ? `
                             <div style="margin-top: 15px; font-size: 12px; padding: 10px; background-color: #fcfaf7; border-radius: 4px;">
-                                <strong>Estimated Work Duration:</strong> ${workDuration}
+                                <strong>Notes:</strong> ${notes}
                             </div>
                         ` : ''}
                         
-                        <div class="print-terms">
-                            <strong style="color: #5a3921; font-size: 14px; margin-bottom: 10px; display: block;">Terms & Conditions</strong>
-                            <ul style="font-size: 11px; padding-left: 20px; margin-bottom: 15px;">
-                                <li>This estimate is valid for 30 days from the date of issue unless otherwise specified.</li>
-                                <li>Advance payment of ${advancePercentage}% is required to confirm the order and commence work.</li>
-                                <li>Balance payment to be made upon completion of work and before delivery/installation.</li>
-                                <li>All prices are exclusive of GST unless otherwise specified.</li>
-                                <li>Any changes in design/specifications after confirmation may result in price adjustments.</li>
-                                <li>Urban Kutir reserves the right to revise prices if material costs change before order confirmation.</li>
-                                <li>Work commencement is subject to receipt of advance payment and availability of materials.</li>
-                                <li>Installation/delivery timelines are estimates and subject to weather conditions and other factors.</li>
-                            </ul>
-                            ${specialNotes.trim() ? `
-                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e0d6c8; font-size: 11px;">
-                                    <strong>Special Notes:</strong> ${specialNotes}
-                                </div>
-                            ` : ''}
-                        </div>
-                        
                         <div class="print-authorization">
                             <div style="flex: 1;">
-                                <p style="font-size: 11px;"><strong>Payment Terms:</strong> ${advancePercentage}% advance, ${100 - advancePercentage}% on completion</p>
-                                <p style="font-size: 11px;"><strong>Delivery/Installation:</strong> Subject to advance payment and material availability</p>
+                                <p style="font-size: 11px;"><strong>Payment Terms:</strong> 50% advance, 50% on delivery</p>
+                                <p style="font-size: 11px;"><strong>Delivery:</strong> Within 15 working days from order confirmation</p>
                                 <p style="font-size: 11px;"><strong>Bank Details:</strong> State Bank of India | A/C: 123456789012 | IFSC: SBIN0001234</p>
                                 <p style="font-size: 11px;"><strong>PAN:</strong> AAHFU6863E</p>
                             </div>
@@ -2493,8 +2271,9 @@
                         </div>
                         
                         <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #f0e6d6; font-size: 10px; color: #8B4513;">
-                            <p>This is a quotation/estimate and not a tax invoice. Tax invoice will be issued upon order confirmation and payment.</p>
-                            <p style="margin-top: 10px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
+                            <p><strong>TOTAL AMOUNT:</strong> RUPEES ${amountWords} ONLY.</p>
+                            <p style="margin-top: 10px;">This is a computer generated invoice and does not require a physical signature. Subject to Kolkata Jurisdiction.</p>
+                            <p style="margin-top: 5px;">As per GST rules, this invoice is valid without signature | E. & O.E.</p>
                         </div>
                     </div>
                 `;
@@ -2515,7 +2294,6 @@
                 confirmExport.disabled = true;
                 
                 try {
-                    // First, generate the HTML for the PDF
                     const html = generatePrintPreviewHTML();
                     
                     // Create a temporary container
@@ -2529,32 +2307,8 @@
                     tempContainer.innerHTML = html;
                     document.body.appendChild(tempContainer);
                     
-                    // Wait for images to load
-                    await new Promise(resolve => {
-                        const images = tempContainer.querySelectorAll('img');
-                        let loadedImages = 0;
-                        
-                        if (images.length === 0) {
-                            setTimeout(resolve, 500);
-                            return;
-                        }
-                        
-                        images.forEach(img => {
-                            if (img.complete) {
-                                loadedImages++;
-                                if (loadedImages === images.length) resolve();
-                            } else {
-                                img.onload = () => {
-                                    loadedImages++;
-                                    if (loadedImages === images.length) resolve();
-                                };
-                                img.onerror = () => {
-                                    loadedImages++;
-                                    if (loadedImages === images.length) resolve();
-                                };
-                            }
-                        });
-                    });
+                    // Wait for content to load
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     
                     // Convert to canvas
                     const canvas = await html2canvas(tempContainer, {
@@ -2588,8 +2342,8 @@
                         heightLeft -= 297;
                     }
                     
-                    const estimateNo = document.getElementById('estimateNo').value || 'Draft';
-                    const filename = `UrbanKutir_Estimate_${estimateNo}.pdf`;
+                    const invoiceNo = document.getElementById('invoiceNo').value || 'Draft';
+                    const filename = `UrbanKutir_Invoice_${invoiceNo}.pdf`;
                     
                     pdf.save(filename);
                     
@@ -2597,7 +2351,7 @@
                     confirmExport.disabled = false;
                     exportModal.classList.remove('active');
                     
-                    showToast('success', 'PDF Downloaded', `Estimate saved as ${filename}`);
+                    showToast('success', 'PDF Downloaded', `Invoice saved as ${filename}`);
                     
                 } catch (error) {
                     console.error('Error generating PDF:', error);
@@ -2617,7 +2371,7 @@
                     <!DOCTYPE html>
                     <html>
                     <head>
-                        <title>Urban Kutir - Estimate ${document.getElementById('estimateNo').value || 'Draft'}</title>
+                        <title>Urban Kutir - Invoice ${document.getElementById('invoiceNo').value || 'Draft'}</title>
                         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                         <style>
@@ -2656,8 +2410,8 @@
             }
             
             // Export modal functionality
-            exportEstimateBtn.addEventListener('click', () => exportModal.classList.add('active'));
-            exportEstimateBtnMobile.addEventListener('click', () => exportModal.classList.add('active'));
+            exportInvoiceBtn.addEventListener('click', () => exportModal.classList.add('active'));
+            exportInvoiceBtnMobile.addEventListener('click', () => exportModal.classList.add('active'));
             
             closeExportModal.addEventListener('click', () => exportModal.classList.remove('active'));
             cancelExport.addEventListener('click', () => exportModal.classList.remove('active'));
@@ -2698,7 +2452,7 @@
                     <!DOCTYPE html>
                     <html>
                     <head>
-                        <title>Urban Kutir - Estimate ${document.getElementById('estimateNo').value || 'Draft'}</title>
+                        <title>Urban Kutir - Invoice ${document.getElementById('invoiceNo').value || 'Draft'}</title>
                         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                         <style>
@@ -2739,24 +2493,42 @@
                 await generatePDF();
             });
             
+            // Add new item
+            addItemBtn.addEventListener('click', function() {
+                const newSlNo = items.length + 1;
+                items.push({
+                    slNo: newSlNo,
+                    name: "",
+                    hsnCode: "",
+                    qty: 1,
+                    price: 0,
+                    unit: "Pcs",
+                    total: 0
+                });
+                renderItems();
+                updateInvoicePreview();
+            });
+            
+            // Update invoice preview
+            updateInvoiceBtn.addEventListener('click', updateInvoicePreview);
+            updateInvoiceBtnMobile.addEventListener('click', updateInvoicePreview);
+            
             // Reset form function
             function resetForm() {
                 if (confirm('Are you sure you want to reset the form? All data will be cleared.')) {
                     // Reset form fields to empty
-                    document.getElementById('estimateNo').value = '';
-                    document.getElementById('estimateDate').value = formattedToday;
-                    document.getElementById('validUntil').value = formattedValidUntil;
-                    document.getElementById('estimateStatus').value = 'draft';
+                    document.getElementById('invoiceNo').value = '';
+                    document.getElementById('invoiceDate').value = formattedToday;
+                    document.getElementById('dueDate').value = formattedDueDate;
+                    document.getElementById('poNumber').value = '';
                     document.getElementById('clientName').value = '';
                     document.getElementById('clientGst').value = '';
-                    document.getElementById('clientPhone').value = '';
                     document.getElementById('clientAddress').value = '';
-                    document.getElementById('projectLocation').value = '';
+                    document.getElementById('deliveryAddress').value = '';
+                    document.getElementById('phoneNumber').value = '';
                     document.getElementById('taxRate').value = '9';
                     document.getElementById('roundOff').value = '0';
-                    document.getElementById('advancePercentage').value = '50';
-                    document.getElementById('workDuration').value = '';
-                    document.getElementById('specialNotes').value = '';
+                    document.getElementById('notes').value = '';
                     
                     // Reset items to one empty item
                     items = [
@@ -2772,7 +2544,7 @@
                     ];
                     
                     renderItems();
-                    updateEstimatePreview();
+                    updateInvoicePreview();
                     
                     showToast('success', 'Form Reset', 'All fields have been reset to default values.');
                 }
@@ -2783,20 +2555,17 @@
             resetFormBtnMobile.addEventListener('click', resetForm);
             
             // Auto-update on input changes
-            document.getElementById('estimateNo').addEventListener('input', updateEstimatePreview);
-            document.getElementById('estimateDate').addEventListener('input', updateEstimatePreview);
-            document.getElementById('validUntil').addEventListener('input', updateEstimatePreview);
-            document.getElementById('estimateStatus').addEventListener('change', updateEstimatePreview);
-            document.getElementById('clientName').addEventListener('input', updateEstimatePreview);
-            document.getElementById('clientGst').addEventListener('input', updateEstimatePreview);
-            document.getElementById('clientPhone').addEventListener('input', updateEstimatePreview);
-            document.getElementById('clientAddress').addEventListener('input', updateEstimatePreview);
-            document.getElementById('projectLocation').addEventListener('input', updateEstimatePreview);
-            document.getElementById('taxRate').addEventListener('input', updateEstimatePreview);
-            document.getElementById('roundOff').addEventListener('input', updateEstimatePreview);
-            document.getElementById('advancePercentage').addEventListener('input', updateEstimatePreview);
-            document.getElementById('workDuration').addEventListener('input', updateEstimatePreview);
-            document.getElementById('specialNotes').addEventListener('input', updateEstimatePreview);
+            document.getElementById('invoiceNo').addEventListener('input', updateInvoicePreview);
+            document.getElementById('invoiceDate').addEventListener('input', updateInvoicePreview);
+            document.getElementById('dueDate').addEventListener('input', updateInvoicePreview);
+            document.getElementById('clientName').addEventListener('input', updateInvoicePreview);
+            document.getElementById('clientGst').addEventListener('input', updateInvoicePreview);
+            document.getElementById('clientAddress').addEventListener('input', updateInvoicePreview);
+            document.getElementById('deliveryAddress').addEventListener('input', updateInvoicePreview);
+            document.getElementById('phoneNumber').addEventListener('input', updateInvoicePreview);
+            document.getElementById('taxRate').addEventListener('input', updateInvoicePreview);
+            document.getElementById('roundOff').addEventListener('input', updateInvoicePreview);
+            document.getElementById('notes').addEventListener('input', updateInvoicePreview);
             
             // Close modals when clicking outside
             document.addEventListener('click', (e) => {
@@ -2808,13 +2577,13 @@
                 }
             });
             
-            // Initialize the estimate
+            // Initialize the invoice
             renderItems();
-            updateEstimatePreview();
+            updateInvoicePreview();
             
             // Show welcome message
             setTimeout(() => {
-                showToast('info', 'Welcome to Urban Kutir', 'Fill in the details and click "Export Estimate" when ready.');
+                showToast('info', 'Welcome to Urban Kutir Invoice System', 'Fill in the details and click "Export Invoice" when ready.');
             }, 1000);
         });
     </script>

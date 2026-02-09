@@ -1670,7 +1670,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
         </div>
         
         <footer class="no-print">
-            <p>Urban Kutir Professional Estimate System &copy; 2025 | GST No: 19AAHFU6863E1ZR</p>
+            <p>Urban Kutir Professional Estimate System &copy; <span id="currentYear">2025</span> | GST No: 19AAHFU6863E1ZR</p>
             <p class="legal-note">This estimate system complies with Indian tax regulations and legal requirements for business quotations.</p>
         </footer>
     </div>
@@ -1754,6 +1754,9 @@ Installation/delivery timelines are estimates and subject to weather conditions 
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Update current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
             // Set default dates
             const today = new Date();
             const formattedToday = today.toISOString().split('T')[0];
@@ -2291,6 +2294,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
             
             // Generate print preview HTML with premium branding
             function generatePrintPreviewHTML() {
+                const currentYear = new Date().getFullYear();
                 const estimateNo = document.getElementById('estimateNo').value;
                 const estimateDate = document.getElementById('estimateDate').value;
                 const validUntil = document.getElementById('validUntil').value;
@@ -2711,7 +2715,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <p style="margin-top: 10px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
                             <p style="margin-top: 15px; font-size: 10px; color: #666; font-style: italic; max-width: 600px; margin-left: auto; margin-right: auto;">
                                 This document complies with Indian tax regulations and legal requirements for business quotations. 
-                                Urban Kutir is registered under GST with GSTIN 19AAHFU6863E1ZR.
+                                Urban Kutir is registered under GST with GSTIN 19AAHFU6863E1ZR. &copy; ${currentYear}
                             </p>
                         </div>
                     </div>

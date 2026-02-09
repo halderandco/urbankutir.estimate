@@ -1514,6 +1514,25 @@
                     <textarea id="specialNotes" rows="3" placeholder="Any special instructions, terms, or conditions..."></textarea>
                 </div>
                 
+                <!-- Terms & Conditions Controls -->
+                <div class="form-group compact" style="margin-top: 22px;">
+                    <label>
+                        <input type="checkbox" id="includeTerms" checked> Include Terms & Conditions
+                    </label>
+                </div>
+                
+                <div class="form-group compact">
+                    <label for="termsContent">Terms & Conditions Content</label>
+                    <textarea id="termsContent" rows="6" placeholder="Enter your terms and conditions...">This estimate is valid for 30 days from the date of issue unless otherwise specified.
+Advance payment of 50% is required to confirm the order and commence work.
+Balance payment to be made upon completion of work and before delivery/installation.
+All prices are exclusive of GST unless otherwise specified.
+Any changes in design/specifications after confirmation may result in price adjustments.
+Urban Kutir reserves the right to revise prices if material costs change before order confirmation.
+Work commencement is subject to receipt of advance payment and availability of materials.
+Installation/delivery timelines are estimates and subject to weather conditions and other factors.</textarea>
+                </div>
+                
                 <button class="btn btn-primary" id="updatePreview" style="width: 100%; margin-top: 16px; padding: 10px;">
                     <i class="fas fa-sync-alt"></i> Update Estimate Preview
                 </button>
@@ -1621,22 +1640,10 @@
                     <strong>Estimated Work Duration:</strong> <span id="previewWorkDurationText"></span>
                 </div>
                 
-                <div class="terms-section">
+                <div class="terms-section" id="previewTermsSection">
                     <div class="terms-title"><i class="fas fa-file-contract"></i> Terms & Conditions</div>
-                    <div class="terms-content">
-                        <ul>
-                            <li>This estimate is valid for 30 days from the date of issue unless otherwise specified.</li>
-                            <li>Advance payment of <span id="previewAdvanceText">50%</span> is required to confirm the order and commence work.</li>
-                            <li>Balance payment to be made upon completion of work and before delivery/installation.</li>
-                            <li>All prices are exclusive of GST unless otherwise specified.</li>
-                            <li>Any changes in design/specifications after confirmation may result in price adjustments.</li>
-                            <li>Urban Kutir reserves the right to revise prices if material costs change before order confirmation.</li>
-                            <li>Work commencement is subject to receipt of advance payment and availability of materials.</li>
-                            <li>Installation/delivery timelines are estimates and subject to weather conditions and other factors.</li>
-                        </ul>
-                        <div id="previewSpecialNotes" style="display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color);">
-                            <strong>Special Notes:</strong> <span id="previewSpecialNotesContent"></span>
-                        </div>
+                    <div class="terms-content" id="previewTermsContent">
+                        <!-- Terms content will be dynamically inserted here -->
                     </div>
                 </div>
                 
@@ -1778,6 +1785,10 @@
             const updatePreviewBtn = document.getElementById('updatePreview');
             const exportEstimateBtn = document.getElementById('exportEstimate');
             const resetFormBtn = document.getElementById('resetForm');
+            const includeTermsCheckbox = document.getElementById('includeTerms');
+            const termsContentTextarea = document.getElementById('termsContent');
+            const previewTermsSection = document.getElementById('previewTermsSection');
+            const previewTermsContent = document.getElementById('previewTermsContent');
             
             // Mobile buttons
             const exportEstimateBtnMobile = document.getElementById('exportEstimateMobile');
@@ -2224,7 +2235,26 @@
                 document.getElementById('previewAdvanceAmount').textContent = '₹' + formatCurrency(advanceAmount, true);
                 
                 // Update terms and conditions
-                document.getElementById('previewAdvanceText').textContent = advancePercentage + '%';
+                const includeTerms = document.getElementById('includeTerms').checked;
+                const termsContent = document.getElementById('termsContent').value;
+                
+                // Show/hide terms section
+                if (includeTerms && termsContent.trim()) {
+                    previewTermsSection.style.display = 'block';
+                    // Format terms content with line breaks
+                    const formattedTerms = termsContent.replace(/\n/g, '</li><li>');
+                    previewTermsContent.innerHTML = `<ul><li>${formattedTerms}</li></ul>`;
+                    
+                    // Update advance percentage in terms if present
+                    const advanceText = document.getElementById('previewAdvanceText');
+                    if (advanceText) {
+                        advanceText.textContent = advancePercentage + '%';
+                    }
+                } else {
+                    previewTermsSection.style.display = 'none';
+                }
+                
+                // Update advance summary
                 document.getElementById('previewAdvanceSummary').textContent = advancePercentage + '% advance, ' + (100 - advancePercentage) + '% on completion';
                 
                 // Update work duration
@@ -2241,9 +2271,20 @@
                 const specialNotes = document.getElementById('specialNotes').value;
                 const specialNotesContainer = document.getElementById('previewSpecialNotes');
                 if (specialNotes.trim()) {
+                    // Create special notes div if it doesn't exist
+                    if (!specialNotesContainer) {
+                        const termsContentDiv = previewTermsContent;
+                        const specialNotesDiv = document.createElement('div');
+                        specialNotesDiv.id = 'previewSpecialNotes';
+                        specialNotesDiv.style.display = 'block';
+                        specialNotesDiv.style.marginTop = '10px';
+                        specialNotesDiv.style.paddingTop = '10px';
+                        specialNotesDiv.style.borderTop = '1px dashed var(--border-color)';
+                        specialNotesDiv.innerHTML = `<strong>Special Notes:</strong> <span id="previewSpecialNotesContent"></span>`;
+                        termsContentDiv.appendChild(specialNotesDiv);
+                    }
                     document.getElementById('previewSpecialNotesContent').textContent = specialNotes;
-                    specialNotesContainer.style.display = 'block';
-                } else {
+                } else if (specialNotesContainer) {
                     specialNotesContainer.style.display = 'none';
                 }
             }
@@ -2264,6 +2305,8 @@
                 const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
                 const roundOff = parseFloat(document.getElementById('roundOff').value) || 0;
                 const advancePercentage = parseFloat(document.getElementById('advancePercentage').value) || 0;
+                const includeTerms = document.getElementById('includeTerms').checked;
+                const termsContent = document.getElementById('termsContent').value;
                 
                 // Calculate totals
                 const taxableValue = items.reduce((sum, item) => sum + item.total, 0);
@@ -2307,6 +2350,40 @@
                     case 'accepted': statusStyle = 'status-accepted'; break;
                     case 'expired': statusStyle = 'status-expired'; break;
                     default: statusStyle = 'status-draft';
+                }
+                
+                // Generate terms HTML if included
+                let termsHTML = '';
+                if (includeTerms && termsContent.trim()) {
+                    const formattedTerms = termsContent.replace(/\n/g, '</li><li>');
+                    termsHTML = `
+                        <div style="margin-top: 35px; padding: 20px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 8px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
+                            <strong style="color: #5a3921; font-size: 15px; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                                <i class="fas fa-file-contract" style="color: #8B4513;"></i> Terms & Conditions
+                            </strong>
+                            <div style="color: #5a3921; line-height: 1.6; font-size: 12px;">
+                                <ul style="padding-left: 20px; margin-bottom: 15px; list-style-type: square;">
+                                    <li>${formattedTerms}</li>
+                                </ul>
+                                ${specialNotes.trim() ? `
+                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1.5px dashed #e0d6c8;">
+                                        <strong style="color: #5a3921;">Special Notes:</strong> ${specialNotes}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                } else if (specialNotes.trim()) {
+                    // Show only special notes if terms are not included
+                    termsHTML = `
+                        <div style="margin-top: 35px; padding: 20px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 8px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
+                            <div style="color: #5a3921; line-height: 1.6; font-size: 12px;">
+                                <div style="margin-top: 15px;">
+                                    <strong style="color: #5a3921;">Special Notes:</strong> ${specialNotes}
+                                </div>
+                            </div>
+                        </div>
+                    `;
                 }
                 
                 return `
@@ -2612,28 +2689,7 @@
                             </div>
                         ` : ''}
                         
-                        <div style="margin-top: 35px; padding: 20px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 8px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
-                            <strong style="color: #5a3921; font-size: 15px; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                                <i class="fas fa-file-contract" style="color: #8B4513;"></i> Terms & Conditions
-                            </strong>
-                            <div style="color: #5a3921; line-height: 1.6; font-size: 12px;">
-                                <ul style="padding-left: 20px; margin-bottom: 15px; list-style-type: square;">
-                                    <li>This estimate is valid for 30 days from the date of issue unless otherwise specified.</li>
-                                    <li>Advance payment of <strong>${advancePercentage}%</strong> is required to confirm the order and commence work.</li>
-                                    <li>Balance payment to be made upon completion of work and before delivery/installation.</li>
-                                    <li>All prices are exclusive of GST unless otherwise specified.</li>
-                                    <li>Any changes in design/specifications after confirmation may result in price adjustments.</li>
-                                    <li>Urban Kutir reserves the right to revise prices if material costs change before order confirmation.</li>
-                                    <li>Work commencement is subject to receipt of advance payment and availability of materials.</li>
-                                    <li>Installation/delivery timelines are estimates and subject to weather conditions and other factors.</li>
-                                </ul>
-                                ${specialNotes.trim() ? `
-                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1.5px dashed #e0d6c8;">
-                                        <strong style="color: #5a3921;">Special Notes:</strong> ${specialNotes}
-                                    </div>
-                                ` : ''}
-                            </div>
-                        </div>
+                        ${termsHTML}
                         
                         <div class="print-authorization">
                             <div style="flex: 1;">
@@ -2942,6 +2998,15 @@
                     document.getElementById('advancePercentage').value = '50';
                     document.getElementById('workDuration').value = '';
                     document.getElementById('specialNotes').value = '';
+                    document.getElementById('includeTerms').checked = true;
+                    document.getElementById('termsContent').value = `This estimate is valid for 30 days from the date of issue unless otherwise specified.
+Advance payment of 50% is required to confirm the order and commence work.
+Balance payment to be made upon completion of work and before delivery/installation.
+All prices are exclusive of GST unless otherwise specified.
+Any changes in design/specifications after confirmation may result in price adjustments.
+Urban Kutir reserves the right to revise prices if material costs change before order confirmation.
+Work commencement is subject to receipt of advance payment and availability of materials.
+Installation/delivery timelines are estimates and subject to weather conditions and other factors.`;
                     
                     // Reset items to one empty item
                     items = [
@@ -2982,6 +3047,8 @@
             document.getElementById('advancePercentage').addEventListener('input', updateEstimatePreview);
             document.getElementById('workDuration').addEventListener('input', updateEstimatePreview);
             document.getElementById('specialNotes').addEventListener('input', updateEstimatePreview);
+            document.getElementById('includeTerms').addEventListener('change', updateEstimatePreview);
+            document.getElementById('termsContent').addEventListener('input', updateEstimatePreview);
             
             // Close modals when clicking outside
             document.addEventListener('click', (e) => {

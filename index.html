@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Kutir - Estimate Details Form</title>
+    <title>Urban Kutir - Tax Invoice System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -46,7 +46,6 @@
             gap: 20px;
         }
         
-        /* Header Styles */
         header {
             display: flex;
             flex-direction: column;
@@ -152,7 +151,6 @@
             }
         }
         
-        /* Controls */
         .controls {
             display: flex;
             gap: 8px;
@@ -225,20 +223,19 @@
             border-color: var(--primary-color);
         }
         
-        /* Main Content Layout */
-        .estimate-container {
+        .invoice-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
         
         @media (min-width: 992px) {
-            .estimate-container {
+            .invoice-container {
                 flex-direction: row;
             }
         }
         
-        .form-panel {
+        .editor-panel {
             flex: 1;
             background-color: white;
             border-radius: var(--radius);
@@ -249,13 +246,13 @@
         }
         
         @media (min-width: 768px) {
-            .form-panel {
+            .editor-panel {
                 padding: 20px;
             }
         }
         
         @media (min-width: 992px) {
-            .form-panel {
+            .editor-panel {
                 order: 1;
             }
         }
@@ -284,36 +281,6 @@
             }
         }
         
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            opacity: 0.025;
-            z-index: 0;
-            pointer-events: none;
-            width: 200px;
-            height: 200px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-        
-        @media (min-width: 768px) {
-            .watermark {
-                width: 300px;
-                height: 300px;
-            }
-        }
-        
-        @media (min-width: 992px) {
-            .watermark {
-                width: 350px;
-                height: 350px;
-            }
-        }
-        
-        /* Form Styles */
         .panel-title {
             color: var(--primary-dark);
             font-size: 15px;
@@ -388,7 +355,302 @@
             flex: 1;
         }
         
-        /* Items Table Editor */
+        .invoice-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-accent);
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-header {
+                flex-direction: row;
+                gap: 25px;
+            }
+        }
+        
+        .invoice-title {
+            font-size: 20px;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-title {
+                font-size: 24px;
+            }
+        }
+        
+        .invoice-meta {
+            text-align: left;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-meta {
+                text-align: right;
+            }
+        }
+        
+        .invoice-meta p {
+            margin-bottom: 3px;
+            color: var(--text-light);
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-meta p {
+                font-size: 12.5px;
+            }
+        }
+        
+        .invoice-addresses {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-addresses {
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+        
+        .address-box {
+            flex: 1;
+            background-color: var(--lighter-accent);
+            padding: 12px;
+            border-radius: var(--radius);
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        @media (min-width: 768px) {
+            .address-box {
+                padding: 14px;
+            }
+        }
+        
+        .address-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+        
+        @media (min-width: 768px) {
+            .address-title {
+                font-size: 14px;
+            }
+        }
+        
+        .address-content {
+            color: var(--text-medium);
+            line-height: 1.5;
+            font-size: 12.5px;
+        }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            font-size: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-table {
+                font-size: 12.5px;
+            }
+        }
+        
+        .invoice-table th {
+            background-color: var(--light-accent);
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--accent-color);
+            border-top: 1px solid var(--accent-color);
+            font-size: 11.5px;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-table th {
+                padding: 9px 11px;
+                font-size: 12px;
+            }
+        }
+        
+        .invoice-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--light-accent);
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-table td {
+                padding: 9px 11px;
+            }
+        }
+        
+        .invoice-table tr:last-child td {
+            border-bottom: 1px solid var(--accent-color);
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .invoice-summary {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-summary {
+                max-width: 280px;
+                margin-left: auto;
+            }
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 12.5px;
+        }
+        
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: 1px solid var(--primary-dark);
+            padding-top: 10px;
+            color: var(--primary-dark);
+        }
+        
+        @media (min-width: 768px) {
+            .summary-row.total {
+                font-size: 14.5px;
+            }
+        }
+        
+        .authorization-section {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--accent-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .authorization-section {
+                flex-direction: row;
+                align-items: center;
+                gap: 25px;
+            }
+        }
+        
+        .signature-box {
+            text-align: center;
+            order: 2;
+        }
+        
+        @media (min-width: 768px) {
+            .signature-box {
+                order: 1;
+            }
+        }
+        
+        .signature-line {
+            width: 160px;
+            border-bottom: 1px solid var(--primary-dark);
+            margin: 0 auto 4px;
+            padding-top: 30px;
+        }
+        
+        .signature-name {
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+        
+        .signature-title {
+            color: var(--text-light);
+            font-size: 12px;
+        }
+        
+        .invoice-footer {
+            margin-top: 15px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 12px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-accent);
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .invoice-footer {
+                font-size: 12.5px;
+            }
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            opacity: 0.025;
+            z-index: 0;
+            pointer-events: none;
+            width: 200px;
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        @media (min-width: 768px) {
+            .watermark {
+                width: 300px;
+                height: 300px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .watermark {
+                width: 350px;
+                height: 350px;
+            }
+        }
+        
         .items-section {
             margin-top: 20px;
         }
@@ -513,64 +775,6 @@
             border-color: var(--primary-color);
         }
         
-        /* Preview Panel Styles */
-        .estimate-header {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--light-accent);
-            gap: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-header {
-                flex-direction: row;
-                gap: 25px;
-            }
-        }
-        
-        .estimate-title {
-            font-size: 20px;
-            color: var(--primary-dark);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.2;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-title {
-                font-size: 24px;
-            }
-        }
-        
-        .estimate-meta {
-            text-align: left;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-meta {
-                text-align: right;
-            }
-        }
-        
-        .estimate-meta p {
-            margin-bottom: 3px;
-            color: var(--text-light);
-            font-size: 12px;
-            line-height: 1.4;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-meta p {
-                font-size: 12.5px;
-            }
-        }
-        
         .company-gst-box {
             background-color: var(--lighter-accent);
             padding: 4px 8px;
@@ -591,322 +795,12 @@
             color: var(--primary-dark);
         }
         
-        .estimate-addresses {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-addresses {
-                flex-direction: row;
-                gap: 20px;
-            }
-        }
-        
-        .address-box {
-            flex: 1;
-            background-color: var(--lighter-accent);
-            padding: 12px;
-            border-radius: var(--radius);
-            border-left: 3px solid var(--accent-color);
-        }
-        
-        @media (min-width: 768px) {
-            .address-box {
-                padding: 14px;
-            }
-        }
-        
-        .address-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 7px;
-            font-size: 13px;
-        }
-        
-        @media (min-width: 768px) {
-            .address-title {
-                font-size: 14px;
-            }
-        }
-        
-        .address-content {
-            color: var(--text-medium);
-            line-height: 1.5;
-            font-size: 12.5px;
-        }
-        
-        .estimate-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 18px 0;
-            font-size: 12px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-table {
-                font-size: 12.5px;
-            }
-        }
-        
-        .estimate-table th {
-            background-color: var(--light-accent);
-            padding: 8px 10px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--primary-dark);
-            border-bottom: 1px solid var(--accent-color);
-            border-top: 1px solid var(--accent-color);
-            font-size: 11.5px;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-table th {
-                padding: 9px 11px;
-                font-size: 12px;
-            }
-        }
-        
-        .estimate-table td {
-            padding: 8px 10px;
-            border-bottom: 1px solid var(--light-accent);
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-table td {
-                padding: 9px 11px;
-            }
-        }
-        
-        .estimate-table tr:last-child td {
-            border-bottom: 1px solid var(--accent-color);
-        }
-        
-        .text-right {
-            text-align: right;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .estimate-summary {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 100%;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-summary {
-                max-width: 280px;
-                margin-left: auto;
-            }
-        }
-        
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px dashed var(--border-color);
-            font-size: 12.5px;
-        }
-        
-        .summary-row.total {
-            font-weight: 700;
-            font-size: 14px;
-            border-bottom: 1px solid var(--primary-dark);
-            padding-top: 10px;
-            color: var(--primary-dark);
-        }
-        
-        @media (min-width: 768px) {
-            .summary-row.total {
-                font-size: 14.5px;
-            }
-        }
-        
-        .terms-section {
-            margin-top: 20px;
-            padding: 14px;
-            background-color: var(--lighter-accent);
-            border-radius: var(--radius);
-            border-left: 3px solid var(--accent-color);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .terms-section {
-                padding: 16px;
-            }
-        }
-        
-        .terms-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-        
-        .terms-content {
-            color: var(--text-medium);
-            line-height: 1.5;
-            font-size: 12px;
-        }
-        
-        @media (min-width: 768px) {
-            .terms-content {
-                font-size: 12.5px;
-            }
-        }
-        
-        .terms-content ul {
-            padding-left: 18px;
-            margin-bottom: 10px;
-        }
-        
-        .terms-content li {
-            margin-bottom: 5px;
-        }
-        
-        .authorization-section {
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--accent-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .authorization-section {
-                flex-direction: row;
-                align-items: center;
-                gap: 25px;
-            }
-        }
-        
-        .signature-box {
-            text-align: center;
-            order: 2;
-        }
-        
-        @media (min-width: 768px) {
-            .signature-box {
-                order: 1;
-            }
-        }
-        
-        .signature-line {
-            width: 160px;
-            border-bottom: 1px solid var(--primary-dark);
-            margin: 0 auto 4px;
-            padding-top: 30px;
-        }
-        
-        .signature-name {
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 14px;
-            letter-spacing: 0.3px;
-        }
-        
-        .signature-title {
-            color: var(--text-light);
-            font-size: 12px;
-        }
-        
-        .estimate-footer {
-            margin-top: 15px;
-            text-align: center;
-            color: var(--text-light);
-            font-size: 12px;
-            padding-top: 15px;
-            border-top: 1px solid var(--light-accent);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .estimate-footer {
-                font-size: 12.5px;
-            }
-        }
-        
-        /* Additional Styles */
-        .validity-box {
-            background-color: #fff8f0;
-            border: 1px solid #f0d6b8;
-            border-radius: var(--radius);
-            padding: 10px 12px;
-            margin-top: 15px;
-            font-size: 12px;
-            color: var(--text-medium);
-            position: relative;
-            z-index: 1;
-        }
-        
-        @media (min-width: 768px) {
-            .validity-box {
-                padding: 12px 15px;
-                font-size: 12.5px;
-            }
-        }
-        
-        .validity-box strong {
-            color: var(--primary-dark);
-        }
-        
         .empty-state {
             color: #95a5a6;
             font-style: italic;
             text-align: center;
             padding: 7px;
             font-size: 12.5px;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-        
-        .status-draft {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
-        
-        .status-sent {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
-        
-        .status-accepted {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-        
-        .status-expired {
-            background-color: #f3f4f6;
-            color: #6b7280;
         }
         
         /* Modal Styles for Export Options */
@@ -1111,7 +1005,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 210mm;
             margin: 0 auto;
-            padding: 20mm; /* Changed from 25mm to 20mm for standard A4 margins */
+            padding: 25mm;
         }
         
         /* Progress Indicator */
@@ -1224,479 +1118,6 @@
             color: var(--primary-dark);
         }
         
-        /* ============================================
-           PROFESSIONAL PRINT/PDF PAGINATION RULES
-           CSS-first, works without JavaScript
-           ============================================ */
-        
-        /* Print and PDF Output Styles */
-        .print-logo {
-            display: none;
-        }
-        
-        @media print {
-            /* Reset all margins and padding for print */
-            * {
-                margin: 0 !important;
-                padding: 0 !important;
-                box-shadow: none !important;
-                text-shadow: none !important;
-            }
-            
-            /* Hide non-print elements */
-            .no-print,
-            .modal-overlay,
-            .toast,
-            .controls,
-            .mobile-controls,
-            .form-panel,
-            footer,
-            .watermark,
-            .estimate-container:before,
-            .estimate-container:after {
-                display: none !important;
-            }
-            
-            /* Ensure body takes full page */
-            body {
-                background: white !important;
-                color: black !important;
-                font-size: 12pt !important;
-                line-height: 1.4 !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 100% !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            
-            /* A4 page sizing with standard 20mm margins on all sides */
-            @page {
-                size: A4 portrait;
-                margin: 20mm; /* Standard A4 margins on all four sides */
-                padding: 0;
-                
-                /* Page counter */
-                @bottom-center {
-                    content: "Page " counter(page) " of " counter(pages);
-                    font-size: 10pt;
-                    color: #666;
-                    font-family: 'Inter', sans-serif;
-                }
-                
-                @top-center {
-                    content: "";
-                }
-            }
-            
-            /* First page special handling - same margins */
-            @page :first {
-                margin: 20mm; /* Consistent margins on first page */
-                
-                @bottom-center {
-                    content: "Page " counter(page) " of " counter(pages);
-                }
-            }
-            
-            /* Enhanced page break control classes */
-            .page-break-before {
-                page-break-before: always !important;
-                break-before: page !important;
-            }
-            
-            .page-break-after {
-                page-break-after: always !important;
-                break-after: page !important;
-            }
-            
-            .page-break-avoid {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            .page-break-auto {
-                page-break-inside: auto !important;
-                break-inside: auto !important;
-            }
-            
-            /* Force page breaks for major sections */
-            .preview-panel {
-                page-break-before: always !important;
-                break-before: page !important;
-                position: relative !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                box-shadow: none !important;
-                border: none !important;
-                border-radius: 0 !important;
-                background: white !important;
-                display: block !important;
-                height: auto !important;
-                min-height: auto !important;
-                overflow: visible !important;
-            }
-            
-            /* Enhanced content block protection - prevent breaks inside all major content blocks */
-            .estimate-header,
-            .estimate-addresses,
-            .address-box,
-            .validity-box,
-            .estimate-summary,
-            .terms-section,
-            .authorization-section,
-            .estimate-footer,
-            .summary-row.total,
-            .signature-box,
-            #previewWorkDuration,
-            .company-gst-box,
-            .terms-content,
-            .address-content,
-            .signature-line + div,
-            .signature-line + div + div {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            /* Keep address boxes together with their content */
-            .address-box > *,
-            .validity-box > *,
-            .terms-section > * {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            /* Prevent orphans and widows in text */
-            p, h1, h2, h3, h4, h5, h6, li, td, th, div {
-                orphans: 3 !important;
-                widows: 3 !important;
-            }
-            
-            /* Keep list items together */
-            .terms-content li,
-            ul li,
-            ol li {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            /* Keep table rows together when possible */
-            .estimate-table tbody tr {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            /* Keep summary rows together */
-            .summary-row {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            /* Keep authorization section together */
-            .authorization-section > * {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                -webkit-column-break-inside: avoid !important;
-            }
-            
-            /* Preview panel content styling for print */
-            .preview-panel > * {
-                max-width: 100% !important;
-                width: 100% !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-            }
-            
-            /* Ensure estimate container doesn't create extra pages */
-            .estimate-container {
-                display: block !important;
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                gap: 0 !important;
-            }
-            
-            /* Header and footer for each page */
-            .print-header {
-                position: running(header);
-                display: none;
-            }
-            
-            .print-footer {
-                position: running(footer);
-                display: none;
-            }
-            
-            /* Estimate header - keep together */
-            .estimate-header {
-                page-break-after: avoid !important;
-                margin-bottom: 8mm !important;
-                padding-bottom: 4mm !important;
-                border-bottom: 1pt solid #d4a574 !important;
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: flex-start !important;
-            }
-            
-            .estimate-title {
-                font-size: 24pt !important;
-                color: #5a3921 !important;
-                margin-bottom: 3mm !important;
-            }
-            
-            /* Address boxes - keep together */
-            .estimate-addresses {
-                margin-bottom: 6mm !important;
-                display: flex !important;
-                flex-direction: row !important;
-                gap: 8mm !important;
-            }
-            
-            .address-box {
-                background: #fcfaf7 !important;
-                border: 0.5pt solid #e0d6c8 !important;
-                padding: 3mm !important;
-                flex: 1 !important;
-            }
-            
-            /* Table styling for print */
-            .estimate-table {
-                page-break-inside: auto !important;
-                break-inside: auto !important;
-                width: 100% !important;
-                border-collapse: collapse !important;
-                margin: 4mm 0 6mm 0 !important;
-                font-size: 10pt !important;
-            }
-            
-            .estimate-table th {
-                background: #f0e6d6 !important;
-                color: #5a3921 !important;
-                font-weight: 600 !important;
-                padding: 2mm !important;
-                border: 0.5pt solid #d4a574 !important;
-            }
-            
-            .estimate-table td {
-                padding: 1.5mm 2mm !important;
-                border: 0.5pt solid #f0e6d6 !important;
-            }
-            
-            /* Repeat table header on each page */
-            .estimate-table thead {
-                display: table-header-group !important;
-            }
-            
-            /* Summary section - keep together */
-            .estimate-summary {
-                margin-top: 6mm !important;
-                margin-left: auto !important;
-                max-width: 280pt !important;
-                background: #fcfaf7 !important;
-                padding: 3mm !important;
-                border: 0.5pt solid #e0d6c8 !important;
-            }
-            
-            /* Terms section - keep together */
-            .terms-section {
-                margin-top: 6mm !important;
-                background: #fcfaf7 !important;
-                padding: 3mm !important;
-                border: 0.5pt solid #e0d6c8 !important;
-            }
-            
-            /* Authorization section - keep together at bottom */
-            .authorization-section {
-                margin-top: 8mm !important;
-                padding-top: 4mm !important;
-                border-top: 0.5pt dashed #d4a574 !important;
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: flex-end !important;
-            }
-            
-            /* Signature box - keep together */
-            .signature-box {
-                text-align: center !important;
-            }
-            
-            /* Estimate footer - keep with authorization if possible */
-            .estimate-footer {
-                margin-top: 4mm !important;
-                padding-top: 2mm !important;
-                border-top: 0.5pt solid #f0e6d6 !important;
-                font-size: 9pt !important;
-                color: #666 !important;
-            }
-            
-            /* Validity box */
-            .validity-box {
-                margin: 3mm 0 !important;
-                padding: 2mm !important;
-                background: #fff8f0 !important;
-                border: 0.5pt solid #f0d6b8 !important;
-                font-size: 10pt !important;
-            }
-            
-            /* Work duration */
-            #previewWorkDuration {
-                margin: 2mm 0 !important;
-                padding: 1.5mm !important;
-                background: #fcfaf7 !important;
-                border: 0.5pt solid #e0d6c8 !important;
-                font-size: 10pt !important;
-            }
-            
-            /* Logo and company info for print */
-            .logo-container {
-                display: flex !important;
-                align-items: center !important;
-                gap: 3mm !important;
-                margin-bottom: 3mm !important;
-            }
-            
-            .logo {
-                width: 60pt !important;
-                height: 60pt !important;
-                border: 0.5pt solid #e0d6c8 !important;
-            }
-            
-            .company-info h1 {
-                font-size: 18pt !important;
-                color: #5a3921 !important;
-                margin-bottom: 1mm !important;
-            }
-            
-            .company-info p {
-                font-size: 11pt !important;
-                color: #8B4513 !important;
-            }
-            
-            /* Status badge for print */
-            .status-badge {
-                padding: 0.5mm 2mm !important;
-                border: 0.5pt solid !important;
-                font-size: 9pt !important;
-            }
-            
-            /* Ensure all colors print correctly */
-            .status-draft {
-                background: #fef3c7 !important;
-                color: #92400e !important;
-                border-color: #fcd34d !important;
-            }
-            
-            .status-sent {
-                background: #d1fae5 !important;
-                color: #065f46 !important;
-                border-color: #a7f3d0 !important;
-            }
-            
-            .status-accepted {
-                background: #dbeafe !important;
-                color: #1e40af !important;
-                border-color: #93c5fd !important;
-            }
-            
-            .status-expired {
-                background: #f3f4f6 !important;
-                color: #6b7280 !important;
-                border-color: #d1d5db !important;
-            }
-            
-            /* Text alignment */
-            .text-right {
-                text-align: right !important;
-            }
-            
-            .text-center {
-                text-align: center !important;
-            }
-            
-            /* Summary row styling */
-            .summary-row {
-                padding: 1mm 0 !important;
-                border-bottom: 0.5pt dashed #e0d6c8 !important;
-                font-size: 11pt !important;
-            }
-            
-            .summary-row.total {
-                border-bottom: 0.5pt solid #5a3921 !important;
-                padding-top: 2mm !important;
-                font-size: 12pt !important;
-                font-weight: 700 !important;
-                color: #5a3921 !important;
-            }
-            
-            /* Ensure proper spacing between sections */
-            .estimate-header,
-            .estimate-addresses,
-            .estimate-table,
-            .estimate-summary,
-            .terms-section,
-            .authorization-section,
-            .estimate-footer {
-                margin-bottom: 4mm !important;
-            }
-            
-            /* Fix for long content that might overflow */
-            .address-content,
-            .terms-content,
-            #previewClient,
-            #previewProjectLocation {
-                max-height: none !important;
-                overflow: visible !important;
-            }
-            
-            /* Hide empty states in print */
-            .empty-state {
-                display: none !important;
-            }
-            
-            /* Show all content in preview panel */
-            #previewPanel > * {
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-            }
-            
-            /* Ensure the entire preview panel is visible for printing */
-            #previewPanel {
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                height: auto !important;
-                min-height: auto !important;
-                position: static !important;
-                transform: none !important;
-            }
-        }
-        
-        /* Additional print-only styles that apply outside @media print */
-        .print-only {
-            display: none;
-        }
-        
-        @media print {
-            .print-only {
-                display: block;
-            }
-        }
-        
         /* Mobile-specific optimizations */
         @media (max-width: 767px) {
             .controls {
@@ -1743,6 +1164,419 @@
             max-width: 110px;
         }
         
+        /* ============================================================================
+           PROFESSIONAL PRINT/PDF PAGINATION LOGIC - A4 FORMAT OPTIMIZATION
+           ============================================================================ */
+        
+        /* Print and PDF Output Styles */
+        .print-logo {
+            display: none;
+        }
+        
+        /* Base print styles - CSS-first approach works even if JS fails */
+        @media print {
+            /* Reset everything for print */
+            body, html {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                font-size: 12pt !important;
+                line-height: 1.4 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Hide non-essential elements */
+            .no-print,
+            .modal-overlay,
+            .toast,
+            .progress-indicator,
+            .controls,
+            .mobile-controls,
+            .editor-panel,
+            header,
+            footer,
+            .btn,
+            .panel-title i,
+            .watermark,
+            .add-item-btn,
+            .items-section-title i,
+            .optional-label .toggle-checkbox {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                width: 0 !important;
+                opacity: 0 !important;
+            }
+            
+            /* A4 page setup */
+            @page {
+                size: A4 portrait;
+                margin: 15mm 15mm 20mm 15mm;
+                marks: crop cross;
+                bleed: 3mm;
+                
+                /* Page counter */
+                @bottom-center {
+                    content: "Page " counter(page) " of " counter(pages);
+                    font-size: 10pt;
+                    color: #666;
+                    font-family: 'Inter', sans-serif;
+                }
+                
+                @top-center {
+                    content: "URBAN KUTIR - TAX INVOICE";
+                    font-size: 10pt;
+                    color: var(--primary-dark);
+                    font-family: 'Inter', sans-serif;
+                    font-weight: 500;
+                }
+            }
+            
+            /* First page special margins */
+            @page :first {
+                margin-top: 20mm;
+                @top-center {
+                    content: "";
+                }
+            }
+            
+            /* Ensure proper page breaks */
+            .page-break-before {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+            
+            .page-break-after {
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+            
+            .page-break-inside-avoid {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            .page-break-inside-auto {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+            
+            /* Main container adjustments */
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                background: white !important;
+                display: block !important;
+                gap: 0 !important;
+            }
+            
+            /* Preview panel becomes the print document */
+            .preview-panel {
+                all: unset !important;
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                background: white !important;
+                position: static !important;
+                overflow: visible !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Invoice structure for print */
+            .invoice-header {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+                margin-bottom: 8mm !important;
+                padding-bottom: 4mm !important;
+                border-bottom: 1.5pt solid var(--accent-color) !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+            
+            .invoice-title {
+                font-size: 22pt !important;
+                color: var(--primary-dark) !important;
+                font-weight: 700 !important;
+                margin-bottom: 3mm !important;
+                letter-spacing: 1pt !important;
+            }
+            
+            .invoice-meta {
+                text-align: right !important;
+                font-size: 10pt !important;
+            }
+            
+            .invoice-meta p {
+                margin-bottom: 2pt !important;
+                line-height: 1.3 !important;
+            }
+            
+            /* Address boxes */
+            .invoice-addresses {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                margin-bottom: 8mm !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                gap: 10mm !important;
+            }
+            
+            .address-box {
+                flex: 1 !important;
+                background: #fcfaf7 !important;
+                padding: 4mm !important;
+                border-left: 3pt solid var(--accent-color) !important;
+                border-radius: 2pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            .address-title {
+                font-size: 11pt !important;
+                font-weight: 700 !important;
+                margin-bottom: 2mm !important;
+                color: var(--primary-dark) !important;
+            }
+            
+            .address-content {
+                font-size: 10pt !important;
+                line-height: 1.4 !important;
+            }
+            
+            /* Invoice table with controlled pagination */
+            .invoice-table-container {
+                overflow: visible !important;
+                margin: 0 !important;
+                border: none !important;
+            }
+            
+            .invoice-table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin: 6mm 0 8mm 0 !important;
+                font-size: 10pt !important;
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+                border: 1pt solid var(--border-color) !important;
+            }
+            
+            .invoice-table thead {
+                display: table-header-group !important;
+                background: var(--light-accent) !important;
+            }
+            
+            .invoice-table th {
+                background: var(--light-accent) !important;
+                padding: 3mm 2mm !important;
+                text-align: left !important;
+                font-weight: 700 !important;
+                color: var(--primary-dark) !important;
+                border-bottom: 1.5pt solid var(--accent-color) !important;
+                font-size: 9.5pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            .invoice-table tbody {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+            
+            .invoice-table tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: auto !important;
+                break-after: auto !important;
+            }
+            
+            /* Keep table rows together when possible */
+            .invoice-table tr.small-row {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Allow table to break between rows if needed */
+            .invoice-table td {
+                padding: 2.5mm 2mm !important;
+                border-bottom: 0.5pt solid var(--light-accent) !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                font-size: 9.5pt !important;
+            }
+            
+            /* Don't break inside amount cells */
+            .invoice-table .amount-cell {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Summary section - keep together */
+            .invoice-summary {
+                max-width: 70mm !important;
+                margin-left: auto !important;
+                margin-right: 0 !important;
+                margin-top: 6mm !important;
+                margin-bottom: 8mm !important;
+                padding: 4mm !important;
+                background: #fcfaf7 !important;
+                border: 0.5pt solid var(--border-color) !important;
+                border-radius: 2pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-before: avoid !important;
+                break-before: avoid !important;
+            }
+            
+            .summary-row {
+                display: flex !important;
+                justify-content: space-between !important;
+                padding: 1.5mm 0 !important;
+                font-size: 10pt !important;
+            }
+            
+            .summary-row.total {
+                font-size: 11pt !important;
+                font-weight: 700 !important;
+                border-top: 1pt solid var(--primary-dark) !important;
+                margin-top: 2mm !important;
+                padding-top: 2.5mm !important;
+            }
+            
+            /* Notes section */
+            #previewNotes {
+                margin-top: 4mm !important;
+                margin-bottom: 6mm !important;
+                padding: 3mm !important;
+                background: #f9f5f0 !important;
+                border-left: 3pt solid var(--accent-color) !important;
+                font-size: 9.5pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Authorization section - keep on same page */
+            .authorization-section {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-end !important;
+                margin-top: 10mm !important;
+                padding-top: 6mm !important;
+                border-top: 1pt dashed var(--accent-color) !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-before: avoid !important;
+                break-before: avoid !important;
+            }
+            
+            .signature-box {
+                text-align: center !important;
+                min-width: 50mm !important;
+            }
+            
+            .signature-line {
+                width: 60mm !important;
+                border-bottom: 1pt solid var(--primary-dark) !important;
+                margin: 0 auto 2mm !important;
+                padding-top: 15mm !important;
+            }
+            
+            .signature-name {
+                font-size: 11pt !important;
+                font-weight: 700 !important;
+            }
+            
+            .signature-title {
+                font-size: 9.5pt !important;
+            }
+            
+            /* Footer - keep with authorization when possible */
+            .invoice-footer {
+                margin-top: 8mm !important;
+                padding-top: 4mm !important;
+                border-top: 0.5pt solid var(--light-accent) !important;
+                text-align: center !important;
+                font-size: 9pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Force page break classes */
+            .force-page-break {
+                page-break-before: always !important;
+                break-before: page !important;
+                margin-top: 20mm !important;
+            }
+            
+            /* Utility classes for print optimization */
+            .print-only {
+                display: block !important;
+                visibility: visible !important;
+            }
+            
+            .no-print-spacing {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            /* Ensure color printing */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Handle widows and orphans */
+            p, h1, h2, h3, h4, h5, h6 {
+                widows: 3;
+                orphans: 3;
+            }
+            
+            /* Prevent empty space at bottom of page */
+            .preview-panel:last-child {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+        }
+        
+        /* Additional print-specific styles outside @media print for preview */
+        .print-optimized {
+            /* Base styles that apply to both screen and print preview */
+            font-family: 'Inter', sans-serif !important;
+            color: var(--text-dark) !important;
+        }
+        
+        /* Ensure print preview shows proper pagination */
+        @media screen and (max-width: 1199px) {
+            .print-preview-content {
+                width: 210mm !important;
+                min-height: 297mm !important;
+                padding: 15mm !important;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1) !important;
+                margin: 20px auto !important;
+                background: white !important;
+                position: relative !important;
+            }
+        }
+        
         /* Compact spacing */
         .form-group.compact {
             margin-bottom: 14px;
@@ -1772,12 +1606,37 @@
         }
         
         /* Elegant font refinements */
-        h1, h2, h3, h4, .estimate-title, .panel-title {
+        h1, h2, h3, h4, .invoice-title, .panel-title {
             letter-spacing: -0.1px;
         }
         
         .address-title, .signature-name {
             letter-spacing: 0.2px;
+        }
+        
+        /* Optional fields styling */
+        .optional-field-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .toggle-checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .optional-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+        
+        .optional-label .toggle-checkbox {
+            margin-right: 2px;
         }
     </style>
 </head>
@@ -1802,10 +1661,10 @@
             </div>
             
             <div class="controls">
-                <button class="btn btn-secondary" id="exportEstimate">
-                    <i class="fas fa-download"></i> Export Estimate
+                <button class="btn btn-secondary" id="exportInvoice">
+                    <i class="fas fa-download"></i> Export Invoice
                 </button>
-                <button class="btn btn-primary" id="updatePreviewBtn">
+                <button class="btn btn-primary" id="updateInvoice">
                     <i class="fas fa-sync-alt"></i> Update Preview
                 </button>
                 <button class="btn btn-outline" id="resetForm">
@@ -1816,10 +1675,10 @@
         
         <!-- Mobile controls -->
         <div class="mobile-controls no-print">
-            <button class="btn btn-secondary mobile-btn" id="exportEstimateMobile">
+            <button class="btn btn-secondary mobile-btn" id="exportInvoiceMobile">
                 <i class="fas fa-download"></i> Export
             </button>
-            <button class="btn btn-primary mobile-btn" id="updatePreviewBtnMobile">
+            <button class="btn btn-primary mobile-btn" id="updateInvoiceMobile">
                 <i class="fas fa-sync-alt"></i> Update
             </button>
             <button class="btn btn-outline mobile-btn" id="resetFormMobile">
@@ -1827,39 +1686,34 @@
             </button>
         </div>
         
-        <div class="estimate-container">
-            <div class="form-panel no-print">
-                <h2 class="panel-title"><i class="fas fa-edit"></i> Estimate Details</h2>
+        <div class="invoice-container">
+            <div class="editor-panel no-print">
+                <h2 class="panel-title"><i class="fas fa-edit"></i> Invoice Details</h2>
                 
                 <div class="row">
                     <div class="form-group compact">
-                        <label for="estimateNo">Estimate Number *</label>
-                        <input type="text" id="estimateNo" placeholder="e.g., EST-001" required>
+                        <label for="invoiceNo">Invoice Number *</label>
+                        <input type="text" id="invoiceNo" placeholder="e.g., INV-001" required>
                     </div>
                     <div class="form-group compact">
-                        <label for="estimateDate">Estimate Date *</label>
-                        <input type="date" id="estimateDate" required>
+                        <label for="invoiceDate">Invoice Date *</label>
+                        <input type="date" id="invoiceDate" required>
                     </div>
                 </div>
                 
                 <div class="row">
                     <div class="form-group compact">
-                        <label for="validUntil">Valid Until *</label>
-                        <input type="date" id="validUntil" required>
+                        <label for="dueDate">Due Date</label>
+                        <input type="date" id="dueDate">
                     </div>
                     <div class="form-group compact">
-                        <label for="estimateStatus">Estimate Status</label>
-                        <select id="estimateStatus">
-                            <option value="draft">Draft</option>
-                            <option value="sent">Sent</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="expired">Expired</option>
-                        </select>
+                        <label for="poNumber">PO Number</label>
+                        <input type="text" id="poNumber" placeholder="Optional">
                     </div>
                 </div>
                 
                 <h3 class="panel-title" style="font-size: 15px; margin-top: 22px;">
-                    <i class="fas fa-building"></i> Client Details
+                    <i class="fas fa-building"></i> Billed To
                 </h3>
                 
                 <div class="form-group compact">
@@ -1867,15 +1721,9 @@
                     <input type="text" id="clientName" placeholder="Enter client name" required>
                 </div>
                 
-                <div class="row">
-                    <div class="form-group compact">
-                        <label for="clientGst">Client GST Number</label>
-                        <input type="text" id="clientGst" placeholder="Enter Client GST Number">
-                    </div>
-                    <div class="form-group compact">
-                        <label for="clientPhone">Client Phone</label>
-                        <input type="text" id="clientPhone" placeholder="Enter phone number">
-                    </div>
+                <div class="form-group compact">
+                    <label for="clientGst">Client GST Number</label>
+                    <input type="text" id="clientGst" placeholder="Enter Client GST Number">
                 </div>
                 
                 <div class="form-group compact">
@@ -1883,38 +1731,50 @@
                     <textarea id="clientAddress" rows="2" placeholder="Enter client address" required></textarea>
                 </div>
                 
-                <div class="form-group compact">
-                    <label for="projectLocation">Project Location</label>
-                    <textarea id="projectLocation" rows="2" placeholder="Enter project/site location"></textarea>
-                </div>
-                
                 <h3 class="panel-title" style="font-size: 15px; margin-top: 22px;">
-                    <i class="fas fa-boxes"></i> Estimate Items
+                    <i class="fas fa-truck"></i> Delivery Address
                 </h3>
                 
-                <div class="items-table-container">
-                    <table class="items-editor-table">
-                        <thead>
-                            <tr>
-                                <th width="45">SL No</th>
-                                <th>Description of Work/Materials</th>
-                                <th width="85">HSN/SAC</th>
-                                <th width="65">Qty</th>
-                                <th width="85">Rate (₹)</th>
-                                <th width="65">Unit</th>
-                                <th width="95">Amount (₹)</th>
-                                <th width="45">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="itemsContainer">
-                            <!-- Items will be added dynamically here -->
-                        </tbody>
-                    </table>
+                <div class="form-group compact">
+                    <label for="deliveryAddress">Delivery Address</label>
+                    <textarea id="deliveryAddress" rows="2" placeholder="Enter delivery address (if different)"></textarea>
                 </div>
                 
-                <button class="add-item-btn" id="addItemBtn">
-                    <i class="fas fa-plus-circle"></i> Add New Line Item
-                </button>
+                <div class="form-group compact">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" id="phoneNumber" placeholder="Enter phone number">
+                </div>
+                
+                <div class="items-section">
+                    <h3 class="items-section-title"><i class="fas fa-boxes"></i> Items & Products</h3>
+                    
+                    <div class="items-table-container">
+                        <table class="items-editor-table">
+                            <thead>
+                                <tr>
+                                    <th width="45">SL No</th>
+                                    <th>Description of Goods/Services</th>
+                                    <th width="85">HSN/SAC</th>
+                                    <th width="65">Qty</th>
+                                    <th width="85">Rate (₹)</th>
+                                    <th width="65">Unit</th>
+                                    <th width="95">Amount (₹)</th>
+                                    <th width="45">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsContainer">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <button class="add-item-btn" id="addItemBtn">
+                        <i class="fas fa-plus-circle"></i> Add New Line Item
+                    </button>
+                    
+                    <div class="legal-note">
+                        * Required fields. HSN/SAC codes are mandatory for GST compliance.
+                    </div>
+                </div>
                 
                 <div class="row" style="margin-top: 18px;">
                     <div class="form-group compact">
@@ -1928,53 +1788,41 @@
                 </div>
                 
                 <div class="form-group compact">
-                    <label for="advancePercentage">Advance Required (%)</label>
-                    <input type="number" id="advancePercentage" value="50" min="0" max="100" step="1">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" rows="2" placeholder="Any special instructions or terms..."></textarea>
                 </div>
-                
+
                 <div class="form-group compact">
-                    <label for="workDuration">Estimated Work Duration</label>
-                    <input type="text" id="workDuration" placeholder="e.g., 15 working days">
+                    <div class="optional-label">
+                        <input type="checkbox" class="toggle-checkbox" id="showPaymentTerms" checked>
+                        <label for="showPaymentTerms" style="margin-bottom: 0;">Payment Terms</label>
+                    </div>
+                    <input type="text" id="paymentTerms" placeholder="e.g., 50% advance, 50% on delivery" value="50% advance, 50% on delivery">
                 </div>
-                
+
                 <div class="form-group compact">
-                    <label for="specialNotes">Special Notes</label>
-                    <textarea id="specialNotes" rows="3" placeholder="Any special instructions, terms, or conditions..."></textarea>
+                    <div class="optional-label">
+                        <input type="checkbox" class="toggle-checkbox" id="showDeliveryTerms" checked>
+                        <label for="showDeliveryTerms" style="margin-bottom: 0;">Delivery</label>
+                    </div>
+                    <input type="text" id="deliveryTerms" placeholder="e.g., Within 15 working days from order confirmation" value="Within 15 working days from order confirmation">
                 </div>
                 
-                <!-- Terms & Conditions Controls -->
-                <div class="form-group compact" style="margin-top: 22px;">
-                    <label>
-                        <input type="checkbox" id="includeTerms" checked> Include Terms & Conditions
-                    </label>
-                </div>
-                
-                <div class="form-group compact">
-                    <label for="termsContent">Terms & Conditions Content</label>
-                    <textarea id="termsContent" rows="6" placeholder="Enter your terms and conditions...">This estimate is valid for 30 days from the date of issue unless otherwise specified.
-Advance payment of 50% is required to confirm the order and commence work.
-Balance payment to be made upon completion of work and before delivery/installation.
-All prices are exclusive of GST unless otherwise specified.
-Any changes in design/specifications after confirmation may result in price adjustments.
-Urban Kutir reserves the right to revise prices if material costs change before order confirmation.
-Work commencement is subject to receipt of advance payment and availability of materials.
-Installation/delivery timelines are estimates and subject to weather conditions and other factors.</textarea>
-                </div>
-                
-                <button class="btn btn-primary" id="updatePreview" style="width: 100%; margin-top: 16px; padding: 10px;">
-                    <i class="fas fa-sync-alt"></i> Update Estimate Preview
+                <button class="btn btn-primary" id="updateInvoiceBtn" style="width: 100%; margin-top: 16px; padding: 10px;">
+                    <i class="fas fa-sync-alt"></i> Update Invoice Preview
                 </button>
             </div>
             
             <div class="preview-panel no-print" id="previewPanel">
                 <div class="watermark"></div>
                 
-                <div class="estimate-header">
+                <div class="invoice-header">
                     <div>
-                        <div class="estimate-title">ESTIMATE</div>
+                        <div class="invoice-title">TAX INVOICE</div>
                         <div class="address-content">
                             <strong>Urban Kutir</strong><br>
-                            59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308, Kolkata 700050<br>
+                            59 Kali Charan Gosh Road, Binayak Enclave, Block J2, Flat 308<br>
+                            Kolkata 700050, West Bengal<br>
                             <div class="company-gst-box">
                                 <strong>GSTIN:</strong> 19AAHFU6863E1ZR
                             </div>
@@ -1983,17 +1831,17 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <i class="fas fa-phone"></i> 9831859858
                         </div>
                     </div>
-                    <div class="estimate-meta">
-                        <p><strong>ESTIMATE NO:</strong> <span id="previewEstimateNo" class="empty-state">[Estimate Number]</span></p>
-                        <p><strong>DATE:</strong> <span id="previewEstimateDate" class="empty-state">[Date]</span></p>
-                        <p><strong>VALID UNTIL:</strong> <span id="previewValidUntil" class="empty-state">[Valid Until]</span></p>
-                        <p><strong>STATUS:</strong> <span id="previewStatus" class="status-badge status-draft">DRAFT</span></p>
+                    <div class="invoice-meta">
+                        <p><strong>INVOICE NO:</strong> <span id="previewInvoiceNo" class="empty-state">[Invoice Number]</span></p>
+                        <p><strong>DATE:</strong> <span id="previewDate" class="empty-state">[Date]</span></p>
+                        <p><strong>DUE DATE:</strong> <span id="previewDueDate" class="empty-state">[Due Date]</span></p>
+                        <p><strong>STATE:</strong> WEST BENGAL</p>
                     </div>
                 </div>
                 
-                <div class="estimate-addresses">
+                <div class="invoice-addresses">
                     <div class="address-box">
-                        <div class="address-title">CLIENT DETAILS:</div>
+                        <div class="address-title">BILLED TO:</div>
                         <div class="address-content" id="previewClient">
                             <div class="empty-state">[Client Information]</div>
                             <div id="previewClientGst" style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--accent-color); display: none;">
@@ -2002,23 +1850,18 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         </div>
                     </div>
                     <div class="address-box">
-                        <div class="address-title">PROJECT LOCATION:</div>
-                        <div class="address-content" id="previewProjectLocation">
-                            <div class="empty-state">[Project/Site Location]</div>
+                        <div class="address-title">SHIP TO:</div>
+                        <div class="address-content" id="previewDelivery">
+                            <div class="empty-state">[Delivery Address]</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="validity-box">
-                    <strong>Note:</strong> This estimate is valid until <span id="previewValidUntilText" class="empty-state">[Valid Until Date]</span>. 
-                    Prices are subject to change based on market rates of materials at the time of order confirmation.
-                </div>
-                
-                <table class="estimate-table">
+                <table class="invoice-table">
                     <thead>
                         <tr>
                             <th class="text-center" width="45">SL No</th>
-                            <th>Description of Work/Materials</th>
+                            <th>Description of Goods/Services</th>
                             <th class="text-center" width="85">HSN/SAC</th>
                             <th class="text-center" width="65">Qty</th>
                             <th class="text-right" width="85">Rate (₹)</th>
@@ -2033,9 +1876,9 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     </tbody>
                 </table>
                 
-                <div class="estimate-summary">
+                <div class="invoice-summary">
                     <div class="summary-row">
-                        <span>Total Estimate Value</span>
+                        <span>Total Taxable Value</span>
                         <span id="previewTaxable">0.00</span>
                     </div>
                     <div class="summary-row">
@@ -2055,30 +1898,19 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         <span id="previewRoundOff">0.00</span>
                     </div>
                     <div class="summary-row total">
-                        <span>TOTAL ESTIMATE</span>
+                        <span>GRAND TOTAL</span>
                         <span id="previewTotal">₹0.00</span>
                     </div>
-                    <div class="summary-row" style="border-bottom: none; padding-top: 8px;">
-                        <span>Advance Required (<span id="previewAdvancePercentage">50</span>%)</span>
-                        <span id="previewAdvanceAmount">₹0.00</span>
-                    </div>
                 </div>
                 
-                <div id="previewWorkDuration" style="margin-top: 10px; font-size: 11.5px; color: var(--text-medium); padding: 7px; background-color: var(--lighter-accent); border-radius: 4px; display: none;">
-                    <strong>Estimated Work Duration:</strong> <span id="previewWorkDurationText"></span>
-                </div>
-                
-                <div class="terms-section" id="previewTermsSection">
-                    <div class="terms-title"><i class="fas fa-file-contract"></i> Terms & Conditions</div>
-                    <div class="terms-content" id="previewTermsContent">
-                        <!-- Terms content will be dynamically inserted here -->
-                    </div>
+                <div id="previewNotes" style="margin-top: 10px; font-size: 11.5px; color: var(--text-medium); padding: 7px; background-color: var(--lighter-accent); border-radius: 4px; display: none;">
+                    <strong>Notes:</strong> <span id="previewNotesContent"></span>
                 </div>
                 
                 <div class="authorization-section">
                     <div style="flex: 1;">
-                        <p><strong>Payment Terms:</strong> <span id="previewAdvanceSummary">50% advance, 50% on completion</span></p>
-                        <p><strong>Delivery/Installation:</strong> Subject to advance payment and material availability</p>
+                        <p id="previewPaymentTermsContainer"><strong>Payment Terms:</strong> <span id="previewPaymentTerms">50% advance, 50% on delivery</span></p>
+                        <p id="previewDeliveryTermsContainer"><strong>Delivery:</strong> <span id="previewDeliveryTerms">Within 15 working days from order confirmation</span></p>
                         <p><strong>Bank Details:</strong> State Bank of India | A/C: 123456789012 | IFSC: SBIN0001234</p>
                         <p><strong>PAN:</strong> AAHFU6863E</p>
                     </div>
@@ -2090,16 +1922,16 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     </div>
                 </div>
                 
-                <div class="estimate-footer">
-                    <p>This is a quotation/estimate and not a tax invoice. Tax invoice will be issued upon order confirmation and payment.</p>
-                    <p style="margin-top: 10px; font-size: 11px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
+                <div class="invoice-footer">
+                    <p><strong>TOTAL AMOUNT:</strong> RUPEES <span id="previewAmountWords" class="empty-state">[Amount in words]</span> ONLY.</p>
+                    <p style="margin-top: 10px; font-size: 11px;">This is a computer generated invoice and does not require a physical signature. Subject to Kolkata Jurisdiction.</p>
+                    <p style="font-size: 10px; color: #7f8c8d; margin-top: 6px;">As per GST rules, this invoice is valid without signature | E. & O.E.</p>
                 </div>
             </div>
         </div>
         
         <footer class="no-print">
-            <p>Urban Kutir Professional Estimate System &copy; <span id="currentYear">2025</span> | GST No: 19AAHFU6863E1ZR</p>
-            <p class="legal-note">This estimate system complies with Indian tax regulations and legal requirements for business quotations.</p>
+            <p>Urban Kutir Professional Invoice System &copy; <span id="currentYear">2025</span> | GST No: 19AAHFU6863E1ZR</p>
         </footer>
     </div>
     
@@ -2107,7 +1939,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
     <div class="modal-overlay" id="exportModal">
         <div class="export-modal">
             <div class="modal-header">
-                <h3>Export Estimate</h3>
+                <h3>Export Invoice</h3>
                 <button class="close-modal" id="closeExportModal">
                     <i class="fas fa-times"></i>
                 </button>
@@ -2182,19 +2014,18 @@ Installation/delivery timelines are estimates and subject to weather conditions 
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Update current year in footer
+            // Auto-update year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             // Set default dates
             const today = new Date();
             const formattedToday = today.toISOString().split('T')[0];
-            document.getElementById('estimateDate').value = formattedToday;
+            document.getElementById('invoiceDate').value = formattedToday;
             
-            // Set valid until date to 30 days from today
-            const validUntil = new Date(today);
-            validUntil.setDate(today.getDate() + 30);
-            const formattedValidUntil = validUntil.toISOString().split('T')[0];
-            document.getElementById('validUntil').value = formattedValidUntil;
+            const dueDate = new Date(today);
+            dueDate.setDate(today.getDate() + 15);
+            const formattedDueDate = dueDate.toISOString().split('T')[0];
+            document.getElementById('dueDate').value = formattedDueDate;
             
             // Initialize items with one empty item
             let items = [
@@ -2213,18 +2044,18 @@ Installation/delivery timelines are estimates and subject to weather conditions 
             const itemsContainer = document.getElementById('itemsContainer');
             const previewItems = document.getElementById('previewItems');
             const addItemBtn = document.getElementById('addItemBtn');
-            const updatePreviewBtn = document.getElementById('updatePreview');
-            const exportEstimateBtn = document.getElementById('exportEstimate');
+            const updateInvoiceBtn = document.getElementById('updateInvoiceBtn');
+            const exportInvoiceBtn = document.getElementById('exportInvoice');
             const resetFormBtn = document.getElementById('resetForm');
-            const includeTermsCheckbox = document.getElementById('includeTerms');
-            const termsContentTextarea = document.getElementById('termsContent');
-            const previewTermsSection = document.getElementById('previewTermsSection');
-            const previewTermsContent = document.getElementById('previewTermsContent');
             
             // Mobile buttons
-            const exportEstimateBtnMobile = document.getElementById('exportEstimateMobile');
-            const updatePreviewBtnMobile = document.getElementById('updatePreviewBtnMobile');
+            const exportInvoiceBtnMobile = document.getElementById('exportInvoiceMobile');
+            const updateInvoiceBtnMobile = document.getElementById('updateInvoiceMobile');
             const resetFormBtnMobile = document.getElementById('resetFormMobile');
+            
+            // Optional fields checkboxes
+            const showPaymentTermsCheckbox = document.getElementById('showPaymentTerms');
+            const showDeliveryTermsCheckbox = document.getElementById('showDeliveryTerms');
             
             // Export modal elements
             const exportModal = document.getElementById('exportModal');
@@ -2251,7 +2082,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     const logoImg = document.querySelector('.logo-img');
                     const logoFallback = document.getElementById('logo-fallback');
                     
-                    // If logo image exists and is loaded
                     if (logoImg && logoImg.src && !logoImg.src.includes('onerror')) {
                         const canvas = document.createElement('canvas');
                         const ctx = canvas.getContext('2d');
@@ -2267,7 +2097,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         };
                         
                         img.onerror = function() {
-                            // Create a premium fallback logo with gradient
                             canvas.width = 120;
                             canvas.height = 120;
                             const gradient = ctx.createLinearGradient(0, 0, 120, 120);
@@ -2275,13 +2104,11 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             gradient.addColorStop(0.5, '#d4a574');
                             gradient.addColorStop(1, '#8B4513');
                             
-                            // Draw elegant circular logo
                             ctx.beginPath();
                             ctx.arc(60, 60, 55, 0, Math.PI * 2);
                             ctx.fillStyle = gradient;
                             ctx.fill();
                             
-                            // Add elegant border
                             ctx.beginPath();
                             ctx.arc(60, 60, 58, 0, Math.PI * 2);
                             ctx.strokeStyle = '#5a3921';
@@ -2300,7 +2127,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         
                         img.src = logoImg.src;
                     } else {
-                        // Create a premium fallback logo
                         const canvas = document.createElement('canvas');
                         const ctx = canvas.getContext('2d');
                         canvas.width = 120;
@@ -2311,27 +2137,25 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         gradient.addColorStop(0.5, '#d4a574');
                         gradient.addColorStop(1, '#8B4513');
                         
-                        // Draw elegant circular logo
                         ctx.beginPath();
-                            ctx.arc(60, 60, 55, 0, Math.PI * 2);
-                            ctx.fillStyle = gradient;
-                            ctx.fill();
-                            
-                            // Add elegant border
-                            ctx.beginPath();
-                            ctx.arc(60, 60, 58, 0, Math.PI * 2);
-                            ctx.strokeStyle = '#5a3921';
-                            ctx.lineWidth = 1.5;
-                            ctx.stroke();
-                            
-                            ctx.fillStyle = 'white';
-                            ctx.font = 'bold 36px Inter';
-                            ctx.textAlign = 'center';
+                        ctx.arc(60, 60, 55, 0, Math.PI * 2);
+                        ctx.fillStyle = gradient;
+                        ctx.fill();
+                        
+                        ctx.beginPath();
+                        ctx.arc(60, 60, 58, 0, Math.PI * 2);
+                        ctx.strokeStyle = '#5a3921';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                        
+                        ctx.fillStyle = 'white';
+                        ctx.font = 'bold 36px Inter';
+                        ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
-                            ctx.fillText('UK', 60, 60);
-                            
-                            logoDataUrl = canvas.toDataURL('image/png');
-                            resolve(logoDataUrl);
+                        ctx.fillText('UK', 60, 60);
+                        
+                        logoDataUrl = canvas.toDataURL('image/png');
+                        resolve(logoDataUrl);
                     }
                 });
             }
@@ -2343,7 +2167,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 
                 watermarks.forEach(watermark => {
                     if (logoDataUrl) {
-                        // Premium watermark styling
                         watermark.style.backgroundImage = `url('${logoDataUrl}')`;
                         watermark.style.opacity = '0.015';
                         watermark.style.width = '350px';
@@ -2356,7 +2179,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 });
             }
             
-            // Call preload function
             setTimeout(preloadWatermark, 500);
             
             // Toast notification system
@@ -2379,17 +2201,14 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 
                 toastContainer.appendChild(toast);
                 
-                // Show toast
                 setTimeout(() => {
                     toast.classList.add('show');
                 }, 10);
                 
-                // Auto-remove toast after 5 seconds
                 const autoRemove = setTimeout(() => {
                     hideToast(toast);
                 }, 5000);
                 
-                // Close button
                 toast.querySelector('.toast-close').addEventListener('click', () => {
                     clearTimeout(autoRemove);
                     hideToast(toast);
@@ -2480,7 +2299,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td><input type="text" class="item-sno" value="${item.slNo}" readonly></td>
-                        <td><input type="text" class="item-name" value="${item.name}" placeholder="Description of work/material"></td>
+                        <td><input type="text" class="item-name" value="${item.name}" placeholder="Description of goods/services"></td>
                         <td><input type="text" class="item-hsn" value="${item.hsnCode}" placeholder="HSN/SAC code"></td>
                         <td><input type="number" class="item-qty" value="${item.qty}" placeholder="Qty" min="0" step="0.01"></td>
                         <td><input type="number" class="item-price" value="${item.price}" placeholder="Rate" min="0" step="0.01"></td>
@@ -2495,7 +2314,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     itemsContainer.appendChild(row);
                 });
                 
-                // Add event listeners to delete buttons
                 document.querySelectorAll('.item-action-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const index = parseInt(this.getAttribute('data-index'));
@@ -2503,12 +2321,11 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             items.splice(index, 1);
                             items.forEach((item, idx) => item.slNo = idx + 1);
                             renderItems();
-                            updateEstimatePreview();
+                            updateInvoicePreview();
                         }
                     });
                 });
                 
-                // Add event listeners to qty and price inputs for auto-calculation
                 document.querySelectorAll('.item-qty, .item-price').forEach(input => {
                     input.addEventListener('input', function() {
                         const row = this.closest('tr');
@@ -2526,11 +2343,10 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         items[sno].hsnCode = row.querySelector('.item-hsn').value;
                         items[sno].unit = row.querySelector('.item-unit').value;
                         
-                        updateEstimatePreview();
+                        updateInvoicePreview();
                     });
                 });
                 
-                // Add event listeners to other inputs
                 document.querySelectorAll('.item-name, .item-hsn, .item-unit').forEach(input => {
                     input.addEventListener('input', function() {
                         const row = this.closest('tr');
@@ -2544,7 +2360,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             items[sno].unit = this.value;
                         }
                         
-                        updateEstimatePreview();
+                        updateInvoicePreview();
                     });
                 });
             }
@@ -2581,33 +2397,23 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 });
             }
             
-            // Update estimate preview with form values
-            function updateEstimatePreview() {
-                // Update basic information
-                const estimateNo = document.getElementById('estimateNo').value;
-                document.getElementById('previewEstimateNo').textContent = estimateNo || '[Estimate Number]';
-                document.getElementById('previewEstimateNo').className = estimateNo ? '' : 'empty-state';
+            // Update invoice preview with form values
+            function updateInvoicePreview() {
+                const invoiceNo = document.getElementById('invoiceNo').value;
+                document.getElementById('previewInvoiceNo').textContent = invoiceNo || '[Invoice Number]';
+                document.getElementById('previewInvoiceNo').className = invoiceNo ? '' : 'empty-state';
                 
-                const estimateDate = document.getElementById('estimateDate').value;
-                document.getElementById('previewEstimateDate').textContent = estimateDate ? formatDate(estimateDate) : '[Date]';
-                document.getElementById('previewEstimateDate').className = estimateDate ? '' : 'empty-state';
+                const invoiceDate = document.getElementById('invoiceDate').value;
+                document.getElementById('previewDate').textContent = invoiceDate ? formatDate(invoiceDate) : '[Date]';
+                document.getElementById('previewDate').className = invoiceDate ? '' : 'empty-state';
                 
-                const validUntil = document.getElementById('validUntil').value;
-                document.getElementById('previewValidUntil').textContent = validUntil ? formatDate(validUntil) : '[Valid Until]';
-                document.getElementById('previewValidUntilText').textContent = validUntil ? formatDate(validUntil) : '[Valid Until Date]';
-                document.getElementById('previewValidUntil').className = validUntil ? '' : 'empty-state';
+                const dueDate = document.getElementById('dueDate').value;
+                document.getElementById('previewDueDate').textContent = dueDate ? formatDate(dueDate) : '[Due Date]';
+                document.getElementById('previewDueDate').className = dueDate ? '' : 'empty-state';
                 
-                // Update status
-                const status = document.getElementById('estimateStatus').value;
-                const statusBadge = document.getElementById('previewStatus');
-                statusBadge.textContent = status.toUpperCase();
-                statusBadge.className = 'status-badge status-' + status;
-                
-                // Update client information
                 const clientName = document.getElementById('clientName').value;
                 const clientAddress = document.getElementById('clientAddress').value;
                 const clientGst = document.getElementById('clientGst').value;
-                const clientPhone = document.getElementById('clientPhone').value;
                 
                 const clientGstContainer = document.getElementById('previewClientGst');
                 if (clientGst.trim()) {
@@ -2621,7 +2427,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     let clientHTML = '';
                     if (clientName.trim()) clientHTML += clientName + '<br>';
                     if (clientAddress.trim()) clientHTML += clientAddress.replace(/\n/g, '<br>');
-                    if (clientPhone.trim()) clientHTML += '<br>PHONE: ' + clientPhone;
                     
                     document.getElementById('previewClient').innerHTML = clientHTML + 
                         (clientGst.trim() ? `<div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--accent-color);">
@@ -2633,28 +2438,28 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     document.getElementById('previewClient').innerHTML = '<div class="empty-state">[Client Information]</div>';
                 }
                 
-                // Update project location
-                const projectLocation = document.getElementById('projectLocation').value;
-                if (projectLocation.trim()) {
-                    document.getElementById('previewProjectLocation').innerHTML = projectLocation.replace(/\n/g, '<br>');
-                    document.getElementById('previewProjectLocation').querySelectorAll('.empty-state').forEach(el => el.remove());
+                const deliveryAddress = document.getElementById('deliveryAddress').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                
+                if (deliveryAddress.trim() || phoneNumber.trim()) {
+                    let deliveryHTML = '';
+                    if (deliveryAddress.trim()) deliveryHTML += deliveryAddress.replace(/\n/g, '<br>');
+                    if (phoneNumber.trim()) deliveryHTML += (deliveryAddress.trim() ? '<br>' : '') + 'PHONE: ' + phoneNumber;
+                    
+                    document.getElementById('previewDelivery').innerHTML = deliveryHTML;
+                    document.getElementById('previewDelivery').querySelectorAll('.empty-state').forEach(el => el.remove());
                 } else {
-                    document.getElementById('previewProjectLocation').innerHTML = '<div class="empty-state">[Project/Site Location]</div>';
+                    document.getElementById('previewDelivery').innerHTML = '<div class="empty-state">[Delivery Address]</div>';
                 }
                 
-                // Update items
                 renderPreviewItems();
                 
-                // Calculate totals
                 const taxableValue = items.reduce((sum, item) => sum + item.total, 0);
                 const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
                 const taxAmount = (taxableValue * taxRate) / 100;
                 const roundOff = parseFloat(document.getElementById('roundOff').value) || 0;
                 const totalAmount = taxableValue + (taxAmount * 2) + roundOff;
-                const advancePercentage = parseFloat(document.getElementById('advancePercentage').value) || 0;
-                const advanceAmount = (totalAmount * advancePercentage) / 100;
                 
-                // Update summary
                 document.getElementById('previewTaxable').textContent = formatCurrency(taxableValue, true);
                 document.getElementById('previewTaxRate').textContent = taxRate;
                 document.getElementById('previewSgstRate').textContent = taxRate;
@@ -2662,105 +2467,84 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 document.getElementById('previewSgst').textContent = formatCurrency(taxAmount, true);
                 document.getElementById('previewRoundOff').textContent = formatCurrency(roundOff, true);
                 document.getElementById('previewTotal').textContent = '₹' + formatCurrency(totalAmount, true);
-                document.getElementById('previewAdvancePercentage').textContent = advancePercentage;
-                document.getElementById('previewAdvanceAmount').textContent = '₹' + formatCurrency(advanceAmount, true);
                 
-                // Update terms and conditions
-                const includeTerms = document.getElementById('includeTerms').checked;
-                const termsContent = document.getElementById('termsContent').value;
+                const amountWords = numberToWords(Math.round(totalAmount));
+                document.getElementById('previewAmountWords').textContent = totalAmount > 0 ? amountWords : '[Amount in words]';
+                document.getElementById('previewAmountWords').className = totalAmount > 0 ? '' : 'empty-state';
                 
-                // Show/hide terms section
-                if (includeTerms && termsContent.trim()) {
-                    previewTermsSection.style.display = 'block';
-                    // Format terms content with line breaks
-                    const formattedTerms = termsContent.replace(/\n/g, '</li><li>');
-                    previewTermsContent.innerHTML = `<ul><li>${formattedTerms}</li></ul>`;
-                    
-                    // Update advance percentage in terms if present
-                    const advanceText = document.getElementById('previewAdvanceText');
-                    if (advanceText) {
-                        advanceText.textContent = advancePercentage + '%';
-                    }
+                const notes = document.getElementById('notes').value;
+                const notesContainer = document.getElementById('previewNotes');
+                const notesContent = document.getElementById('previewNotesContent');
+                
+                if (notes.trim()) {
+                    notesContent.textContent = notes;
+                    notesContainer.style.display = 'block';
                 } else {
-                    previewTermsSection.style.display = 'none';
+                    notesContainer.style.display = 'none';
                 }
                 
-                // Update advance summary
-                document.getElementById('previewAdvanceSummary').textContent = advancePercentage + '% advance, ' + (100 - advancePercentage) + '% on completion';
+                // Update payment terms with optional toggle
+                const paymentTerms = document.getElementById('paymentTerms').value;
+                const deliveryTerms = document.getElementById('deliveryTerms').value;
+                const showPaymentTerms = document.getElementById('showPaymentTerms').checked;
+                const showDeliveryTerms = document.getElementById('showDeliveryTerms').checked;
+
+                const paymentTermsContainer = document.getElementById('previewPaymentTermsContainer');
+                const deliveryTermsContainer = document.getElementById('previewDeliveryTermsContainer');
                 
-                // Update work duration
-                const workDuration = document.getElementById('workDuration').value;
-                const workDurationContainer = document.getElementById('previewWorkDuration');
-                if (workDuration.trim()) {
-                    document.getElementById('previewWorkDurationText').textContent = workDuration;
-                    workDurationContainer.style.display = 'block';
+                if (showPaymentTerms && paymentTerms.trim()) {
+                    document.getElementById('previewPaymentTerms').textContent = paymentTerms;
+                    paymentTermsContainer.style.display = 'block';
                 } else {
-                    workDurationContainer.style.display = 'none';
+                    paymentTermsContainer.style.display = 'none';
                 }
                 
-                // Update special notes
-                const specialNotes = document.getElementById('specialNotes').value;
-                const specialNotesContainer = document.getElementById('previewSpecialNotes');
-                if (specialNotes.trim()) {
-                    // Create special notes div if it doesn't exist
-                    if (!specialNotesContainer) {
-                        const termsContentDiv = previewTermsContent;
-                        const specialNotesDiv = document.createElement('div');
-                        specialNotesDiv.id = 'previewSpecialNotes';
-                        specialNotesDiv.style.display = 'block';
-                        specialNotesDiv.style.marginTop = '10px';
-                        specialNotesDiv.style.paddingTop = '10px';
-                        specialNotesDiv.style.borderTop = '1px dashed var(--border-color)';
-                        specialNotesDiv.innerHTML = `<strong>Special Notes:</strong> <span id="previewSpecialNotesContent"></span>`;
-                        termsContentDiv.appendChild(specialNotesDiv);
-                    }
-                    document.getElementById('previewSpecialNotesContent').textContent = specialNotes;
-                } else if (specialNotesContainer) {
-                    specialNotesContainer.style.display = 'none';
+                if (showDeliveryTerms && deliveryTerms.trim()) {
+                    document.getElementById('previewDeliveryTerms').textContent = deliveryTerms;
+                    deliveryTermsContainer.style.display = 'block';
+                } else {
+                    deliveryTermsContainer.style.display = 'none';
                 }
             }
             
-            // Generate print preview HTML with premium branding
+            // Generate print preview HTML
             function generatePrintPreviewHTML() {
-                const currentYear = new Date().getFullYear();
-                const estimateNo = document.getElementById('estimateNo').value;
-                const estimateDate = document.getElementById('estimateDate').value;
-                const validUntil = document.getElementById('validUntil').value;
-                const status = document.getElementById('estimateStatus').value;
+                const invoiceNo = document.getElementById('invoiceNo').value;
+                const invoiceDate = document.getElementById('invoiceDate').value;
+                const dueDate = document.getElementById('dueDate').value;
+                const poNumber = document.getElementById('poNumber').value;
                 const clientName = document.getElementById('clientName').value;
                 const clientAddress = document.getElementById('clientAddress').value;
                 const clientGst = document.getElementById('clientGst').value;
-                const clientPhone = document.getElementById('clientPhone').value;
-                const projectLocation = document.getElementById('projectLocation').value;
-                const workDuration = document.getElementById('workDuration').value;
-                const specialNotes = document.getElementById('specialNotes').value;
+                const deliveryAddress = document.getElementById('deliveryAddress').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                const notes = document.getElementById('notes').value;
                 const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
                 const roundOff = parseFloat(document.getElementById('roundOff').value) || 0;
-                const advancePercentage = parseFloat(document.getElementById('advancePercentage').value) || 0;
-                const includeTerms = document.getElementById('includeTerms').checked;
-                const termsContent = document.getElementById('termsContent').value;
+                const paymentTerms = document.getElementById('paymentTerms').value;
+                const deliveryTerms = document.getElementById('deliveryTerms').value;
+                const showPaymentTerms = document.getElementById('showPaymentTerms').checked;
+                const showDeliveryTerms = document.getElementById('showDeliveryTerms').checked;
                 
-                // Calculate totals
                 const taxableValue = items.reduce((sum, item) => sum + item.total, 0);
                 const taxAmount = (taxableValue * taxRate) / 100;
                 const totalAmount = taxableValue + (taxAmount * 2) + roundOff;
-                const advanceAmount = (totalAmount * advancePercentage) / 100;
+                const amountWords = numberToWords(Math.round(totalAmount));
                 
-                // Generate items HTML
                 let itemsHTML = '';
                 if (items.some(item => item.name.trim() !== '' || item.total > 0)) {
                     items.forEach(item => {
                         if (item.name.trim() === '' && item.total === 0) return;
                         
                         itemsHTML += `
-                            <tr>
+                            <tr class="small-row">
                                 <td class="text-center">${item.slNo}</td>
                                 <td>${item.name || '-'}</td>
                                 <td class="text-center">${item.hsnCode || '-'}</td>
                                 <td class="text-center">${item.qty}</td>
-                                <td class="text-right">${formatCurrency(item.price, true)}</td>
+                                <td class="text-right amount-cell">${formatCurrency(item.price, true)}</td>
                                 <td class="text-center">${item.unit || 'Pcs'}</td>
-                                <td class="text-right">${formatCurrency(item.total, true)}</td>
+                                <td class="text-right amount-cell">${formatCurrency(item.total, true)}</td>
                             </tr>
                         `;
                     });
@@ -2768,55 +2552,14 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     itemsHTML = '<tr><td colspan="7" class="text-center">[No items added]</td></tr>';
                 }
                 
-                // Client info
                 let clientHTML = '';
                 if (clientName.trim()) clientHTML += clientName + '<br>';
                 if (clientAddress.trim()) clientHTML += clientAddress.replace(/\n/g, '<br>');
-                if (clientPhone.trim()) clientHTML += '<br>PHONE: ' + clientPhone;
                 if (clientGst.trim()) clientHTML += '<br><strong>GSTIN:</strong> ' + clientGst;
                 
-                // Status badge style
-                let statusStyle = '';
-                switch(status) {
-                    case 'sent': statusStyle = 'status-sent'; break;
-                    case 'accepted': statusStyle = 'status-accepted'; break;
-                    case 'expired': statusStyle = 'status-expired'; break;
-                    default: statusStyle = 'status-draft';
-                }
-                
-                // Generate terms HTML if included
-                let termsHTML = '';
-                if (includeTerms && termsContent.trim()) {
-                    const formattedTerms = termsContent.replace(/\n/g, '</li><li>');
-                    termsHTML = `
-                        <div style="margin-top: 35px; padding: 20px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 8px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
-                            <strong style="color: #5a3921; font-size: 15px; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                                <i class="fas fa-file-contract" style="color: #8B4513;"></i> Terms & Conditions
-                            </strong>
-                            <div style="color: #5a3921; line-height: 1.6; font-size: 12px;">
-                                <ul style="padding-left: 20px; margin-bottom: 15px; list-style-type: square;">
-                                    <li>${formattedTerms}</li>
-                                </ul>
-                                ${specialNotes.trim() ? `
-                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1.5px dashed #e0d6c8;">
-                                        <strong style="color: #5a3921;">Special Notes:</strong> ${specialNotes}
-                                    </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                    `;
-                } else if (specialNotes.trim()) {
-                    // Show only special notes if terms are not included
-                    termsHTML = `
-                        <div style="margin-top: 35px; padding: 20px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 8px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
-                            <div style="color: #5a3921; line-height: 1.6; font-size: 12px;">
-                                <div style="margin-top: 15px;">
-                                    <strong style="color: #5a3921;">Special Notes:</strong> ${specialNotes}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
+                let deliveryHTML = '';
+                if (deliveryAddress.trim()) deliveryHTML += deliveryAddress.replace(/\n/g, '<br>');
+                if (phoneNumber.trim()) deliveryHTML += (deliveryAddress.trim() ? '<br>' : '') + 'PHONE: ' + phoneNumber;
                 
                 return `
                     <style>
@@ -2825,7 +2568,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             color: #2c1810;
                             line-height: 1.5;
                             position: relative;
-                            min-height: 100vh;
                         }
                         
                         .print-watermark {
@@ -2854,6 +2596,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             border-bottom: 2px solid #d4a574;
                             position: relative;
                             z-index: 1;
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-logo-container {
@@ -2901,6 +2645,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             gap: 20px;
                             position: relative;
                             z-index: 1;
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-address-box {
@@ -2910,6 +2656,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             border-radius: 8px;
                             border-left: 4px solid #d4a574;
                             box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-table {
@@ -2920,6 +2668,12 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             position: relative;
                             z-index: 1;
                             box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);
+                            page-break-inside: auto;
+                            break-inside: auto;
+                        }
+                        
+                        .print-table thead {
+                            display: table-header-group;
                         }
                         
                         .print-table th {
@@ -2931,11 +2685,20 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             border-bottom: 2px solid #d4a574;
                             border-top: 2px solid #d4a574;
                             font-size: 11.5px;
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-table td {
                             padding: 10px 15px;
                             border-bottom: 1px solid #f0e6d6;
+                            page-break-inside: avoid;
+                            break-inside: avoid;
+                        }
+                        
+                        .print-table tr {
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-summary {
@@ -2950,6 +2713,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             border-radius: 8px;
                             border: 1px solid #e0d6c8;
                             box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-summary-row {
@@ -2976,6 +2741,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             align-items: flex-end;
                             position: relative;
                             z-index: 1;
+                            page-break-inside: avoid;
+                            break-inside: avoid;
                         }
                         
                         .print-signature {
@@ -2987,40 +2754,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             border-bottom: 1.5px solid #5a3921;
                             margin: 0 auto 8px;
                             padding-top: 50px;
-                        }
-                        
-                        .status-badge {
-                            display: inline-block;
-                            padding: 4px 10px;
-                            border-radius: 4px;
-                            font-size: 11px;
-                            font-weight: 600;
-                            margin-left: 8px;
-                            letter-spacing: 0.5px;
-                        }
-                        
-                        .status-draft {
-                            background-color: #fef3c7;
-                            color: #92400e;
-                            border: 1px solid #fcd34d;
-                        }
-                        
-                        .status-sent {
-                            background-color: #d1fae5;
-                            color: #065f46;
-                            border: 1px solid #a7f3d0;
-                        }
-                        
-                        .status-accepted {
-                            background-color: #dbeafe;
-                            color: #1e40af;
-                            border: 1px solid #93c5fd;
-                        }
-                        
-                        .status-expired {
-                            background-color: #f3f4f6;
-                            color: #6b7280;
-                            border: 1px solid #d1d5db;
                         }
                     </style>
                     
@@ -3044,38 +2777,34 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                                 </p>
                             </div>
                             <div class="print-meta">
-                                <p><strong>ESTIMATE NO:</strong> ${estimateNo || 'EST-XXXX'}</p>
-                                <p><strong>DATE:</strong> ${estimateDate ? formatDate(estimateDate) : formatDate(formattedToday)}</p>
-                                <p><strong>VALID UNTIL:</strong> ${validUntil ? formatDate(validUntil) : formatDate(formattedValidUntil)}</p>
-                                <p><strong>STATUS:</strong> <span class="status-badge ${statusStyle}">${status.toUpperCase()}</span></p>
+                                <p><strong>INVOICE NO:</strong> ${invoiceNo || 'INV-XXXX'}</p>
+                                <p><strong>DATE:</strong> ${invoiceDate ? formatDate(invoiceDate) : formatDate(formattedToday)}</p>
+                                <p><strong>DUE DATE:</strong> ${dueDate ? formatDate(dueDate) : formatDate(formattedDueDate)}</p>
+                                ${poNumber ? `<p><strong>PO NUMBER:</strong> ${poNumber}</p>` : ''}
+                                <p><strong>STATE:</strong> WEST BENGAL</p>
                             </div>
                         </div>
                         
                         <div style="text-align: center; margin: 30px 0; position: relative; z-index: 1;">
-                            <h1 style="color: #5a3921; font-size: 32px; border-bottom: 3px solid #d4a574; padding-bottom: 12px; display: inline-block; font-weight: 700; letter-spacing: 1px;">ESTIMATE</h1>
+                            <h1 style="color: #5a3921; font-size: 32px; border-bottom: 3px solid #d4a574; padding-bottom: 12px; display: inline-block; font-weight: 700; letter-spacing: 1px;">TAX INVOICE</h1>
                         </div>
                         
                         <div class="print-addresses">
                             <div class="print-address-box">
-                                <strong style="color: #5a3921; font-size: 15px; display: block; margin-bottom: 10px;">CLIENT DETAILS:</strong>
+                                <strong style="color: #5a3921; font-size: 15px; display: block; margin-bottom: 10px;">BILLED TO:</strong>
                                 <div style="margin-top: 8px; font-size: 12.5px; color: #5a3921; line-height: 1.6;">${clientHTML || '[Client Information]'}</div>
                             </div>
                             <div class="print-address-box">
-                                <strong style="color: #5a3921; font-size: 15px; display: block; margin-bottom: 10px;">PROJECT LOCATION:</strong>
-                                <div style="margin-top: 8px; font-size: 12.5px; color: #5a3921; line-height: 1.6;">${projectLocation.trim() ? projectLocation.replace(/\n/g, '<br>') : '[Project/Site Location]'}</div>
+                                <strong style="color: #5a3921; font-size: 15px; display: block; margin-bottom: 10px;">SHIP TO:</strong>
+                                <div style="margin-top: 8px; font-size: 12.5px; color: #5a3921; line-height: 1.6;">${deliveryHTML || '[Delivery Address]'}</div>
                             </div>
-                        </div>
-                        
-                        <div style="background: linear-gradient(to right, #fff8f0, #fff0e0); border: 1px solid #f0d6b8; border-radius: 8px; padding: 15px 18px; margin-bottom: 25px; font-size: 12.5px; color: #5a3921; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
-                            <strong style="color: #5a3921;">NOTE:</strong> This estimate is valid until <strong>${validUntil ? formatDate(validUntil) : formatDate(formattedValidUntil)}</strong>. 
-                            Prices are subject to change based on market rates of materials at the time of order confirmation.
                         </div>
                         
                         <table class="print-table">
                             <thead>
                                 <tr>
                                     <th class="text-center" width="45">SL No</th>
-                                    <th>Description of Work/Materials</th>
+                                    <th>Description of Goods/Services</th>
                                     <th class="text-center" width="85">HSN/SAC</th>
                                     <th class="text-center" width="65">Qty</th>
                                     <th class="text-right" width="85">Rate (₹)</th>
@@ -3090,7 +2819,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         
                         <div class="print-summary">
                             <div class="print-summary-row">
-                                <span>Total Estimate Value</span>
+                                <span>Total Taxable Value</span>
                                 <span>${formatCurrency(taxableValue, true)}</span>
                             </div>
                             <div class="print-summary-row">
@@ -3106,27 +2835,21 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                                 <span>${formatCurrency(roundOff, true)}</span>
                             </div>
                             <div class="print-summary-row print-total">
-                                <span>TOTAL ESTIMATE</span>
+                                <span>GRAND TOTAL</span>
                                 <span>₹${formatCurrency(totalAmount, true)}</span>
-                            </div>
-                            <div class="print-summary-row" style="border-bottom: none; padding-top: 12px; margin-top: 8px; background-color: #f0e6d6; padding: 8px 12px; border-radius: 4px;">
-                                <span style="font-weight: 600;">Advance Required (${advancePercentage}%)</span>
-                                <span style="font-weight: 600;">₹${formatCurrency(advanceAmount, true)}</span>
                             </div>
                         </div>
                         
-                        ${workDuration.trim() ? `
-                            <div style="margin-top: 20px; font-size: 12.5px; padding: 12px 15px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 6px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);">
-                                <strong style="color: #5a3921;">Estimated Work Duration:</strong> ${workDuration}
+                        ${notes.trim() ? `
+                            <div style="margin-top: 15px; font-size: 12.5px; padding: 12px 15px; background: linear-gradient(to right, #fcfaf7, #f9f5f0); border-radius: 6px; border-left: 4px solid #d4a574; position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05); page-break-inside: avoid; break-inside: avoid;">
+                                <strong style="color: #5a3921;">Notes:</strong> ${notes}
                             </div>
                         ` : ''}
                         
-                        ${termsHTML}
-                        
                         <div class="print-authorization">
                             <div style="flex: 1;">
-                                <p style="font-size: 12px; color: #5a3921; margin-bottom: 8px;"><strong>Payment Terms:</strong> ${advancePercentage}% advance, ${100 - advancePercentage}% on completion</p>
-                                <p style="font-size: 12px; color: #5a3921; margin-bottom: 8px;"><strong>Delivery/Installation:</strong> Subject to advance payment and material availability</p>
+                                ${showPaymentTerms && paymentTerms.trim() ? `<p style="font-size: 12px; color: #5a3921; margin-bottom: 8px;"><strong>Payment Terms:</strong> ${paymentTerms}</p>` : ''}
+                                ${showDeliveryTerms && deliveryTerms.trim() ? `<p style="font-size: 12px; color: #5a3921; margin-bottom: 8px;"><strong>Delivery:</strong> ${deliveryTerms}</p>` : ''}
                                 <p style="font-size: 12px; color: #5a3921; margin-bottom: 8px;"><strong>Bank Details:</strong> State Bank of India | A/C: 123456789012 | IFSC: SBIN0001234</p>
                                 <p style="font-size: 12px; color: #5a3921;"><strong>PAN:</strong> AAHFU6863E</p>
                             </div>
@@ -3138,12 +2861,12 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             </div>
                         </div>
                         
-                        <div style="text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1.5px solid #f0e6d6; font-size: 11px; color: #8B4513; position: relative; z-index: 1;">
-                            <p style="font-weight: 500;">This is a quotation/estimate and not a tax invoice. Tax invoice will be issued upon order confirmation and payment.</p>
-                            <p style="margin-top: 10px;">Subject to Kolkata Jurisdiction | E. & O.E.</p>
+                        <div style="text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1.5px solid #f0e6d6; font-size: 11px; color: #8B4513; position: relative; z-index: 1; page-break-inside: avoid; break-inside: avoid;">
+                            <p style="font-weight: 500;"><strong>TOTAL AMOUNT:</strong> RUPEES ${amountWords} ONLY.</p>
+                            <p style="margin-top: 10px;">This is a computer generated invoice and does not require a physical signature. Subject to Kolkata Jurisdiction.</p>
                             <p style="margin-top: 15px; font-size: 10px; color: #666; font-style: italic; max-width: 600px; margin-left: auto; margin-right: auto;">
-                                This document complies with Indian tax regulations and legal requirements for business quotations. 
-                                Urban Kutir is registered under GST with GSTIN 19AAHFU6863E1ZR. &copy; ${currentYear}
+                                This document complies with Indian tax regulations and legal requirements for business invoices. 
+                                Urban Kutir &copy; ${new Date().getFullYear()} is registered under GST with GSTIN 19AAHFU6863E1ZR.
                             </p>
                         </div>
                     </div>
@@ -3165,14 +2888,12 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 confirmExport.disabled = true;
                 
                 try {
-                    // Ensure logo data URL is available
                     if (!logoDataUrl) {
                         await convertLogoToDataUrl();
                     }
                     
                     const html = generatePrintPreviewHTML();
                     
-                    // Create a temporary container
                     const tempContainer = document.createElement('div');
                     tempContainer.style.position = 'absolute';
                     tempContainer.style.left = '-9999px';
@@ -3183,10 +2904,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     tempContainer.innerHTML = html;
                     document.body.appendChild(tempContainer);
                     
-                    // Wait for content to load
                     await new Promise(resolve => setTimeout(resolve, 800));
                     
-                    // Convert to canvas
                     const canvas = await html2canvas(tempContainer, {
                         scale: 2,
                         useCORS: true,
@@ -3196,10 +2915,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         height: tempContainer.scrollHeight
                     });
                     
-                    // Remove temp container
                     document.body.removeChild(tempContainer);
                     
-                    // Create PDF
                     const pdf = new jsPDF('p', 'mm', 'a4');
                     const imgWidth = 210;
                     const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -3210,7 +2927,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     pdf.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight);
                     heightLeft -= 297;
                     
-                    // Add additional pages if needed
                     while (heightLeft > 0) {
                         position = heightLeft - imgHeight;
                         pdf.addPage();
@@ -3218,8 +2934,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         heightLeft -= 297;
                     }
                     
-                    const estimateNo = document.getElementById('estimateNo').value || 'Draft';
-                    const filename = `UrbanKutir_Estimate_${estimateNo}.pdf`;
+                    const invoiceNo = document.getElementById('invoiceNo').value || 'Draft';
+                    const filename = `UrbanKutir_Invoice_${invoiceNo}.pdf`;
                     
                     pdf.save(filename);
                     
@@ -3227,7 +2943,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     confirmExport.disabled = false;
                     exportModal.classList.remove('active');
                     
-                    showToast('success', 'PDF Downloaded', `Estimate saved as ${filename}`);
+                    showToast('success', 'PDF Downloaded', `Invoice saved as ${filename}`);
                     
                 } catch (error) {
                     console.error('Error generating PDF:', error);
@@ -3240,7 +2956,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
             
             // Direct print function
             function directPrint() {
-                // Ensure logo data URL is available
                 if (!logoDataUrl) {
                     convertLogoToDataUrl().then(() => {
                         executePrint();
@@ -3257,13 +2972,13 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         <!DOCTYPE html>
                         <html>
                         <head>
-                            <title>Urban Kutir - Estimate ${document.getElementById('estimateNo').value || 'Draft'}</title>
+                            <title>Urban Kutir - Invoice ${document.getElementById('invoiceNo').value || 'Draft'}</title>
                             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
                             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                             <style>
                                 @media print {
                                     @page {
-                                        margin: 20mm; /* Standard A4 margins on all four sides */
+                                        margin: 15mm;
                                         size: A4;
                                     }
                                     body {
@@ -3297,8 +3012,8 @@ Installation/delivery timelines are estimates and subject to weather conditions 
             }
             
             // Export modal functionality
-            exportEstimateBtn.addEventListener('click', () => exportModal.classList.add('active'));
-            exportEstimateBtnMobile.addEventListener('click', () => exportModal.classList.add('active'));
+            exportInvoiceBtn.addEventListener('click', () => exportModal.classList.add('active'));
+            exportInvoiceBtnMobile.addEventListener('click', () => exportModal.classList.add('active'));
             
             closeExportModal.addEventListener('click', () => exportModal.classList.remove('active'));
             cancelExport.addEventListener('click', () => exportModal.classList.remove('active'));
@@ -3333,7 +3048,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
             closePreviewModal.addEventListener('click', () => printPreviewModal.classList.remove('active'));
             
             printNowBtn.addEventListener('click', () => {
-                // Ensure logo data URL is available
                 if (!logoDataUrl) {
                     convertLogoToDataUrl().then(() => {
                         const html = printPreviewContent.innerHTML;
@@ -3350,13 +3064,13 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                         <!DOCTYPE html>
                         <html>
                         <head>
-                            <title>Urban Kutir - Estimate ${document.getElementById('estimateNo').value || 'Draft'}</title>
+                            <title>Urban Kutir - Invoice ${document.getElementById('invoiceNo').value || 'Draft'}</title>
                             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
                             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                             <style>
                                 @media print {
                                     @page {
-                                        margin: 20mm; /* Standard A4 margins on all four sides */
+                                        margin: 15mm;
                                         size: A4;
                                     }
                                     body {
@@ -3405,42 +3119,33 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     total: 0
                 });
                 renderItems();
-                updateEstimatePreview();
+                updateInvoicePreview();
             });
             
-            // Update estimate preview
-            updatePreviewBtn.addEventListener('click', updateEstimatePreview);
-            updatePreviewBtnMobile.addEventListener('click', updateEstimatePreview);
+            // Update invoice preview
+            updateInvoiceBtn.addEventListener('click', updateInvoicePreview);
+            updateInvoiceBtnMobile.addEventListener('click', updateInvoicePreview);
             
             // Reset form function
             function resetForm() {
                 if (confirm('Are you sure you want to reset the form? All data will be cleared.')) {
-                    // Reset form fields to empty
-                    document.getElementById('estimateNo').value = '';
-                    document.getElementById('estimateDate').value = formattedToday;
-                    document.getElementById('validUntil').value = formattedValidUntil;
-                    document.getElementById('estimateStatus').value = 'draft';
+                    document.getElementById('invoiceNo').value = '';
+                    document.getElementById('invoiceDate').value = formattedToday;
+                    document.getElementById('dueDate').value = formattedDueDate;
+                    document.getElementById('poNumber').value = '';
                     document.getElementById('clientName').value = '';
                     document.getElementById('clientGst').value = '';
-                    document.getElementById('clientPhone').value = '';
                     document.getElementById('clientAddress').value = '';
-                    document.getElementById('projectLocation').value = '';
+                    document.getElementById('deliveryAddress').value = '';
+                    document.getElementById('phoneNumber').value = '';
                     document.getElementById('taxRate').value = '9';
                     document.getElementById('roundOff').value = '0';
-                    document.getElementById('advancePercentage').value = '50';
-                    document.getElementById('workDuration').value = '';
-                    document.getElementById('specialNotes').value = '';
-                    document.getElementById('includeTerms').checked = true;
-                    document.getElementById('termsContent').value = `This estimate is valid for 30 days from the date of issue unless otherwise specified.
-Advance payment of 50% is required to confirm the order and commence work.
-Balance payment to be made upon completion of work and before delivery/installation.
-All prices are exclusive of GST unless otherwise specified.
-Any changes in design/specifications after confirmation may result in price adjustments.
-Urban Kutir reserves the right to revise prices if material costs change before order confirmation.
-Work commencement is subject to receipt of advance payment and availability of materials.
-Installation/delivery timelines are estimates and subject to weather conditions and other factors.`;
+                    document.getElementById('notes').value = '';
+                    document.getElementById('paymentTerms').value = '50% advance, 50% on delivery';
+                    document.getElementById('deliveryTerms').value = 'Within 15 working days from order confirmation';
+                    document.getElementById('showPaymentTerms').checked = true;
+                    document.getElementById('showDeliveryTerms').checked = true;
                     
-                    // Reset items to one empty item
                     items = [
                         { 
                             slNo: 1, 
@@ -3454,7 +3159,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     ];
                     
                     renderItems();
-                    updateEstimatePreview();
+                    updateInvoicePreview();
                     
                     showToast('success', 'Form Reset', 'All fields have been reset to default values.');
                 }
@@ -3464,23 +3169,22 @@ Installation/delivery timelines are estimates and subject to weather conditions 
             resetFormBtn.addEventListener('click', resetForm);
             resetFormBtnMobile.addEventListener('click', resetForm);
             
-            // Auto-update on input changes
-            document.getElementById('estimateNo').addEventListener('input', updateEstimatePreview);
-            document.getElementById('estimateDate').addEventListener('input', updateEstimatePreview);
-            document.getElementById('validUntil').addEventListener('input', updateEstimatePreview);
-            document.getElementById('estimateStatus').addEventListener('change', updateEstimatePreview);
-            document.getElementById('clientName').addEventListener('input', updateEstimatePreview);
-            document.getElementById('clientGst').addEventListener('input', updateEstimatePreview);
-            document.getElementById('clientPhone').addEventListener('input', updateEstimatePreview);
-            document.getElementById('clientAddress').addEventListener('input', updateEstimatePreview);
-            document.getElementById('projectLocation').addEventListener('input', updateEstimatePreview);
-            document.getElementById('taxRate').addEventListener('input', updateEstimatePreview);
-            document.getElementById('roundOff').addEventListener('input', updateEstimatePreview);
-            document.getElementById('advancePercentage').addEventListener('input', updateEstimatePreview);
-            document.getElementById('workDuration').addEventListener('input', updateEstimatePreview);
-            document.getElementById('specialNotes').addEventListener('input', updateEstimatePreview);
-            document.getElementById('includeTerms').addEventListener('change', updateEstimatePreview);
-            document.getElementById('termsContent').addEventListener('input', updateEstimatePreview);
+            // Auto-update on input changes including optional toggles
+            document.getElementById('invoiceNo').addEventListener('input', updateInvoicePreview);
+            document.getElementById('invoiceDate').addEventListener('input', updateInvoicePreview);
+            document.getElementById('dueDate').addEventListener('input', updateInvoicePreview);
+            document.getElementById('clientName').addEventListener('input', updateInvoicePreview);
+            document.getElementById('clientGst').addEventListener('input', updateInvoicePreview);
+            document.getElementById('clientAddress').addEventListener('input', updateInvoicePreview);
+            document.getElementById('deliveryAddress').addEventListener('input', updateInvoicePreview);
+            document.getElementById('phoneNumber').addEventListener('input', updateInvoicePreview);
+            document.getElementById('taxRate').addEventListener('input', updateInvoicePreview);
+            document.getElementById('roundOff').addEventListener('input', updateInvoicePreview);
+            document.getElementById('notes').addEventListener('input', updateInvoicePreview);
+            document.getElementById('paymentTerms').addEventListener('input', updateInvoicePreview);
+            document.getElementById('deliveryTerms').addEventListener('input', updateInvoicePreview);
+            document.getElementById('showPaymentTerms').addEventListener('change', updateInvoicePreview);
+            document.getElementById('showDeliveryTerms').addEventListener('change', updateInvoicePreview);
             
             // Close modals when clicking outside
             document.addEventListener('click', (e) => {
@@ -3492,15 +3196,15 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 }
             });
             
-            // Initialize the estimate
+            // Initialize the invoice
             renderItems();
-            updateEstimatePreview();
+            updateInvoicePreview();
             
             // Show welcome message
             setTimeout(() => {
-                showToast('info', 'Welcome to Urban Kutir Estimate System', 'Fill in the details and click "Export Estimate" when ready.');
+                showToast('info', 'Welcome to Urban Kutir Invoice System', 'Fill in the details and click "Export Invoice" when ready.');
             }, 1000);
         });
     </script>
 </body>
-    </html>
+</html>

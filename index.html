@@ -2828,109 +2828,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             min-height: 100vh;
                         }
                         
-                        /* Enhanced PDF Pagination - Prevent breaks inside content blocks */
-                        .print-content * {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-table tbody tr {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-table tbody tr td {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-summary-row,
-                        .print-summary-row * {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        /* Enhanced orphans and widows control for PDF */
-                        h1, h2, h3, h4, h5, h6, p, li, td, th, div {
-                            orphans: 4 !important;
-                            widows: 4 !important;
-                        }
-                        
-                        /* Keep address boxes completely together */
-                        .print-address-box {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-address-box * {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        /* Keep summary section completely together */
-                        .print-summary {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-summary * {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        /* Keep authorization section together */
-                        .print-authorization {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-authorization * {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        /* Keep signature block together */
-                        .print-signature {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        .print-signature * {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        /* Keep terms section together */
-                        .print-content > div:has(> strong:contains('Terms & Conditions')) {
-                            page-break-inside: avoid !important;
-                            break-inside: avoid !important;
-                            -webkit-column-break-inside: avoid !important;
-                        }
-                        
-                        /* Enhanced table row protection */
-                        .print-table tbody {
-                            page-break-inside: auto !important;
-                        }
-                        
-                        .print-table tbody tr {
-                            page-break-before: avoid !important;
-                            page-break-after: avoid !important;
-                            break-before: avoid !important;
-                            break-after: avoid !important;
-                        }
-                        
                         .print-watermark {
                             position: absolute;
                             top: 50%;
@@ -3124,15 +3021,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             background-color: #f3f4f6;
                             color: #6b7280;
                             border: 1px solid #d1d5db;
-                        }
-                        
-                        /* Enhanced page break control for PDF */
-                        @media all {
-                            .page-break {
-                                display: block;
-                                page-break-before: always;
-                                break-before: page;
-                            }
                         }
                     </style>
                     
@@ -3615,4 +3503,4 @@ Installation/delivery timelines are estimates and subject to weather conditions 
         });
     </script>
 </body>
-</html>
+                                                   </html>

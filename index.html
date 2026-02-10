@@ -1111,7 +1111,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 210mm;
             margin: 0 auto;
-            padding: 25mm;
+            padding: 20mm; /* Changed from 25mm to 20mm for standard A4 margins */
         }
         
         /* Progress Indicator */
@@ -1270,10 +1270,10 @@
                 print-color-adjust: exact !important;
             }
             
-            /* A4 page sizing and margins */
+            /* A4 page sizing with standard 20mm margins on all sides */
             @page {
                 size: A4 portrait;
-                margin: 15mm 15mm 20mm 15mm;
+                margin: 20mm; /* Standard A4 margins on all four sides */
                 padding: 0;
                 
                 /* Page counter */
@@ -1289,9 +1289,9 @@
                 }
             }
             
-            /* First page special handling */
+            /* First page special handling - same margins */
             @page :first {
-                margin-top: 15mm;
+                margin: 20mm; /* Consistent margins on first page */
                 
                 @bottom-center {
                     content: "Page " counter(page) " of " counter(pages);
@@ -3229,7 +3229,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <style>
                                 @media print {
                                     @page {
-                                        margin: 15mm;
+                                        margin: 20mm; /* Standard A4 margins on all four sides */
                                         size: A4;
                                     }
                                     body {
@@ -3322,7 +3322,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <style>
                                 @media print {
                                     @page {
-                                        margin: 15mm;
+                                        margin: 20mm; /* Standard A4 margins on all four sides */
                                         size: A4;
                                     }
                                     body {

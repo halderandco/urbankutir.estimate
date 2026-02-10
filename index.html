@@ -1298,7 +1298,7 @@
                 }
             }
             
-            /* Page break control classes */
+            /* Enhanced page break control classes */
             .page-break-before {
                 page-break-before: always !important;
                 break-before: page !important;
@@ -1312,6 +1312,7 @@
             .page-break-avoid {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
             }
             
             .page-break-auto {
@@ -1338,6 +1339,73 @@
                 height: auto !important;
                 min-height: auto !important;
                 overflow: visible !important;
+            }
+            
+            /* Enhanced content block protection - prevent breaks inside all major content blocks */
+            .estimate-header,
+            .estimate-addresses,
+            .address-box,
+            .validity-box,
+            .estimate-summary,
+            .terms-section,
+            .authorization-section,
+            .estimate-footer,
+            .summary-row.total,
+            .signature-box,
+            #previewWorkDuration,
+            .company-gst-box,
+            .terms-content,
+            .address-content,
+            .signature-line + div,
+            .signature-line + div + div {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
+            }
+            
+            /* Keep address boxes together with their content */
+            .address-box > *,
+            .validity-box > *,
+            .terms-section > * {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
+            }
+            
+            /* Prevent orphans and widows in text */
+            p, h1, h2, h3, h4, h5, h6, li, td, th, div {
+                orphans: 3 !important;
+                widows: 3 !important;
+            }
+            
+            /* Keep list items together */
+            .terms-content li,
+            ul li,
+            ol li {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
+            }
+            
+            /* Keep table rows together when possible */
+            .estimate-table tbody tr {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
+            }
+            
+            /* Keep summary rows together */
+            .summary-row {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
+            }
+            
+            /* Keep authorization section together */
+            .authorization-section > * {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                -webkit-column-break-inside: avoid !important;
             }
             
             /* Preview panel content styling for print */
@@ -1373,8 +1441,6 @@
             
             /* Estimate header - keep together */
             .estimate-header {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 page-break-after: avoid !important;
                 margin-bottom: 8mm !important;
                 padding-bottom: 4mm !important;
@@ -1393,8 +1459,6 @@
             
             /* Address boxes - keep together */
             .estimate-addresses {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin-bottom: 6mm !important;
                 display: flex !important;
                 flex-direction: row !important;
@@ -1431,21 +1495,6 @@
                 border: 0.5pt solid #f0e6d6 !important;
             }
             
-            /* Keep table rows together when possible */
-            .estimate-table tbody tr {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            
-            /* Force page break if table is too long */
-            .estimate-table {
-                page-break-before: auto !important;
-            }
-            
-            .estimate-table tbody {
-                page-break-inside: auto !important;
-            }
-            
             /* Repeat table header on each page */
             .estimate-table thead {
                 display: table-header-group !important;
@@ -1453,8 +1502,6 @@
             
             /* Summary section - keep together */
             .estimate-summary {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin-top: 6mm !important;
                 margin-left: auto !important;
                 max-width: 280pt !important;
@@ -1463,10 +1510,8 @@
                 border: 0.5pt solid #e0d6c8 !important;
             }
             
-            /* Terms section - try to keep together, but allow break if too long */
+            /* Terms section - keep together */
             .terms-section {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin-top: 6mm !important;
                 background: #fcfaf7 !important;
                 padding: 3mm !important;
@@ -1475,9 +1520,6 @@
             
             /* Authorization section - keep together at bottom */
             .authorization-section {
-                page-break-before: avoid !important;
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin-top: 8mm !important;
                 padding-top: 4mm !important;
                 border-top: 0.5pt dashed #d4a574 !important;
@@ -1489,15 +1531,11 @@
             
             /* Signature box - keep together */
             .signature-box {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 text-align: center !important;
             }
             
             /* Estimate footer - keep with authorization if possible */
             .estimate-footer {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin-top: 4mm !important;
                 padding-top: 2mm !important;
                 border-top: 0.5pt solid #f0e6d6 !important;
@@ -1507,8 +1545,6 @@
             
             /* Validity box */
             .validity-box {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin: 3mm 0 !important;
                 padding: 2mm !important;
                 background: #fff8f0 !important;
@@ -1518,8 +1554,6 @@
             
             /* Work duration */
             #previewWorkDuration {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
                 margin: 2mm 0 !important;
                 padding: 1.5mm !important;
                 background: #fcfaf7 !important;

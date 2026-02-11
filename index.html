@@ -2085,21 +2085,21 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <i class="fas fa-print"></i>
                         </div>
                         <h4>Print</h4>
-                        <p>Print directly to your printer</p>
+                        <p>Print directly to your printer or save as PDF</p>
                     </div>
                     <div class="export-option" data-export-type="pdf">
                         <div class="export-icon">
                             <i class="fas fa-file-pdf"></i>
                         </div>
-                        <h4>Save as PDF</h4>
-                        <p>High‑quality PDF with identical layout (via print dialog)</p>
+                        <h4>Download PDF</h4>
+                        <p>High-quality PDF optimized for sharing</p>
                     </div>
                     <div class="export-option" data-export-type="preview">
                         <div class="export-icon">
                             <i class="fas fa-eye"></i>
                         </div>
                         <h4>Preview</h4>
-                        <p>Preview before printing or saving</p>
+                        <p>Preview before printing or downloading</p>
                     </div>
                 </div>
                 <div class="progress-indicator" id="exportProgress">
@@ -2142,7 +2142,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
     <!-- Toast Container -->
     <div id="toastContainer"></div>
     
-    <!-- Include jsPDF and html2canvas libraries for PDF generation (kept but not used to guarantee identical output) -->
+    <!-- Include jsPDF and html2canvas libraries for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
@@ -3123,7 +3123,88 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 printPreviewModal.classList.add('active');
             }
             
-            // HDFC Bank–style deterministic print (identical output for both Print & PDF)
+            // Generate PDF
+            async function generatePDF() {
+                const { jsPDF } = window.jspdf;
+                
+                exportProgress.classList.add('active');
+                confirmExport.disabled = true;
+                
+                try {
+                    // Ensure logo data URL is available
+                    if (!logoDataUrl) {
+                        await convertLogoToDataUrl();
+                    }
+                    
+                    const html = generatePrintPreviewHTML();
+                    
+                    // Create a temporary container
+                    const tempContainer = document.createElement('div');
+                    tempContainer.style.position = 'absolute';
+                    tempContainer.style.left = '-9999px';
+                    tempContainer.style.top = '0';
+                    tempContainer.style.width = '800px';
+                    tempContainer.style.padding = '20px';
+                    tempContainer.style.background = 'white';
+                    tempContainer.innerHTML = html;
+                    document.body.appendChild(tempContainer);
+                    
+                    // Wait for content to load
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // Convert to canvas
+                    const canvas = await html2canvas(tempContainer, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: '#ffffff',
+                        width: 800,
+                        height: tempContainer.scrollHeight
+                    });
+                    
+                    // Remove temp container
+                    document.body.removeChild(tempContainer);
+                    
+                    // Create PDF
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    pdf.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= 297;
+                    
+                    // Add additional pages if needed
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= 297;
+                    }
+                    
+                    const estimateNo = document.getElementById('estimateNo').value || 'Draft';
+                    const filename = `UrbanKutir_Estimate_${estimateNo}.pdf`;
+                    
+                    pdf.save(filename);
+                    
+                    exportProgress.classList.remove('active');
+                    confirmExport.disabled = false;
+                    exportModal.classList.remove('active');
+                    
+                    showToast('success', 'PDF Downloaded', `Estimate saved as ${filename}`);
+                    
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    exportProgress.classList.remove('active');
+                    confirmExport.disabled = false;
+                    
+                    showToast('error', 'PDF Generation Failed', 'Unable to generate PDF. Please try again.');
+                }
+            }
+            
+            // Direct print function
             function directPrint() {
                 // Ensure logo data URL is available
                 if (!logoDataUrl) {
@@ -3148,7 +3229,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <style>
                                 @media print {
                                     @page {
-                                        margin: 15mm 15mm 20mm 15mm;
+                                        margin: 15mm;
                                         size: A4;
                                     }
                                     body {
@@ -3160,7 +3241,6 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                                     margin: 0;
                                     padding: 0;
                                     font-family: 'Inter', sans-serif;
-                                    background: white;
                                 }
                             </style>
                         </head>
@@ -3178,7 +3258,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                     printWindow.document.close();
                     
                     exportModal.classList.remove('active');
-                    showToast('success', 'Print / PDF', 'Print dialog opened. Choose "Save as PDF" for a perfect digital copy.');
+                    showToast('success', 'Print Started', 'The print dialog has been opened.');
                 }
             }
             
@@ -3199,15 +3279,14 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 });
             });
             
-            // Confirm export – HDFC Bank style: Print & PDF use identical deterministic output via print dialog
+            // Confirm export
             confirmExport.addEventListener('click', () => {
                 switch (selectedExportType) {
                     case 'print':
                         directPrint();
                         break;
                     case 'pdf':
-                        // PDF uses same print dialog → identical pagination, true A4, fixed margins, no mid‑field breaks
-                        directPrint();
+                        generatePDF();
                         break;
                     case 'preview':
                         showPrintPreview();
@@ -3243,7 +3322,7 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                             <style>
                                 @media print {
                                     @page {
-                                        margin: 15mm 15mm 20mm 15mm;
+                                        margin: 15mm;
                                         size: A4;
                                     }
                                     body {
@@ -3274,10 +3353,9 @@ Installation/delivery timelines are estimates and subject to weather conditions 
                 }
             });
             
-            downloadPdfFromPreviewBtn.addEventListener('click', () => {
-                // PDF from preview also uses the same deterministic print dialog
+            downloadPdfFromPreviewBtn.addEventListener('click', async () => {
                 printPreviewModal.classList.remove('active');
-                directPrint();
+                await generatePDF();
             });
             
             // Add new item
